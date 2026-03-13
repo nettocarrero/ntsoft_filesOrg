@@ -4,6 +4,7 @@ Não inicia watcher nem ingestão WhatsApp; apenas consulta dados existentes.
 """
 from __future__ import annotations
 
+import socket
 import webbrowser
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -35,12 +36,33 @@ app.include_router(files_router, tags=["files"])
 app.include_router(config_router, tags=["config"])
 
 
+def _get_local_ip() -> str | None:
+    """Retorna o IPv4 principal da máquina na rede local (ex.: 192.168.0.12)."""
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.settimeout(0.5)
+            s.connect(("8.8.8.8", 80))
+            return s.getsockname()[0]
+    except (OSError, socket.error):
+        return None
+
+
 def main():
     import uvicorn
-    host = "127.0.0.1"
+    host = "0.0.0.0"
     port = 8000
-    url = f"http://{host}:{port}"
-    webbrowser.open(url)
+    local_url = f"http://localhost:{port}"
+    webbrowser.open(local_url)
+    local_ip = _get_local_ip()
+    print("Servidor web iniciado.")
+    print()
+    print("Painel disponível em:")
+    print(f"  {local_url}")
+    if local_ip:
+        print(f"  http://{local_ip}:{port}")
+    else:
+        print("  (IP da rede local não detectado automaticamente)")
+    print()
     uvicorn.run(app, host=host, port=port)
 
 

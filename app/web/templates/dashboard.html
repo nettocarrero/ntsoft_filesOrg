@@ -13,12 +13,14 @@
 </p>
 {% endif %}
 
+{% if allow_management %}
 <p class="muted" style="margin-bottom: 1rem;">
   <form method="post" action="/reset-counters" style="display: inline;" onsubmit="return confirm('Arquivar os relatórios atuais e zerar os contadores? Os arquivos serão movidos para reports/archive_&lt;data&gt;/ e não serão apagados.');">
     <button type="submit" class="btn btn-sm">Zerar contadores</button>
   </form>
   — Arquivar relatórios antigos para iniciar o monitoramento do zero. Nenhum arquivo é apagado.
 </p>
+{% endif %}
 
 <section class="cards">
     <div class="card">

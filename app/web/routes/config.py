@@ -5,10 +5,10 @@ import sys
 from pathlib import Path
 
 from fastapi import APIRouter, Request, Form
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
 
 from app.config import PROJECT_ROOT, save_local_config
-from app.web.helpers import get_settings, system_status
+from app.web.helpers import get_settings, system_status, is_local_client
 
 router = APIRouter()
 
@@ -73,6 +73,8 @@ async def config_page(
     settings = get_settings()
     status = system_status(settings)
     config = _config_dict(settings)
+    client_host = request.client.host if request.client else None
+    allow_management = is_local_client(client_host)
     return request.app.state.templates.TemplateResponse(
         "config.html",
         {
@@ -82,6 +84,7 @@ async def config_page(
             "saved": saved == "1",
             "watcher_started": watcher_started == "1",
             "watcher_started_error": watcher_started == "0",
+            "allow_management": allow_management,
         },
     )
 
@@ -92,6 +95,7 @@ def _checkbox_bool(value: str | None) -> bool:
 
 @router.post("/config", response_class=RedirectResponse)
 async def config_save(
+    request: Request,
     input_dir: str = Form(...),
     output_dir: str = Form(...),
     review_manual_dir: str = Form(...),
@@ -105,6 +109,8 @@ async def config_save(
     whatsapp_ingestion_enabled: str | None = Form(None),
     whatsapp_source_dir: str = Form(""),
 ):
+    if not is_local_client(request.client.host if request.client else None):
+        return PlainTextResponse("Apenas o PC principal (localhost) pode alterar configurações.", status_code=403)
     updates = {
         "paths": {
             "input_dir": input_dir.strip(),
@@ -132,8 +138,10 @@ async def config_save(
 
 
 @router.post("/start-watcher", response_class=RedirectResponse)
-async def start_watcher():
-    """Abre uma nova janela do terminal com o identificador (watcher) em execução."""
+async def start_watcher(request: Request):
+    """Abre uma nova janela do terminal com o identificador (watcher) em execução. Apenas localhost."""
+    if not is_local_client(request.client.host if request.client else None):
+        return PlainTextResponse("Apenas o PC principal (localhost) pode iniciar o identificador.", status_code=403)
     ok = start_watcher_in_new_terminal()
     return RedirectResponse(
         url="/config?watcher_started=1" if ok else "/config?watcher_started=0",

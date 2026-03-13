@@ -18,6 +18,14 @@ def get_settings():
     return load_settings()
 
 
+def is_local_client(client_host: str | None) -> bool:
+    """
+    True se a requisição veio do localhost (PC onde o servidor roda).
+    Usado para permitir edição de configurações e botões de manutenção apenas no PC principal.
+    """
+    return client_host in ("127.0.0.1", "::1")
+
+
 def _load_report_json(path: Path) -> Optional[Dict[str, Any]]:
     try:
         with path.open("r", encoding="utf-8") as f:
