@@ -30,3 +30,6 @@ Thumbs.db
 temp/
 *.coverage
 
+# Local configuration
+config.local.json
+

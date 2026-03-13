@@ -20,6 +20,7 @@ from app.services import (
     organize_document,
     generate_reports,
 )
+from app.services.whatsapp_ingestion_service import start_whatsapp_ingestion
 from app.utils.file_utils import is_pdf, is_zip, is_rar
 
 
@@ -299,6 +300,9 @@ def main() -> None:
         from app.services.watcher_service import start_watcher
 
         logger.info("Iniciando modo watch para pasta: %s", settings.paths.input_dir)
+        # inicia ingestão do WhatsApp (observer próprio, não bloqueante)
+        start_whatsapp_ingestion(settings)
+        # inicia watcher principal da pasta input (bloqueante)
         start_watcher(settings, process_input_files)
     else:
         process()

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, Any
 import json
@@ -51,6 +51,19 @@ class OCRConfig:
 
 
 @dataclass
+class WhatsAppIngestionConfig:
+    enabled: bool = False
+    source_dir: Path | None = None
+    recursive: bool = True
+    copy_supported_extensions: list[str] = field(
+        default_factory=lambda: [".pdf", ".zip", ".rar"]
+    )
+    stabilize_timeout: int = 30
+    stabilize_interval: float = 1.0
+    startup_scan: bool = True
+
+
+@dataclass
 class Settings:
     paths: PathsConfig
     thresholds: ConfidenceThresholds
@@ -59,6 +72,7 @@ class Settings:
     document_keywords: Dict[str, Any]
     processed_input: ProcessedInputConfig
     ocr: OCRConfig
+    whatsapp_ingestion: WhatsAppIngestionConfig
 
 
 def ensure_directories(paths: PathsConfig) -> None:
@@ -87,6 +101,69 @@ def load_json(path: Path) -> Dict[str, Any]:
         return json.load(f)
 
 
+def _deep_update_dict(original: Dict[str, Any], updates: Dict[str, Any]) -> Dict[str, Any]:
+    for key, value in updates.items():
+        if (
+            key in original
+            and isinstance(original[key], dict)
+            and isinstance(value, dict)
+        ):
+            original[key] = _deep_update_dict(original[key], value)
+        else:
+            original[key] = value
+    return original
+
+
+def _apply_local_overrides(settings: Settings) -> Settings:
+    """
+    Aplica overrides vindos de config.local.json, se existir, sem exigir
+    alteração de código por máquina.
+    """
+    local_cfg_path = PROJECT_ROOT / "config.local.json"
+    if not local_cfg_path.exists():
+        return settings
+
+    try:
+        raw = load_json(local_cfg_path)
+    except Exception:
+        return settings
+
+    # Paths
+    paths_data = raw.get("paths")
+    if isinstance(paths_data, dict):
+        data = settings.paths.__dict__
+        merged = _deep_update_dict(data, paths_data)
+        settings.paths = PathsConfig(**merged)
+
+    # Processed input
+    pi_data = raw.get("processed_input")
+    if isinstance(pi_data, dict):
+        data = settings.processed_input.__dict__
+        merged = _deep_update_dict(data, pi_data)
+        settings.processed_input = ProcessedInputConfig(**merged)
+
+    # OCR
+    ocr_data = raw.get("ocr")
+    if isinstance(ocr_data, dict):
+        data = settings.ocr.__dict__
+        merged = _deep_update_dict(data, ocr_data)
+        settings.ocr = OCRConfig(**merged)
+
+    # WhatsApp ingestion
+    wa_data = raw.get("whatsapp_ingestion")
+    if isinstance(wa_data, dict):
+        serializable = {}
+        for k, v in wa_data.items():
+            if k == "source_dir" and isinstance(v, str):
+                serializable[k] = Path(v)
+            else:
+                serializable[k] = v
+        data = settings.whatsapp_ingestion.__dict__
+        merged = _deep_update_dict(data, serializable)
+        settings.whatsapp_ingestion = WhatsAppIngestionConfig(**merged)
+
+    return settings
+
 def load_settings() -> Settings:
     paths = PathsConfig()
     ensure_directories(paths)
@@ -109,8 +186,9 @@ def load_settings() -> Settings:
     processed_input = ProcessedInputConfig()
     processed_input.processed_dir.mkdir(parents=True, exist_ok=True)
     ocr = OCRConfig()
+    whatsapp_ingestion = WhatsAppIngestionConfig()
 
-    return Settings(
+    settings = Settings(
         paths=paths,
         thresholds=thresholds,
         scoring=scoring,
@@ -118,5 +196,9 @@ def load_settings() -> Settings:
         document_keywords=document_keywords,
         processed_input=processed_input,
         ocr=ocr,
+        whatsapp_ingestion=whatsapp_ingestion,
     )
+
+    settings = _apply_local_overrides(settings)
+    return settings
 
