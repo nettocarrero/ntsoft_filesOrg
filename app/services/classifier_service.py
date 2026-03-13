@@ -31,6 +31,10 @@ def _build_store_alias_index(aliases_cfg: Dict[str, Any]) -> Dict[str, Dict[str,
             norm_city = normalize_text(city)
             if norm_city:
                 index[norm_city] = {"code": code, "alias": city, "kind": "city"}
+        for kw in info.get("address_keywords", []):
+            norm_kw = normalize_text(kw)
+            if norm_kw and norm_kw not in index:
+                index[norm_kw] = {"code": code, "alias": kw, "kind": "address"}
     return index
 
 

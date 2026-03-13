@@ -4,31 +4,36 @@
       "code": "ljUbj",
       "city": "ubajara",
       "aliases": ["ubajara", "ubj"],
-      "cnpjs": ["07439697000140"]
+      "cnpjs": ["07439697000140"],
+      "address_keywords": ["ubajara", "ubj", "centro ubajara", "ubajara ce", "DOS CONSTITUINTES"]
     },
     "ljIbi": {
       "code": "ljIbi",
       "city": "ibiapina",
       "aliases": ["ibiapina", "ibi"],
-      "cnpjs": ["07439697000574"]
+      "cnpjs": ["07439697000574"],
+      "address_keywords": ["ibiapina", "ibi", "centro ibiapina", "ibiapina ce"]
     },
     "ljSb": {
       "code": "ljSb",
       "city": "saobenedito",
       "aliases": ["sao benedito", "saobenedito", "sb"],
-      "cnpjs": ["07439697000302"]
+      "cnpjs": ["07439697000302"],
+      "address_keywords": ["sao benedito", "saobenedito", "sb", "sao benedito ce", "centro sao benedito"]
     },
     "ljGba": {
       "code": "ljGba",
       "city": "guaraciaba",
       "aliases": ["guaraciaba", "gba"],
-      "cnpjs": ["07439697000493"]
+      "cnpjs": ["07439697000493"],
+      "address_keywords": ["guaraciaba", "gba", "guaraciaba do norte", "centro guaraciaba", "guaraciaba ce"]
     },
     "ljLc": {
       "code": "ljLc",
       "city": "sobral",
       "aliases": ["l&c", "l & c"],
-      "cnpjs": ["37052558000120"]
+      "cnpjs": ["37052558000120"],
+      "address_keywords": ["sobral", "l&c", "l e c", "centro sobral", "sobral ce"]
     }
   }
 }
