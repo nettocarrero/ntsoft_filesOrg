@@ -3,6 +3,23 @@
 {% block content %}
 <h2>Dashboard</h2>
 
+{% if counters_reset == '1' %}
+<p class="msg msg-success">
+  {% if request.query_params.get('archived', '0') != '0' and request.query_params.get('path') %}
+  Contadores zerados. {{ request.query_params.get('archived') }} relatório(s) foram arquivados em <code>reports/{{ request.query_params.get('path') }}</code>. A partir de agora os números refletem apenas o novo monitoramento.
+  {% else %}
+  Contadores zerados. Não havia relatórios na pasta (ou já estavam arquivados). A partir de agora os números refletem apenas o novo monitoramento.
+  {% endif %}
+</p>
+{% endif %}
+
+<p class="muted" style="margin-bottom: 1rem;">
+  <form method="post" action="/reset-counters" style="display: inline;" onsubmit="return confirm('Arquivar os relatórios atuais e zerar os contadores? Os arquivos serão movidos para reports/archive_&lt;data&gt;/ e não serão apagados.');">
+    <button type="submit" class="btn btn-sm">Zerar contadores</button>
+  </form>
+  — Arquivar relatórios antigos para iniciar o monitoramento do zero. Nenhum arquivo é apagado.
+</p>
+
 <section class="cards">
     <div class="card">
         <span class="card-value">{{ stats.total_hoje }}</span>

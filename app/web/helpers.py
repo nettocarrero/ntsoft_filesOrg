@@ -5,6 +5,7 @@ Não altera o pipeline; apenas consulta.
 from __future__ import annotations
 
 import json
+import shutil
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -47,6 +48,30 @@ def get_reports_from_today(reports_dir: Path) -> List[Dict[str, Any]]:
         if data:
             out.append(data)
     return out
+
+
+def archive_reports(reports_dir: Path) -> tuple[int, Path | None]:
+    """
+    Move todos os report_*.json e report_*.txt para uma subpasta archive_<timestamp>.
+    Não remove nada; apenas arquiva. Assim os contadores do dashboard zeram.
+    Retorna (quantidade de arquivos movidos, caminho da pasta de arquivo ou None).
+    Não mexe em app.log nem em outros arquivos.
+    """
+    if not reports_dir.exists():
+        return 0, None
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    archive_dir = reports_dir / f"archive_{stamp}"
+    count = 0
+    for pattern in ("report_*.json", "report_*.txt"):
+        for p in reports_dir.glob(pattern):
+            if p.is_file():
+                try:
+                    archive_dir.mkdir(parents=True, exist_ok=True)
+                    shutil.move(str(p), str(archive_dir / p.name))
+                    count += 1
+                except (OSError, shutil.Error):
+                    pass
+    return count, archive_dir if archive_dir.exists() else None
 
 
 def dashboard_stats(reports_dir: Path) -> Dict[str, Any]:
