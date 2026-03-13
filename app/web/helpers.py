@@ -189,12 +189,15 @@ def list_store_files(
                 continue
             try:
                 mtime = f.stat().st_mtime
+                dt = datetime.fromtimestamp(mtime)
                 out.append({
                     "name": f.name,
                     "doc_type": type_path.name,
                     "path": f,
                     "mtime": mtime,
-                    "mtime_iso": datetime.fromtimestamp(mtime).isoformat(),
+                    "mtime_iso": dt.isoformat(),
+                    "mtime_br": dt.strftime("%d/%m/%Y %H:%M:%S"),
+                    "hint": str(f),
                 })
             except OSError:
                 pass

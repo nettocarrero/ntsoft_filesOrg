@@ -27,21 +27,21 @@
 <section class="section">
     <h3>{{ store_name }}</h3>
     {% if files %}
-    <table class="table">
+    <table class="table table-files">
         <thead>
             <tr>
-                <th>Arquivo</th>
+                <th class="col-name">Arquivo</th>
                 <th>Tipo</th>
-                <th>Data</th>
+                <th class="col-date">Data</th>
                 <th>Ação</th>
             </tr>
         </thead>
         <tbody>
             {% for f in files %}
-            <tr>
-                <td>{{ f.name }}</td>
+            <tr title="{{ f.hint }}">
+                <td class="col-name" title="{{ f.hint }}">{{ f.name }}</td>
                 <td>{{ f.doc_type }}</td>
-                <td>{{ f.mtime_iso[:19] if f.mtime_iso else '-' }}</td>
+                <td class="col-date">{{ f.mtime_br or '-' }}</td>
                 <td><a href="/files/download?path={{ f.path_url }}" class="btn btn-sm">Baixar</a></td>
             </tr>
             {% endfor %}

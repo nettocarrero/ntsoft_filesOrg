@@ -1,0 +1,47 @@
+/**
+ * Paleta de cores do sistema (Organizador de Documentos)
+ * Use var(--nome) no style.css e nos componentes.
+ */
+:root {
+    /* Fundos */
+    --color-bg-page: #f5f5f5;
+    --color-bg-main: #fff;
+    --color-bg-card: #e8eef7;
+    --color-bg-header: #1a1a2e;
+    --color-bg-table-header: #f0f0f0;
+    --color-bg-input: #fff;
+    --color-bg-code: #f0f0f0;
+
+    /* Texto */
+    --color-text: #222;
+    --color-text-muted: #555;
+    --color-text-footer: #666;
+    --color-text-inverse: #eee;
+
+    /* Links e ações */
+    --color-link: #aaccff;
+    --color-link-content: #1a5fb4;
+    --color-btn: #1a1a2e;
+    --color-btn-hover: #2a2a4e;
+    --color-btn-disabled: #999;
+
+    /* Bordas */
+    --color-border: #ddd;
+    --color-border-light: #eee;
+    --color-border-input: #ccc;
+
+    /* Tabelas - explorador de arquivos */
+    --color-row-hover: #e8eef7;
+    --color-table-border: #eee;
+
+    /* Mensagens */
+    --color-msg-success-bg: #d4edda;
+    --color-msg-success-text: #155724;
+    --color-msg-success-border: #c3e6cb;
+    --color-msg-error-bg: #f8d7da;
+    --color-msg-error-text: #721c24;
+    --color-msg-error-border: #f5c6cb;
+
+    /* Sombras */
+    --color-shadow: rgba(0, 0, 0, 0.08);
+}
