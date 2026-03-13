@@ -209,3 +209,75 @@ code {
     border-radius: 3px;
     font-size: 0.9em;
 }
+
+.msg {
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.msg-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.config-form .section {
+    margin-bottom: 1.5rem;
+}
+
+.config-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.config-form .form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.config-form .form-grid label {
+    margin-bottom: 0;
+}
+
+.config-form input[type="text"],
+.config-form input[type="number"],
+.config-form select {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 0.2rem;
+}
+
+.config-form .input-path {
+    font-family: ui-monospace, monospace;
+    font-size: 0.85rem;
+}
+
+.config-form .label-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.config-form .label-inline select {
+    width: auto;
+    display: inline-block;
+}
+
+.config-form .label-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.config-form .label-checkbox input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}

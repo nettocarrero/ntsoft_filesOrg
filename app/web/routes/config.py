@@ -1,33 +1,88 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse
+from fastapi import APIRouter, Request, Form
+from fastapi.responses import HTMLResponse, RedirectResponse
 
+from app.config import save_local_config
 from app.web.helpers import get_settings, system_status
 
 router = APIRouter()
 
 
-@router.get("/config", response_class=HTMLResponse)
-async def config_page(request: Request):
-    settings = get_settings()
-    status = system_status(settings)
-    config_readonly = {
+def _config_dict(settings):
+    """Dicionário com valores atuais para o formulário."""
+    return {
         "input_dir": str(settings.paths.input_dir),
         "output_dir": str(settings.paths.output_dir),
         "review_manual_dir": str(settings.paths.review_manual_dir),
         "reports_dir": str(settings.paths.reports_dir),
         "temp_dir": str(settings.paths.temp_dir),
+        "processed_dir": str(settings.processed_input.processed_dir),
+        "processed_action": settings.processed_input.action,
         "ocr_enabled": settings.ocr.enabled,
         "ocr_language": settings.ocr.language,
+        "ocr_dpi": settings.ocr.dpi,
         "whatsapp_ingestion_enabled": settings.whatsapp_ingestion.enabled,
-        "whatsapp_source_dir": str(settings.whatsapp_ingestion.source_dir) if settings.whatsapp_ingestion.source_dir else None,
+        "whatsapp_source_dir": str(settings.whatsapp_ingestion.source_dir) if settings.whatsapp_ingestion.source_dir else "",
     }
+
+
+@router.get("/config", response_class=HTMLResponse)
+async def config_page(request: Request, saved: str | None = None):
+    settings = get_settings()
+    status = system_status(settings)
+    config = _config_dict(settings)
     return request.app.state.templates.TemplateResponse(
         "config.html",
         {
             "request": request,
-            "config": config_readonly,
+            "config": config,
             "status": status,
+            "saved": saved == "1",
         },
     )
+
+
+def _checkbox_bool(value: str | None) -> bool:
+    return value in ("on", "true", "1", "yes")
+
+
+@router.post("/config", response_class=RedirectResponse)
+async def config_save(
+    input_dir: str = Form(...),
+    output_dir: str = Form(...),
+    review_manual_dir: str = Form(...),
+    reports_dir: str = Form(...),
+    temp_dir: str = Form(...),
+    processed_dir: str = Form(...),
+    processed_action: str = Form("move"),
+    ocr_enabled: str | None = Form(None),
+    ocr_language: str = Form("por"),
+    ocr_dpi: str = Form("200"),
+    whatsapp_ingestion_enabled: str | None = Form(None),
+    whatsapp_source_dir: str = Form(""),
+):
+    updates = {
+        "paths": {
+            "input_dir": input_dir.strip(),
+            "output_dir": output_dir.strip(),
+            "review_manual_dir": review_manual_dir.strip(),
+            "reports_dir": reports_dir.strip(),
+            "temp_dir": temp_dir.strip(),
+        },
+        "processed_input": {
+            "processed_dir": processed_dir.strip(),
+            "action": processed_action.strip() or "move",
+        },
+        "ocr": {
+            "enabled": _checkbox_bool(ocr_enabled),
+            "language": ocr_language.strip() or "por",
+            "dpi": max(72, min(600, int(ocr_dpi) if str(ocr_dpi).strip().isdigit() else 200)),
+        },
+        "whatsapp_ingestion": {
+            "enabled": _checkbox_bool(whatsapp_ingestion_enabled),
+            "source_dir": whatsapp_source_dir.strip() or None,
+        },
+    }
+    save_local_config(updates)
+    return RedirectResponse(url="/config?saved=1", status_code=303)

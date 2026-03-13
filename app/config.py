@@ -101,6 +101,11 @@ def load_json(path: Path) -> Dict[str, Any]:
         return json.load(f)
 
 
+def save_json(path: Path, data: Dict[str, Any]) -> None:
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+
 def _deep_update_dict(original: Dict[str, Any], updates: Dict[str, Any]) -> Dict[str, Any]:
     for key, value in updates.items():
         if (
@@ -175,6 +180,24 @@ def _apply_local_overrides(settings: Settings) -> Settings:
         settings.whatsapp_ingestion = WhatsAppIngestionConfig(**merged)
 
     return settings
+
+
+def save_local_config(updates: Dict[str, Any]) -> None:
+    """
+    Atualiza config.local.json com os valores em updates (merge com conteúdo existente).
+    Usado pelo painel web para persistir alterações. Paths devem ser strings.
+    """
+    local_cfg_path = PROJECT_ROOT / "config.local.json"
+    existing: Dict[str, Any] = {}
+    if local_cfg_path.exists():
+        try:
+            existing = load_json(local_cfg_path)
+        except Exception:
+            pass
+    merged = _deep_update_dict(existing, updates)
+    local_cfg_path.parent.mkdir(parents=True, exist_ok=True)
+    save_json(local_cfg_path, merged)
+
 
 def load_settings() -> Settings:
     paths = PathsConfig()
