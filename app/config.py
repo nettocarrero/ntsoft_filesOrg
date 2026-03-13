@@ -128,18 +128,30 @@ def _apply_local_overrides(settings: Settings) -> Settings:
     except Exception:
         return settings
 
-    # Paths
+    # Paths (converter strings para Path quando apropriado)
     paths_data = raw.get("paths")
     if isinstance(paths_data, dict):
+        serializable: Dict[str, Any] = {}
+        for k, v in paths_data.items():
+            if isinstance(v, str) and k.endswith("_dir"):
+                serializable[k] = Path(v)
+            else:
+                serializable[k] = v
         data = settings.paths.__dict__
-        merged = _deep_update_dict(data, paths_data)
+        merged = _deep_update_dict(data, serializable)
         settings.paths = PathsConfig(**merged)
 
-    # Processed input
+    # Processed input (converter processed_dir em Path se string)
     pi_data = raw.get("processed_input")
     if isinstance(pi_data, dict):
+        serializable_pi: Dict[str, Any] = {}
+        for k, v in pi_data.items():
+            if k == "processed_dir" and isinstance(v, str):
+                serializable_pi[k] = Path(v)
+            else:
+                serializable_pi[k] = v
         data = settings.processed_input.__dict__
-        merged = _deep_update_dict(data, pi_data)
+        merged = _deep_update_dict(data, serializable_pi)
         settings.processed_input = ProcessedInputConfig(**merged)
 
     # OCR
