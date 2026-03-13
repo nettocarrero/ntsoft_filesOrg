@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Explorador por loja — Organizador de Documentos{% endblock %}
+{% block content %}
+<h2>Explorador por loja</h2>
+
+<form method="get" action="/files" class="filters">
+    <label>Loja
+        <select name="store">
+            <option value="">— Selecione —</option>
+            {% for s in stores %}
+            <option value="{{ s.code }}" {% if selected_store == s.code %}selected{% endif %}>{{ s.name }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    {% if selected_store %}
+    <label>Tipo
+        <input type="text" name="tipo" value="{{ filter_tipo }}" placeholder="ex: boleto">
+    </label>
+    <label>Nome
+        <input type="text" name="nome" value="{{ filter_nome }}" placeholder="filtrar por nome">
+    </label>
+    {% endif %}
+    <button type="submit" class="btn">Filtrar</button>
+</form>
+
+{% if selected_store %}
+<section class="section">
+    <h3>{{ store_name }}</h3>
+    {% if files %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Arquivo</th>
+                <th>Tipo</th>
+                <th>Data</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in files %}
+            <tr>
+                <td>{{ f.name }}</td>
+                <td>{{ f.doc_type }}</td>
+                <td>{{ f.mtime_iso[:19] if f.mtime_iso else '-' }}</td>
+                <td><a href="/files/download?path={{ f.path_url }}" class="btn btn-sm">Baixar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum documento encontrado para esta loja{% if filter_tipo or filter_nome %} com os filtros aplicados{% endif %}.</p>
+    {% endif %}
+</section>
+{% else %}
+<p>Selecione uma loja para listar os documentos.</p>
+<ul class="store-links">
+    {% for s in stores %}
+    <li><a href="/files?store={{ s.code }}">{{ s.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

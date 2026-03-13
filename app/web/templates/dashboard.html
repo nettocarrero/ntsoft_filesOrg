@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Organizador de Documentos{% endblock %}
+{% block content %}
+<h2>Dashboard</h2>
+
+<section class="cards">
+    <div class="card">
+        <span class="card-value">{{ stats.total_hoje }}</span>
+        <span class="card-label">Arquivos hoje</span>
+    </div>
+    <div class="card">
+        <span class="card-value">{{ stats.ocr_hoje }}</span>
+        <span class="card-label">OCR utilizados</span>
+    </div>
+    <div class="card">
+        <span class="card-value">{{ stats.revisao_manual_hoje }}</span>
+        <span class="card-label">Revisão manual</span>
+    </div>
+</section>
+
+{% if stats.por_loja %}
+<section class="section">
+    <h3>Total por loja (hoje)</h3>
+    <ul class="loja-list">
+        {% for code, count in stats.por_loja.items() %}
+        <li><strong>{{ store_names.get(code, code) }}</strong>: {{ count }}</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %}
+
+<section class="section">
+    <h3>Últimos arquivos processados</h3>
+    {% if stats.ultimos_itens %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Arquivo</th>
+                <th>Loja</th>
+                <th>Tipo</th>
+                <th>Status</th>
+                <th>OCR</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in stats.ultimos_itens %}
+            <tr>
+                <td>{{ item.nome_original }}</td>
+                <td>{{ store_names.get(item.loja_sugerida, item.loja_sugerida or '-') }}</td>
+                <td>{{ item.tipo_sugerido }}</td>
+                <td>{{ item.status_processamento }}{% if item.enviado_para_revisao %} (revisão){% endif %}</td>
+                <td>{% if item.ocr_used %}Sim{% else %}Não{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum relatório recente ou nenhum arquivo processado.</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Revisão manual — Organizador de Documentos{% endblock %}
+{% block content %}
+<h2>Revisão manual</h2>
+<p>Arquivos em <code>review_manual/</code> aguardando revisão.</p>
+
+{% if files %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Arquivo</th>
+            <th>Data</th>
+            <th>Tipo detectado</th>
+            <th>Loja sugerida</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for f in files %}
+        <tr>
+            <td>{{ f.name }}</td>
+            <td>{{ f.mtime_iso[:19] if f.mtime_iso else '-' }}</td>
+            <td>{{ f.doc_type }}</td>
+            <td>{{ f.store }}</td>
+            <td>
+                <a href="/review/file?path={{ f.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
+                <span class="btn btn-sm disabled">Corrigir (em breve)</span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Nenhum arquivo em revisão no momento.</p>
+{% endif %}
+{% endblock %}

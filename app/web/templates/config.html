@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Configurações — Organizador de Documentos{% endblock %}
+{% block content %}
+<h2>Configurações</h2>
+<p>Visualização somente leitura das configurações atuais.</p>
+
+<section class="section">
+    <h3>Pastas</h3>
+    <table class="table config-table">
+        <tr><th>input_dir</th><td><code>{{ config.input_dir }}</code></td></tr>
+        <tr><th>output_dir</th><td><code>{{ config.output_dir }}</code></td></tr>
+        <tr><th>review_manual_dir</th><td><code>{{ config.review_manual_dir }}</code></td></tr>
+        <tr><th>reports_dir</th><td><code>{{ config.reports_dir }}</code></td></tr>
+        <tr><th>temp_dir</th><td><code>{{ config.temp_dir }}</code></td></tr>
+    </table>
+</section>
+
+<section class="section">
+    <h3>OCR</h3>
+    <table class="table config-table">
+        <tr><th>ocr_enabled</th><td>{{ config.ocr_enabled }}</td></tr>
+        <tr><th>ocr_language</th><td>{{ config.ocr_language }}</td></tr>
+    </table>
+</section>
+
+<section class="section">
+    <h3>WhatsApp ingestion</h3>
+    <table class="table config-table">
+        <tr><th>whatsapp_ingestion_enabled</th><td>{{ config.whatsapp_ingestion_enabled }}</td></tr>
+        <tr><th>whatsapp_source_dir</th><td><code>{{ config.whatsapp_source_dir or '-' }}</code></td></tr>
+    </table>
+</section>
+
+<section class="section">
+    <h3>Status do sistema</h3>
+    <ul class="status-list">
+        <li>Watcher ativo: <strong>{{ 'Sim' if status.watcher_ativo else 'Não' }}</strong> (o watcher não é iniciado por este servidor; use <code>python -m app.main --watch</code> em outro processo)</li>
+        <li>WhatsApp ingestion ativo: <strong>{{ 'Sim' if status.whatsapp_ingestion_ativo else 'Não' }}</strong></li>
+        <li>OCR habilitado: <strong>{{ 'Sim' if status.ocr_habilitado else 'Não' }}</strong></li>
+        <li>WhatsApp ingestion habilitado: <strong>{{ 'Sim' if status.whatsapp_ingestion_habilitado else 'Não' }}</strong></li>
+        <li>Última execução (relatório): <strong>{{ status.ultima_execucao or '-' }}</strong></li>
+        <li>Último erro: <strong>{{ status.ultimo_erro or 'Nenhum' }}</strong></li>
+        {% if status.total_ultimo_relatorio is not none %}
+        <li>Total no último relatório: {{ status.total_ultimo_relatorio }} | Erros: {{ status.erros_ultimo_relatorio }}</li>
+        {% endif %}
+    </ul>
+</section>
+{% endblock %}
