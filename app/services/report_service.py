@@ -39,6 +39,7 @@ def _serialize_processing_result(result: ProcessingResult) -> Dict[str, Any]:
         "destino_final": str(d.destination_path) if d.destination_path else None,
         "motivo_decisao": d.decision_reason,
         "explicacao_decisao": d.decision_explanation,
+        "ignorado_por_regra": d.ignored,
         "enviado_para_revisao": d.sent_to_review,
         "status_processamento": result.status.value,
         "erro": result.error_message,
@@ -90,6 +91,7 @@ def generate_reports(
             f.write(f"  Fonte do texto: {item['text_source']}\n")
             f.write(f"  OCR usado: {item['ocr_used']}, sucesso: {item['ocr_success']}\n")
             f.write(f"  OCR metadata: {item['ocr_metadata']}\n")
+            f.write(f"  Ignorado por regra: {item['ignorado_por_regra']}\n")
             f.write(f"  CNPJs detectados: {', '.join(item['cnpjs_detectados']) if item['cnpjs_detectados'] else 'nenhum'}\n")
             f.write(f"  Loja sugerida: {item['loja_sugerida']}\n")
             f.write(f"  Tipo sugerido: {item['tipo_sugerido']}\n")

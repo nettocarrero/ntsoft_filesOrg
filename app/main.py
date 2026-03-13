@@ -21,6 +21,7 @@ from app.services import (
     generate_reports,
 )
 from app.services.whatsapp_ingestion_service import start_whatsapp_ingestion
+from app.services.filter_service import should_ignore_document
 from app.utils.file_utils import is_pdf, is_zip, is_rar
 
 
@@ -255,6 +256,14 @@ def _process_pdf(
         else:
             if status == "ok":
                 logger.info("OCR ignorado, texto extraído do PDF é suficiente: %s", pdf_path)
+
+        # Regras de ignorar documentos por nome/texto
+        ignore, reason = should_ignore_document(doc, settings)
+        if ignore:
+            logger.info("Documento ignorado por regra de filtro: %s (%s)", pdf_path, reason)
+            doc.ignored = True
+            doc.decision_reason = reason
+            return ProcessingResult(document=doc, status=ProcessingStatus.SUCCESS)
 
         doc = classify_document(doc, settings)
         doc = organize_document(doc, settings.paths)

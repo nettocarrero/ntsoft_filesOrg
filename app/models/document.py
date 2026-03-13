@@ -44,4 +44,5 @@ class DocumentInfo:
     sent_to_review: bool = False
     decision_reason: str = ""
     decision_explanation: str = ""
+    ignored: bool = False
 
