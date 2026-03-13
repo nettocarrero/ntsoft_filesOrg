@@ -7,6 +7,11 @@
 {% if saved %}
 <p class="msg msg-success">Configurações salvas com sucesso.</p>
 {% endif %}
+{% if watcher_started %}
+<p class="msg msg-success">Identificador iniciado em nova janela do terminal. Feche a janela ou use Ctrl+C nela para parar.</p>
+{% elif watcher_started_error %}
+<p class="msg msg-error">Não foi possível abrir o terminal. Execute manualmente: <code>python -m app.main --watch</code></p>
+{% endif %}
 
 <form method="post" action="/config" class="config-form">
   <section class="section">
@@ -58,8 +63,14 @@
 
 <section class="section">
   <h3>Status do sistema</h3>
+  <p>
+    <form method="post" action="/start-watcher" style="display: inline;">
+      <button type="submit" class="btn">Inicializar identificador</button>
+    </form>
+    <span class="muted">Abre uma nova janela do terminal com o watcher (<code>python -m app.main --watch</code>). Para parar, feche a janela ou use Ctrl+C.</span>
+  </p>
   <ul class="status-list">
-    <li>Watcher ativo: <strong>{{ 'Sim' if status.watcher_ativo else 'Não' }}</strong> (o watcher não é iniciado por este servidor; use <code>python -m app.main --watch</code> em outro processo)</li>
+    <li>Watcher ativo: <strong>{{ 'Sim' if status.watcher_ativo else 'Não' }}</strong> (o watcher roda em outra janela; use o botão acima para iniciar)</li>
     <li>WhatsApp ingestion ativo: <strong>{{ 'Sim' if status.whatsapp_ingestion_ativo else 'Não' }}</strong></li>
     <li>OCR habilitado: <strong>{{ 'Sim' if status.ocr_habilitado else 'Não' }}</strong></li>
     <li>WhatsApp ingestion habilitado: <strong>{{ 'Sim' if status.whatsapp_ingestion_habilitado else 'Não' }}</strong></li>

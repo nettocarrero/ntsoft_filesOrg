@@ -1,12 +1,49 @@
 from __future__ import annotations
 
+import subprocess
+import sys
+from pathlib import Path
+
 from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 
-from app.config import save_local_config
+from app.config import PROJECT_ROOT, save_local_config
 from app.web.helpers import get_settings, system_status
 
 router = APIRouter()
+
+
+def start_watcher_in_new_terminal() -> bool:
+    """
+    Abre uma nova janela do terminal e executa `python -m app.main --watch`.
+    Retorna True se o comando foi disparado com sucesso (Windows).
+    """
+    python_exe = Path(sys.executable).resolve()
+    cwd = str(PROJECT_ROOT.resolve())
+    cmd = f'"{python_exe}" -m app.main --watch'
+    try:
+        if sys.platform == "win32":
+            # Nova janela CMD com título "Identificador"
+            subprocess.Popen(
+                f'start "Identificador" cmd /k "cd /d "{cwd}" && {cmd}"',
+                cwd=cwd,
+                shell=True,
+            )
+            return True
+        # Linux/macOS: tente abrir terminal (gnome-terminal, xterm, etc.)
+        if sys.platform == "darwin":
+            subprocess.Popen(
+                ["open", "-a", "Terminal", "-n", "--args", "bash", "-c", f"cd {cwd!r} && {python_exe} -m app.main --watch; exec bash"],
+                cwd=cwd,
+            )
+            return True
+        subprocess.Popen(
+            ["xterm", "-e", f"cd {cwd!r} && {python_exe} -m app.main --watch; exec bash"],
+            cwd=cwd,
+        )
+        return True
+    except (OSError, Exception):
+        return False
 
 
 def _config_dict(settings):
@@ -28,7 +65,11 @@ def _config_dict(settings):
 
 
 @router.get("/config", response_class=HTMLResponse)
-async def config_page(request: Request, saved: str | None = None):
+async def config_page(
+    request: Request,
+    saved: str | None = None,
+    watcher_started: str | None = None,
+):
     settings = get_settings()
     status = system_status(settings)
     config = _config_dict(settings)
@@ -39,6 +80,8 @@ async def config_page(request: Request, saved: str | None = None):
             "config": config,
             "status": status,
             "saved": saved == "1",
+            "watcher_started": watcher_started == "1",
+            "watcher_started_error": watcher_started == "0",
         },
     )
 
@@ -86,3 +129,13 @@ async def config_save(
     }
     save_local_config(updates)
     return RedirectResponse(url="/config?saved=1", status_code=303)
+
+
+@router.post("/start-watcher", response_class=RedirectResponse)
+async def start_watcher():
+    """Abre uma nova janela do terminal com o identificador (watcher) em execução."""
+    ok = start_watcher_in_new_terminal()
+    return RedirectResponse(
+        url="/config?watcher_started=1" if ok else "/config?watcher_started=0",
+        status_code=303,
+    )
