@@ -1,0 +1,34 @@
+{
+  "stores": {
+    "ljUbj": {
+      "code": "ljUbj",
+      "city": "ubajara",
+      "aliases": ["ubajara", "ubj"],
+      "cnpjs": ["07439697000140"]
+    },
+    "ljIbi": {
+      "code": "ljIbi",
+      "city": "ibiapina",
+      "aliases": ["ibiapina", "ibi"],
+      "cnpjs": ["07439697000574"]
+    },
+    "ljSb": {
+      "code": "ljSb",
+      "city": "saobenedito",
+      "aliases": ["sao benedito", "saobenedito", "sb"],
+      "cnpjs": ["07439697000302"]
+    },
+    "ljGba": {
+      "code": "ljGba",
+      "city": "guaraciaba",
+      "aliases": ["guaraciaba", "gba"],
+      "cnpjs": ["07439697000493"]
+    },
+    "ljLc": {
+      "code": "ljLc",
+      "city": "sobral",
+      "aliases": ["l&c", "l & c"],
+      "cnpjs": ["37052558000120"]
+    }
+  }
+}

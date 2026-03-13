@@ -1,0 +1,45 @@
+Resumo da execução
+- total_arquivos: 1
+- total_arquivos_compactados: 0
+- total_vindos_de_zip: 0
+- total_vindos_de_rar: 0
+- total_classificados_automaticamente: 1
+- total_revisao_manual: 0
+- total_erros: 0
+- total_com_cnpj: 1
+
+Detalhes por arquivo:
+
+Arquivo: notafiscal 02 02.2026.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\input\notafiscal 02 02.2026.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: False
+  Tipo arquivo compactado: None
+  Arquivo compactado origem: None
+  CNPJs detectados: 07439697000140, 51751292000135, 23129081251751, 29200013500000, 00000013260280
+  Loja sugerida: ljUbj
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljUbj\desconhecido\notafiscal 02 02.2026.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'sobral', 'kind': 'city', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'nota_fiscal', 'keyword': 'nota fiscal', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'chave de acesso', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs-e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'prestador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'tomador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljUbj.
+Scores por loja: {'ljUbj': 26, 'ljLc': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'sobral', 'kind': 'city', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'nota_servico': 5, 'nota_fiscal': 3}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'nota_fiscal', 'keyword': 'nota fiscal', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'chave de acesso', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs-e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'prestador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'tomador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+

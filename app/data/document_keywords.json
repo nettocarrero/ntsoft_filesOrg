@@ -1,0 +1,52 @@
+{
+  "boleto": {
+    "keywords": [
+      "boleto",
+      "vencimento",
+      "linha digitavel",
+      "pagador",
+      "beneficiario",
+      "valor do documento"
+    ]
+  },
+  "nota_fiscal": {
+    "keywords": [
+      "nota fiscal",
+      "danfe",
+      "chave de acesso",
+      "emissao",
+      "nf-e",
+      "nfe"
+    ]
+  },
+  "nota_servico": {
+    "keywords": [
+      "nfs-e",
+      "nfs e",
+      "nota fiscal de servico",
+      "prestador",
+      "tomador",
+      "servico"
+    ]
+  },
+  "taxa": {
+    "keywords": [
+      "darf",
+      "fgts",
+      "simples nacional",
+      "taxa",
+      "arrecadacao",
+      "imposto"
+    ]
+  },
+  "comprovante": {
+    "keywords": [
+      "comprovante",
+      "pagamento efetuado",
+      "autenticacao",
+      "autenticacao mecanica",
+      "autenticacao eletronica"
+    ]
+  }
+}
+

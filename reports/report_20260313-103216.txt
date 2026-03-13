@@ -1,0 +1,48 @@
+Resumo da execução
+- total_arquivos: 1
+- total_arquivos_compactados: 0
+- total_vindos_de_zip: 0
+- total_vindos_de_rar: 0
+- total_classificados_automaticamente: 0
+- total_revisao_manual: 1
+- total_erros: 0
+- total_com_cnpj: 0
+
+Detalhes por arquivo:
+
+Arquivo: img20260313_10192335.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\input\img20260313_10192335.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: False
+  Tipo arquivo compactado: None
+  Arquivo compactado origem: None
+  Texto extraído status: texto_insuficiente
+  Fonte do texto: none
+  OCR usado: True, sucesso: False
+  OCR metadata: {'pages_processed': 0, 'ocr_engine': 'tesseract', 'text_length': 0, 'success': False, 'error': "tesseract is not installed or it's not in your PATH. See README file for more information."}
+  CNPJs detectados: nenhum
+  Loja sugerida: None
+  Tipo sugerido: desconhecido
+  Confiança: store=0.0, type=0.0, overall=0.0
+  Enviado para revisão: True
+  Destino final: C:\Projetos\ntsoft-orgfiles\review_manual\desconhecido\desconhecido\img20260313_10192335.pdf
+  Motivo decisão: Loja não identificada com confiança suficiente.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: []
+    matched_store_sources: []
+    matched_type_keywords: []
+    matched_type_sources: []
+  Explicação detalhada da decisão:
+Loja sugerida: nenhuma.
+Scores por loja: {}.
+Evidências de loja (aliases e locais): [].
+Fontes de evidência de loja: [].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {}.
+Evidências de tipo (palavras‑chave): [].
+Fontes de evidência de tipo: [].
+Confianças: store=0.0, type=0.0, overall=0.0.
+Decisão final: Loja não identificada com confiança suficiente.
+  Status processamento: success
+
