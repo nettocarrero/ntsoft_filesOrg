@@ -25,6 +25,7 @@ async def dashboard(request: Request, counters_reset: str | None = None):
                 "ljSb": "São Benedito",
                 "ljGba": "Guaraciaba",
                 "ljLc": "L&C (Sobral)",
+                "ljKlc": "KLC (Sobral)",
                 "desconhecido": "Desconhecido",
             },
             "counters_reset": counters_reset,

@@ -44,4 +44,28 @@
 
     /* Sombras */
     --color-shadow: rgba(0, 0, 0, 0.08);
+    --color-shadow-card: rgba(0, 0, 0, 0.06);
+
+    /* Sidebar */
+    --color-sidebar-bg: #1a1a2e;
+    --color-sidebar-text: #e8e8e8;
+    --color-sidebar-link: rgba(255, 255, 255, 0.85);
+    --color-sidebar-link-hover: #fff;
+    --color-sidebar-link-active-bg: rgba(255, 255, 255, 0.12);
+
+    /* Badges */
+    --color-badge-success-bg: #d4edda;
+    --color-badge-success-text: #155724;
+    --color-badge-error-bg: #f8d7da;
+    --color-badge-error-text: #721c24;
+    --color-badge-review-bg: #fff3cd;
+    --color-badge-review-text: #856404;
+    --color-badge-unknown-bg: #e9ecef;
+    --color-badge-unknown-text: #495057;
+    --color-badge-nf-bg: #d4edda;
+    --color-badge-nf-text: #155724;
+    --color-badge-boleto-bg: #cce5ff;
+    --color-badge-boleto-text: #004085;
+    --color-badge-nota-servico-bg: #e2d5f1;
+    --color-badge-nota-servico-text: #4a3f5c;
 }

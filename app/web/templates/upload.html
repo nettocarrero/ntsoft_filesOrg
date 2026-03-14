@@ -3,7 +3,7 @@
 {% block content %}
 <h2>Enviar para classificação</h2>
 
-<p class="muted">Envie PDF, ZIP ou RAR. Informe uma observação sobre o conteúdo. Os arquivos serão salvos na pasta de entrada e processados pela mesma rotina de classificação (incluindo OCR quando necessário).</p>
+<p class="muted" style="margin-bottom: 1.25rem;">Envie PDF, ZIP ou RAR. Informe uma observação sobre o conteúdo. Os arquivos serão salvos na pasta de entrada e processados pela mesma rotina de classificação (incluindo OCR quando necessário).</p>
 
 {% if request.query_params.get('success') == '1' %}
 <p class="msg msg-success">Arquivos enviados e classificados com sucesso.</p>
@@ -18,7 +18,7 @@
 <p class="msg msg-error">Erro durante o processamento. Verifique os relatórios ou o log.</p>
 {% endif %}
 
-<div class="upload-identify muted">
+<div class="upload-identify muted" style="margin-bottom: 1.25rem;">
     <strong>Identificação:</strong>
     {% if client_name %}
     <span>{{ client_name }}</span> (IP: <code>{{ client_ip }}</code>)
@@ -27,7 +27,7 @@
     {% endif %}
 </div>
 
-<form method="post" action="/upload" enctype="multipart/form-data" class="upload-form">
+<form method="post" action="/upload" enctype="multipart/form-data" class="upload-form" id="upload-form">
   <section class="section">
     <label class="upload-label">Observação sobre os arquivos <span class="required">*</span></label>
     <textarea name="observation" rows="3" required placeholder="Ex.: Notas fiscais da loja de Ubajara – março/2025" class="upload-textarea"></textarea>
@@ -35,10 +35,59 @@
   </section>
   <section class="section">
     <label class="upload-label">Arquivos (PDF, ZIP ou RAR)</label>
-    <input type="file" name="files" multiple accept=".pdf,.zip,.rar" class="upload-input">
+    <div class="upload-drop-zone" id="drop-zone" tabindex="0">
+      <input type="file" name="files" multiple accept=".pdf,.zip,.rar" class="upload-input" id="file-input">
+      <p style="margin: 0; color: var(--color-text-muted);">Arraste arquivos aqui ou clique para selecionar</p>
+      <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: var(--color-text-muted);">Formatos aceitos: PDF, ZIP, RAR</p>
+      <ul class="upload-file-list" id="file-list" aria-live="polite"></ul>
+    </div>
   </section>
   <section class="section">
     <button type="submit" class="btn">Enviar e classificar</button>
   </section>
 </form>
+{% endblock %}
+{% block scripts %}
+<script>
+(function() {
+  var form = document.getElementById('upload-form');
+  var dropZone = document.getElementById('drop-zone');
+  var fileInput = document.getElementById('file-input');
+  var fileList = document.getElementById('file-list');
+
+  function updateFileList() {
+    var files = fileInput.files;
+    fileList.innerHTML = '';
+    if (files.length === 0) return;
+    for (var i = 0; i < files.length; i++) {
+      var li = document.createElement('li');
+      li.textContent = files[i].name;
+      fileList.appendChild(li);
+    }
+  }
+
+  dropZone.addEventListener('click', function() { fileInput.click(); });
+  fileInput.addEventListener('change', updateFileList);
+
+  dropZone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    dropZone.classList.add('drag-over');
+  });
+  dropZone.addEventListener('dragleave', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    dropZone.classList.remove('drag-over');
+  });
+  dropZone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    dropZone.classList.remove('drag-over');
+    if (e.dataTransfer.files.length) {
+      fileInput.files = e.dataTransfer.files;
+      updateFileList();
+    }
+  });
+})();
+</script>
 {% endblock %}

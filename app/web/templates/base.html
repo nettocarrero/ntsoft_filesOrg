@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="/static/css/colors.css">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body>
-    <header class="header">
-        <h1>Organizador de Documentos</h1>
-        <nav class="nav">
-            <a href="/">Dashboard</a>
-            <a href="/review">Revisão manual</a>
-            <a href="/files">Explorador</a>
-            <a href="/upload">Enviar para classificação</a>
-            <a href="/config">Configurações</a>
+<body class="layout-with-sidebar">
+    <aside class="sidebar">
+        <div class="sidebar-brand">Organizador de Documentos</div>
+        <nav class="sidebar-nav">
+            <a href="/" class="sidebar-link{% if request.url.path == '/' %} active{% endif %}">Dashboard</a>
+            <a href="/review" class="sidebar-link{% if request.url.path.startswith('/review') %} active{% endif %}">Revisão manual</a>
+            <a href="/files" class="sidebar-link{% if request.url.path.startswith('/files') %} active{% endif %}">Explorador</a>
+            <a href="/upload" class="sidebar-link{% if request.url.path == '/upload' %} active{% endif %}">Enviar para classificação</a>
+            <a href="/config" class="sidebar-link{% if request.url.path.startswith('/config') %} active{% endif %}">Configurações</a>
         </nav>
-    </header>
+    </aside>
     <main class="main">
         {% block content %}{% endblock %}
     </main>

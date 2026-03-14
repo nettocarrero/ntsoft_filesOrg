@@ -2,7 +2,6 @@
 {% block title %}Revisão manual — Organizador de Documentos{% endblock %}
 {% block content %}
 <h2>Revisão manual</h2>
-<p>Arquivos em <code>review_manual/</code> aguardando revisão.</p>
 
 {% if request.query_params.get('corrected') == '1' %}
 <p class="msg msg-success">Arquivo enviado para a pasta correta.</p>
@@ -19,13 +18,14 @@
 {% endif %}
 
 {% if files %}
-<table class="table">
+<div class="table-wrap">
+<table class="table table-zebra">
     <thead>
         <tr>
             <th>Arquivo</th>
-            <th>Data</th>
-            <th>Tipo detectado</th>
             <th>Loja sugerida</th>
+            <th>Tipo sugerido</th>
+            <th>Data</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -33,19 +33,26 @@
         {% for f in files %}
         <tr>
             <td>{{ f.name }}</td>
-            <td>{{ f.mtime_iso[:19] if f.mtime_iso else '-' }}</td>
-            <td>{{ f.doc_type }}</td>
             <td>{{ f.store }}</td>
+            <td>{{ f.doc_type }}</td>
+            <td>{{ f.mtime_iso[:19] if f.mtime_iso else '-' }}</td>
             <td>
-                <a href="/review/file?path={{ f.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
-                <a href="/review/correct?path={{ f.path_url }}" class="btn btn-sm">Corrigir</a>
-                <a href="/review/discard?path={{ f.path_url }}" class="btn btn-sm" style="background: var(--color-msg-error-bg); color: var(--color-msg-error-text); border: 1px solid var(--color-msg-error-border);">Descartar</a>
+                <span class="action-buttons">
+                    <a href="/review/file?path={{ f.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
+                    <a href="/review/correct?path={{ f.path_url }}" class="btn btn-sm">Corrigir</a>
+                    <a href="/review/discard?path={{ f.path_url }}" class="btn btn-sm btn-danger">Descartar</a>
+                </span>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+</div>
 {% else %}
-<p>Nenhum arquivo em revisão no momento.</p>
+<div class="empty-state">
+    <div class="empty-state-icon">📋</div>
+    <h3>Nenhum arquivo aguardando revisão manual.</h3>
+    <p>Documentos com baixa confiança na classificação automática aparecem aqui para que você possa enviá-los à pasta correta ou descartá-los.</p>
+</div>
 {% endif %}
 {% endblock %}

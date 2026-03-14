@@ -4,7 +4,7 @@
 <h2>Configurações</h2>
 
 {% if allow_management %}
-<p>Altere as configurações abaixo. As alterações são salvas em <code>config.local.json</code> e aplicadas na próxima execução do sistema.</p>
+<p class="muted" style="margin-bottom: 1.5rem;">Altere as configurações abaixo. As alterações são salvas em <code>config.local.json</code> e aplicadas na próxima execução do sistema.</p>
 
 {% if saved %}
 <p class="msg msg-success">Configurações salvas com sucesso.</p>
@@ -16,7 +16,7 @@
 {% endif %}
 
 <form method="post" action="/config" class="config-form">
-  <section class="section">
+  <section class="section-card">
     <h3>Pastas</h3>
     <div class="form-grid">
       <label>input_dir <input type="text" name="input_dir" value="{{ config.input_dir }}" class="input-path"></label>
@@ -35,7 +35,7 @@
     </label>
   </section>
 
-  <section class="section">
+  <section class="section-card">
     <h3>OCR</h3>
     <div class="form-grid">
       <label class="label-checkbox">
@@ -47,7 +47,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section-card">
     <h3>WhatsApp ingestion</h3>
     <div class="form-grid">
       <label class="label-checkbox">
@@ -59,11 +59,11 @@
   </section>
 
   <section class="section">
-    <button type="submit" class="btn">Salvar configurações</button>
+    <button type="submit" class="btn btn-primary">Salvar configurações</button>
   </section>
 </form>
 
-<section class="section">
+<section class="section-card">
   <h3>Status do sistema</h3>
   <p>
     <form method="post" action="/start-watcher" style="display: inline;">
@@ -84,7 +84,7 @@
   </ul>
 </section>
 
-<section class="section" id="ip-users">
+<section class="section-card" id="ip-users">
   <h3>Identificação por IP (quem enviou)</h3>
   <p class="muted">Vincule IPs a nomes de usuário. Ao enviar arquivos para classificação, o sistema identifica quem enviou pelo IP e grava o nome nos relatórios de upload.</p>
   <table class="table config-table" style="max-width: 480px;">
@@ -118,7 +118,7 @@
 {% else %}
 <p class="muted">Visualização somente leitura. Edição de configurações e inicialização do identificador estão disponíveis apenas no PC principal (acesso por <strong>localhost</strong>).</p>
 
-<section class="section">
+<section class="section-card">
   <h3>Pastas</h3>
   <table class="table config-table">
     <tr><th>input_dir</th><td><code>{{ config.input_dir }}</code></td></tr>
@@ -130,7 +130,7 @@
   </table>
 </section>
 
-<section class="section">
+<section class="section-card">
   <h3>OCR</h3>
   <table class="table config-table">
     <tr><th>ocr_enabled</th><td>{{ config.ocr_enabled }}</td></tr>
@@ -139,7 +139,7 @@
   </table>
 </section>
 
-<section class="section">
+<section class="section-card">
   <h3>WhatsApp ingestion</h3>
   <table class="table config-table">
     <tr><th>whatsapp_ingestion_enabled</th><td>{{ config.whatsapp_ingestion_enabled }}</td></tr>
@@ -147,7 +147,7 @@
   </table>
 </section>
 
-<section class="section">
+<section class="section-card">
   <h3>Status do sistema</h3>
   <ul class="status-list">
     <li>Watcher ativo: <strong>{{ 'Sim' if status.watcher_ativo else 'Não' }}</strong></li>
@@ -162,7 +162,7 @@
   </ul>
 </section>
 
-<section class="section">
+<section class="section-card">
   <h3>Identificação por IP</h3>
   <p class="muted">Vínculos IP → nome (somente leitura; editar no PC principal).</p>
   {% if ip_users %}
