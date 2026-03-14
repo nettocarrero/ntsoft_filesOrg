@@ -11,6 +11,7 @@ from watchdog.observers import Observer
 from app.config import Settings
 from app.utils.file_utils import is_pdf, is_zip, is_rar
 from app.services.watcher_service import wait_until_file_is_ready
+from app.web.helpers import add_path_to_whatsapp_origins
 
 
 logger = logging.getLogger(__name__)
@@ -90,6 +91,7 @@ class WhatsAppIngestionHandler(FileSystemEventHandler):
             import shutil
 
             shutil.copy2(path, dest)
+            add_path_to_whatsapp_origins(dest)
             logger.info("Arquivo copiado da pasta do WhatsApp para input: %s -> %s", path, dest)
         except Exception as exc:
             logger.error("Erro ao copiar arquivo do WhatsApp para input %s: %s", path, exc)

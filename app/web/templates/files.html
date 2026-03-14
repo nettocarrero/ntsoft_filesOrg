@@ -45,6 +45,7 @@
                 <th class="col-name">Arquivo</th>
                 <th>Tipo</th>
                 <th class="col-date">Data</th>
+                <th>Enviado por</th>
                 <th>Ação</th>
             </tr>
         </thead>
@@ -54,6 +55,7 @@
                 <td class="col-name" title="{{ f.hint }}">{{ f.name }}</td>
                 <td>{{ f.doc_type }}</td>
                 <td class="col-date">{{ f.mtime_br or '-' }}</td>
+                <td>{{ f.sent_by or '-' }}</td>
                 <td class="col-actions">
                     <span class="action-buttons">
                         <a href="/files/view?path={{ f.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>

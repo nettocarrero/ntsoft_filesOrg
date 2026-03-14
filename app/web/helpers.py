@@ -49,6 +49,70 @@ def save_ip_users(mapping: Dict[str, str]) -> None:
         json.dump(mapping, f, ensure_ascii=False, indent=2)
 
 
+def load_file_sender_registry() -> Dict[str, str]:
+    """Carrega registro path_resolvido -> nome de quem enviou (app/data/file_sender_registry.json)."""
+    settings = get_settings()
+    path = settings.paths.data_dir / "file_sender_registry.json"
+    if not path.exists():
+        return {}
+    try:
+        with path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def update_file_sender_registry(entries: Dict[str, str]) -> None:
+    """Atualiza o registro de quem enviou (merge com o existente)."""
+    settings = get_settings()
+    reg_path = settings.paths.data_dir / "file_sender_registry.json"
+    current = load_file_sender_registry()
+    current.update(entries)
+    reg_path.parent.mkdir(parents=True, exist_ok=True)
+    with reg_path.open("w", encoding="utf-8") as f:
+        json.dump(current, f, ensure_ascii=False, indent=2)
+
+
+def load_whatsapp_input_paths() -> set:
+    """Carrega conjunto de paths (str) em input que vieram do WhatsApp (app/data/whatsapp_input_paths.json)."""
+    settings = get_settings()
+    path = settings.paths.data_dir / "whatsapp_input_paths.json"
+    if not path.exists():
+        return set()
+    try:
+        with path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        return set(data) if isinstance(data, list) else set()
+    except Exception:
+        return set()
+
+
+def add_path_to_whatsapp_origins(input_path: Path) -> None:
+    """Registra que este path em input/ veio do WhatsApp (para marcar destino como 'classificado de forma automatica')."""
+    settings = get_settings()
+    reg_path = settings.paths.data_dir / "whatsapp_input_paths.json"
+    current = list(load_whatsapp_input_paths())
+    key = str(input_path.resolve())
+    if key not in current:
+        current.append(key)
+    reg_path.parent.mkdir(parents=True, exist_ok=True)
+    with reg_path.open("w", encoding="utf-8") as f:
+        json.dump(current, f, ensure_ascii=False, indent=2)
+
+
+def remove_whatsapp_input_paths(paths_to_remove: List[str]) -> None:
+    """Remove paths do registro de origens WhatsApp (após processamento)."""
+    current = load_whatsapp_input_paths()
+    for p in paths_to_remove:
+        current.discard(p)
+    settings = get_settings()
+    reg_path = settings.paths.data_dir / "whatsapp_input_paths.json"
+    reg_path.parent.mkdir(parents=True, exist_ok=True)
+    with reg_path.open("w", encoding="utf-8") as f:
+        json.dump(list(current), f, ensure_ascii=False, indent=2)
+
+
 def _load_report_json(path: Path) -> Optional[Dict[str, Any]]:
     try:
         with path.open("r", encoding="utf-8") as f:
@@ -268,6 +332,9 @@ def list_store_files(
             except OSError:
                 pass
     out.sort(key=lambda x: x["mtime"], reverse=True)
+    registry = load_file_sender_registry()
+    for item in out:
+        item["sent_by"] = registry.get(str(item["path"].resolve()), "-")
     return out
 
 

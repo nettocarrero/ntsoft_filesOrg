@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Descartar arquivo — Revisão manual{% endblock %}
+{% block content %}
+<h2>Descartar arquivo</h2>
+
+<p>Arquivo: <strong>{{ file_name }}</strong></p>
+<p class="msg msg-error">O arquivo será excluído permanentemente. Esta ação não pode ser desfeita.</p>
+
+<form method="post" action="/review/discard" class="config-form">
+  <input type="hidden" name="path" value="{{ path_value }}">
+  <section class="section">
+    <button type="submit" class="btn" style="background: var(--color-msg-error-bg); color: var(--color-msg-error-text); border: 1px solid var(--color-msg-error-border);">Descartar</button>
+    <a href="/review" class="btn" style="margin-left: 0.5rem;">Cancelar</a>
+  </section>
+</form>
+{% endblock %}

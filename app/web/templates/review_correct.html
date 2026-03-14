@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Corrigir — enviar para pasta correta{% endblock %}
+{% block content %}
+<h2>Enviar para pasta correta</h2>
+
+<p>Arquivo: <strong>{{ file_name }}</strong></p>
+
+{% if request.query_params.get('error') == 'preencha_loja_tipo' %}
+<p class="msg msg-error">Selecione a loja e o tipo de documento.</p>
+{% elif request.query_params.get('error') == 'tipo_invalido' %}
+<p class="msg msg-error">Tipo de documento inválido.</p>
+{% endif %}
+
+<form method="post" action="/review/correct" class="config-form">
+  <input type="hidden" name="path" value="{{ path_value }}">
+  <section class="section">
+    <label>Loja
+      <select name="store" required>
+        <option value="">— Selecione —</option>
+        {% for s in stores %}
+        <option value="{{ s.code }}">{{ s.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Tipo de documento
+      <select name="doc_type" required>
+        <option value="">— Selecione —</option>
+        {% for dt in doc_types %}
+        <option value="{{ dt }}">{{ dt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+  </section>
+  <section class="section">
+    <button type="submit" class="btn">Enviar para pasta correta</button>
+    <a href="/review" class="btn" style="margin-left: 0.5rem;">Cancelar</a>
+  </section>
+</form>
+{% endblock %}

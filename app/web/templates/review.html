@@ -4,6 +4,20 @@
 <h2>Revisão manual</h2>
 <p>Arquivos em <code>review_manual/</code> aguardando revisão.</p>
 
+{% if request.query_params.get('corrected') == '1' %}
+<p class="msg msg-success">Arquivo enviado para a pasta correta.</p>
+{% elif request.query_params.get('discarded') == '1' %}
+<p class="msg msg-success">Arquivo descartado.</p>
+{% elif request.query_params.get('error') == 'arquivo_nao_encontrado' %}
+<p class="msg msg-error">Arquivo não encontrado.</p>
+{% elif request.query_params.get('error') == 'erro_ao_mover' %}
+<p class="msg msg-error">Erro ao mover o arquivo. Verifique permissões.</p>
+{% elif request.query_params.get('error') == 'erro_ao_excluir' %}
+<p class="msg msg-error">Erro ao excluir o arquivo. Verifique permissões.</p>
+{% elif request.query_params.get('error') == 'loja_invalida' %}
+<p class="msg msg-error">Loja inválida.</p>
+{% endif %}
+
 {% if files %}
 <table class="table">
     <thead>
@@ -24,7 +38,8 @@
             <td>{{ f.store }}</td>
             <td>
                 <a href="/review/file?path={{ f.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
-                <span class="btn btn-sm disabled">Corrigir (em breve)</span>
+                <a href="/review/correct?path={{ f.path_url }}" class="btn btn-sm">Corrigir</a>
+                <a href="/review/discard?path={{ f.path_url }}" class="btn btn-sm" style="background: var(--color-msg-error-bg); color: var(--color-msg-error-text); border: 1px solid var(--color-msg-error-border);">Descartar</a>
             </td>
         </tr>
         {% endfor %}

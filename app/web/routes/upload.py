@@ -14,7 +14,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from app.config import load_settings
 from app.logger import setup_logging
 from app.main import process_input_files
-from app.web.helpers import load_ip_users
+from app.web.helpers import load_ip_users, update_file_sender_registry
 
 router = APIRouter()
 
@@ -113,7 +113,15 @@ async def upload_submit(
 
     setup_logging()
     try:
-        await asyncio.to_thread(process_input_files, saved_paths, settings)
+        results = await asyncio.to_thread(process_input_files, saved_paths, settings)
+        if user_name:
+            entries = {}
+            for r in results:
+                dest = r.document.destination_path
+                if dest and dest.exists():
+                    entries[str(dest.resolve())] = user_name
+            if entries:
+                update_file_sender_registry(entries)
     except Exception:
         return RedirectResponse(url="/upload?error=erro_processamento", status_code=303)
 

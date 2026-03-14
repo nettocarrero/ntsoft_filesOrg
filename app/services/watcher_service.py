@@ -100,9 +100,33 @@ class InputFolderEventHandler(FileSystemEventHandler):
             return
 
         try:
-            self.process_fn([path], self.settings)
+            results = self.process_fn([path], self.settings)
+            self._mark_whatsapp_results(path, results)
         except Exception as exc:
             logger.error("Erro ao processar arquivo disparado pelo watcher %s: %s", path, exc)
+
+    def _mark_whatsapp_results(self, input_path: Path, results: list) -> None:
+        """Se o arquivo em input veio do WhatsApp, marca destinos no registry como 'classificado de forma automatica'."""
+        from app.web.helpers import (
+            load_whatsapp_input_paths,
+            remove_whatsapp_input_paths,
+            update_file_sender_registry,
+        )
+        key = str(input_path.resolve())
+        if key not in load_whatsapp_input_paths():
+            return
+        entries = {}
+        for r in results:
+            dest = getattr(r.document, "destination_path", None)
+            if not dest or not dest.exists():
+                continue
+            orig = r.document.original_path
+            arch = getattr(r.document, "archive_root", None)
+            if (orig and str(orig.resolve()) == key) or (arch and str(arch.resolve()) == key):
+                entries[str(dest.resolve())] = "classificado de forma automatica"
+        if entries:
+            update_file_sender_registry(entries)
+        remove_whatsapp_input_paths([key])
 
     def on_created(self, event: FileCreatedEvent) -> None:
         if event.is_directory:
