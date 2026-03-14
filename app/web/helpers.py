@@ -270,7 +270,7 @@ def list_output_stores(output_dir: Path, aliases: Dict[str, Any]) -> List[Dict[s
         "ljSb": "São Benedito",
         "ljGba": "Guaraciaba",
         "ljLc": "L&C (Sobral)",
-        "ljKlc": "KLC (Ubajara)",
+        "ljKlc": "KLC (Sobral)",
     }
     for code, info in (aliases.get("stores") or {}).items():
         if code not in store_names and isinstance(info, dict):
