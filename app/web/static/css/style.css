@@ -118,13 +118,48 @@ body {
 }
 
 .sidebar-link .nav-icon {
-    font-size: 1.1rem;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0.9;
-    width: 1.4em;
-    text-align: center;
+}
+
+.sidebar-link .nav-icon svg {
+    display: block;
 }
 
 /* ---- TIPOGRAFIA E ESPAÇAMENTO ---- */
+.page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.page-header .page-title-wrap {
+    flex: 1;
+    min-width: 0;
+}
+
+.page-header h2 {
+    margin: 0 0 0.25rem 0;
+    border: none;
+    padding: 0;
+}
+
+.page-header .page-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.page-header .page-actions {
+    flex-shrink: 0;
+}
+
 h2 {
     margin-top: 0;
     margin-bottom: 1.5rem;
@@ -217,6 +252,18 @@ h2 {
     letter-spacing: 0.03em;
 }
 
+/* Cards de métricas com cor por tipo */
+.card-metric-blue { border-left: 4px solid var(--color-metric-blue); background: var(--color-metric-blue-bg); }
+.card-metric-blue .card-value { color: var(--color-metric-blue); }
+.card-metric-purple { border-left: 4px solid var(--color-metric-purple); background: var(--color-metric-purple-bg); }
+.card-metric-purple .card-value { color: var(--color-metric-purple); }
+.card-metric-orange { border-left: 4px solid var(--color-metric-orange); background: var(--color-metric-orange-bg); }
+.card-metric-orange .card-value { color: var(--color-metric-orange); }
+.card-metric-green { border-left: 4px solid var(--color-metric-green); background: var(--color-metric-green-bg); }
+.card-metric-green .card-value { color: var(--color-metric-green); }
+.card-metric-red { border-left: 4px solid var(--color-metric-red); background: var(--color-metric-red-bg); }
+.card-metric-red .card-value { color: var(--color-metric-red); }
+
 .card-value {
     display: block;
     font-size: 1.75rem;
@@ -229,28 +276,33 @@ h2 {
     color: var(--color-text-muted);
 }
 
-/* Cards pequenos (por loja) — grid ---- */
+/* Cards pequenos (por loja) — grid, mais visuais ---- */
 .cards-small {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.25rem;
 }
 
 .card-small {
     background: var(--color-bg-main);
-    padding: 1rem 1.25rem;
+    padding: 1.25rem 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 1px 4px var(--color-shadow-card);
+    box-shadow: 0 2px 6px var(--color-shadow-card);
     border: 1px solid var(--color-border-light);
+    text-align: center;
 }
 
 .card-small .card-value {
-    font-size: 1.5rem;
-    font-weight: 700;
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-text);
+    margin-bottom: 0.35rem;
 }
 
 .card-small .card-label {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
 }
 
 /* ---- TABLES ---- */
@@ -351,6 +403,10 @@ h2 {
 .badge-review { background: var(--color-badge-review-bg); color: var(--color-badge-review-text); }
 .badge-unknown { background: var(--color-badge-unknown-bg); color: var(--color-badge-unknown-text); }
 
+.badge-status-processado::before { content: "✓ "; }
+.badge-status-erro::before { content: "✕ "; }
+.badge-status-revisao::before { content: "↻ "; }
+
 [class*="badge-tipo-"] {
     background: var(--color-badge-unknown-bg);
     color: var(--color-badge-unknown-text);
@@ -405,6 +461,68 @@ h2 {
     padding: 0.75rem 1.75rem;
     font-size: 1rem;
     border-radius: 8px;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-btn);
+    border: 1.5px solid var(--color-border);
+}
+
+.btn-outline:hover {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: var(--color-btn);
+}
+
+.btn-outline .btn-icon {
+    display: inline-block;
+    margin-right: 0.45rem;
+    vertical-align: middle;
+    line-height: 0;
+}
+
+.btn-outline .btn-icon svg {
+    vertical-align: middle;
+}
+
+/* Status bar (dashboard) */
+.status-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-bg-main);
+    border-radius: 8px;
+    border: 1px solid var(--color-border-light);
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+}
+
+.status-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.status-bar-item strong {
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+.status-bar-item .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-text-muted);
+}
+
+.status-bar-item .status-dot.active {
+    background: var(--color-metric-green);
+}
+
+.status-bar-item .status-dot.inactive {
+    background: var(--color-badge-unknown-bg);
 }
 
 .action-buttons {

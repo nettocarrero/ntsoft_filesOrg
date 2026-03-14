@@ -68,4 +68,16 @@
     --color-badge-boleto-text: #004085;
     --color-badge-nota-servico-bg: #e2d5f1;
     --color-badge-nota-servico-text: #4a3f5c;
+
+    /* Cards de métricas (dashboard) */
+    --color-metric-blue: #2563eb;
+    --color-metric-blue-bg: #eff6ff;
+    --color-metric-purple: #7c3aed;
+    --color-metric-purple-bg: #f5f3ff;
+    --color-metric-orange: #ea580c;
+    --color-metric-orange-bg: #fff7ed;
+    --color-metric-green: #15803d;
+    --color-metric-green-bg: #f0fdf4;
+    --color-metric-red: #dc2626;
+    --color-metric-red-bg: #fef2f2;
 }

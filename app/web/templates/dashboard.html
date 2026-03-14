@@ -1,7 +1,22 @@
 {% extends "base.html" %}
 {% block title %}Dashboard — Organizador de Documentos{% endblock %}
 {% block content %}
-<h2>Dashboard</h2>
+<div class="page-header">
+    <div class="page-title-wrap">
+        <h2>Dashboard</h2>
+        <p class="page-subtitle">Visão geral do processamento de documentos</p>
+    </div>
+    {% if allow_management %}
+    <div class="page-actions">
+        <form method="post" action="/reset-counters" style="display: inline;" onsubmit="return confirm('Arquivar os relatórios atuais e zerar os contadores? Os arquivos serão movidos para reports/archive_&lt;data&gt;/ e não serão apagados.');">
+            <button type="submit" class="btn btn-outline">
+                <span class="btn-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></span>
+                Resetar contadores
+            </button>
+        </form>
+    </div>
+    {% endif %}
+</div>
 
 {% if counters_reset == '1' %}
 <p class="msg msg-success">
@@ -13,46 +28,57 @@
 </p>
 {% endif %}
 
-{% if allow_management %}
-<p class="muted" style="margin-bottom: 1.25rem;">
-  <form method="post" action="/reset-counters" style="display: inline;" onsubmit="return confirm('Arquivar os relatórios atuais e zerar os contadores? Os arquivos serão movidos para reports/archive_&lt;data&gt;/ e não serão apagados.');">
-    <button type="submit" class="btn btn-sm">Zerar contadores</button>
-  </form>
-  — Arquivar relatórios antigos para iniciar o monitoramento do zero. Nenhum arquivo é apagado.
-</p>
+{% if status %}
+<div class="status-bar" role="status">
+    <span class="status-bar-item">
+        <span class="status-dot {{ 'active' if status.watcher_ativo else 'inactive' }}" aria-hidden="true"></span>
+        <strong>Watcher:</strong> {{ 'ativo' if status.watcher_ativo else 'inativo' }}
+    </span>
+    <span class="status-bar-item">
+        <span class="status-dot {{ 'active' if status.ocr_habilitado else 'inactive' }}" aria-hidden="true"></span>
+        <strong>OCR:</strong> {{ 'ativo' if status.ocr_habilitado else 'inativo' }}
+    </span>
+    <span class="status-bar-item">
+        <span class="status-dot {{ 'active' if status.whatsapp_ingestion_habilitado else 'inactive' }}" aria-hidden="true"></span>
+        <strong>WhatsApp:</strong> {{ 'conectado' if status.whatsapp_ingestion_habilitado else 'inativo' }}
+    </span>
+    <span class="status-bar-item">
+        <strong>Última varredura:</strong> {{ status.ultima_varredura_display }}
+    </span>
+</div>
 {% endif %}
 
 <section class="cards">
-    <div class="card card-modern">
-        <span class="card-icon">📄</span>
+    <div class="card card-modern card-metric-blue">
+        <span class="card-icon" aria-hidden="true">📄</span>
         <div class="card-body">
             <span class="card-value">{{ stats.total_hoje }}</span>
             <span class="card-label">Arquivos hoje</span>
         </div>
     </div>
-    <div class="card card-modern">
-        <span class="card-icon">🔍</span>
+    <div class="card card-modern card-metric-purple">
+        <span class="card-icon" aria-hidden="true">🔍</span>
         <div class="card-body">
             <span class="card-value">{{ stats.ocr_hoje }}</span>
             <span class="card-label">OCR utilizados</span>
         </div>
     </div>
-    <div class="card card-modern">
-        <span class="card-icon">📋</span>
+    <div class="card card-modern card-metric-orange">
+        <span class="card-icon" aria-hidden="true">📋</span>
         <div class="card-body">
             <span class="card-value">{{ stats.revisao_manual_hoje }}</span>
             <span class="card-label">Revisão manual</span>
         </div>
     </div>
-    <div class="card card-modern">
-        <span class="card-icon">✓</span>
+    <div class="card card-modern card-metric-green">
+        <span class="card-icon" aria-hidden="true">✓</span>
         <div class="card-body">
             <span class="card-value">{% if stats.ultimo_relatorio and stats.ultimo_relatorio.get('resumo') %}{{ stats.ultimo_relatorio.resumo.total_classificados_automaticamente|default(0) }}{% else %}0{% endif %}</span>
             <span class="card-label">Classificados automaticamente</span>
         </div>
     </div>
-    <div class="card card-modern">
-        <span class="card-icon">⚠</span>
+    <div class="card card-modern card-metric-red">
+        <span class="card-icon" aria-hidden="true">⚠</span>
         <div class="card-body">
             <span class="card-value">{% if stats.ultimo_relatorio and stats.ultimo_relatorio.get('resumo') %}{{ stats.ultimo_relatorio.resumo.total_erros|default(0) }}{% else %}0{% endif %}</span>
             <span class="card-label">Erros de processamento</span>
@@ -98,13 +124,13 @@
                 <td>{{ item._report_timestamp[:19] if item._report_timestamp else '-' }}</td>
                 <td>
                     {% if item.erro %}
-                    <span class="badge badge-error">erro</span>
+                    <span class="badge badge-error badge-status-erro">Erro</span>
                     {% elif item.enviado_para_revisao %}
-                    <span class="badge badge-review">revisão</span>
+                    <span class="badge badge-review badge-status-revisao">Revisão manual</span>
                     {% elif item.status_processamento == 'success' %}
-                    <span class="badge badge-success">success</span>
+                    <span class="badge badge-success badge-status-processado">Processado</span>
                     {% else %}
-                    <span class="badge badge-unknown">{{ item.status_processamento|default('desconhecido') }}</span>
+                    <span class="badge badge-unknown">{{ item.status_processamento|default('Desconhecido') }}</span>
                     {% endif %}
                 </td>
                 <td>{% if item.ocr_used %}Sim{% else %}Não{% endif %}</td>
