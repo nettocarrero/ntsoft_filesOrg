@@ -34,6 +34,13 @@
       "aliases": ["l&c", "l & c"],
       "cnpjs": ["37052558000120"],
       "address_keywords": ["sobral", "l&c", "l e c", "centro sobral", "sobral ce"]
+    },
+    "ljKlc": {
+      "code": "ljKlc",
+      "city": "ubajara",
+      "aliases": ["klc", "k l c"],
+      "cnpjs": ["32125000000104"],
+      "address_keywords": ["ubajara", "klc", "k l c", "centro ubajara", "ubajara ce"]
     }
   }
 }
