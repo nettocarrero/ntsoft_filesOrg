@@ -14,6 +14,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from app.config import load_settings
 from app.logger import setup_logging
 from app.main import process_input_files
+from app.web.helpers import load_ip_users
 
 router = APIRouter()
 
@@ -32,8 +33,15 @@ def _safe_destination(input_dir: Path, original_name: str) -> Path:
     return candidate
 
 
-def _save_upload_metadata(reports_dir: Path, observation: str, ip: str, filenames: list[str], saved_paths: list[str]) -> Path:
-    """Registra observação, IP e arquivos em reports/upload_log/."""
+def _save_upload_metadata(
+    reports_dir: Path,
+    observation: str,
+    ip: str,
+    user_name: str | None,
+    filenames: list[str],
+    saved_paths: list[str],
+) -> Path:
+    """Registra observação, IP, nome do usuário (se vinculado) e arquivos em reports/upload_log/."""
     log_dir = reports_dir / "upload_log"
     log_dir.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -41,6 +49,7 @@ def _save_upload_metadata(reports_dir: Path, observation: str, ip: str, filename
     data = {
         "timestamp": datetime.now().isoformat(),
         "ip": ip,
+        "user_name": user_name,
         "observation": observation,
         "filenames": filenames,
         "saved_paths": saved_paths,
@@ -52,11 +61,13 @@ def _save_upload_metadata(reports_dir: Path, observation: str, ip: str, filename
 
 @router.get("/upload", response_class=HTMLResponse)
 async def upload_page(request: Request):
-    """Formulário: observação (obrigatória), arquivos, exibe IP do remetente."""
+    """Formulário: observação (obrigatória), arquivos, exibe IP e nome (se vinculado)."""
     client_ip = request.client.host if request.client else "—"
+    ip_users = load_ip_users()
+    client_name = ip_users.get(client_ip) if client_ip != "—" else None
     return request.app.state.templates.TemplateResponse(
         "upload.html",
-        {"request": request, "client_ip": client_ip},
+        {"request": request, "client_ip": client_ip, "client_name": client_name},
     )
 
 
@@ -66,8 +77,10 @@ async def upload_submit(
     observation: str = Form(..., min_length=1),
     files: list[UploadFile] = File(default=[]),
 ):
-    """Recebe observação e arquivos; salva em input/, registra metadata (obs + IP), executa pipeline."""
+    """Recebe observação e arquivos; salva em input/, registra metadata (obs + IP + usuário), executa pipeline."""
     client_ip = request.client.host if request.client else "desconhecido"
+    ip_users = load_ip_users()
+    user_name = ip_users.get(client_ip)
     settings = load_settings()
     settings.paths.input_dir.mkdir(parents=True, exist_ok=True)
 
@@ -93,6 +106,7 @@ async def upload_submit(
         settings.paths.reports_dir,
         observation.strip(),
         client_ip,
+        user_name,
         filenames,
         [str(p) for p in saved_paths],
     )

@@ -83,6 +83,38 @@
     {% endif %}
   </ul>
 </section>
+
+<section class="section" id="ip-users">
+  <h3>Identificação por IP (quem enviou)</h3>
+  <p class="muted">Vincule IPs a nomes de usuário. Ao enviar arquivos para classificação, o sistema identifica quem enviou pelo IP e grava o nome nos relatórios de upload.</p>
+  <table class="table config-table" style="max-width: 480px;">
+    <thead><tr><th>IP</th><th>Nome</th><th></th></tr></thead>
+    <tbody>
+      {% for ip, nome in ip_users.items() %}
+      <tr>
+        <td><code>{{ ip }}</code></td>
+        <td>{{ nome }}</td>
+        <td>
+          <form method="post" action="/config/ip-users" style="display: inline;">
+            <input type="hidden" name="action" value="remove">
+            <input type="hidden" name="ip" value="{{ ip }}">
+            <button type="submit" class="btn btn-sm">Remover</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if not ip_users %}
+  <p class="muted">Nenhum vínculo cadastrado.</p>
+  {% endif %}
+  <form method="post" action="/config/ip-users" style="margin-top: 1rem; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.5rem;">
+    <input type="hidden" name="action" value="add">
+    <label style="margin: 0;">IP <input type="text" name="ip" placeholder="ex: 192.168.0.5" required style="width: 140px;"></label>
+    <label style="margin: 0;">Nome <input type="text" name="name" placeholder="ex: João Silva" style="width: 160px;"></label>
+    <button type="submit" class="btn btn-sm">Adicionar</button>
+  </form>
+</section>
 {% else %}
 <p class="muted">Visualização somente leitura. Edição de configurações e inicialização do identificador estão disponíveis apenas no PC principal (acesso por <strong>localhost</strong>).</p>
 
@@ -128,6 +160,21 @@
     <li>Total no último relatório: {{ status.total_ultimo_relatorio }} | Erros: {{ status.erros_ultimo_relatorio }}</li>
     {% endif %}
   </ul>
+</section>
+
+<section class="section">
+  <h3>Identificação por IP</h3>
+  <p class="muted">Vínculos IP → nome (somente leitura; editar no PC principal).</p>
+  {% if ip_users %}
+  <table class="table config-table" style="max-width: 480px;">
+    <tr><th>IP</th><th>Nome</th></tr>
+    {% for ip, nome in ip_users.items() %}
+    <tr><td><code>{{ ip }}</code></td><td>{{ nome }}</td></tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p class="muted">Nenhum vínculo cadastrado.</p>
+  {% endif %}
 </section>
 {% endif %}
 {% endblock %}

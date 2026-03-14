@@ -26,6 +26,29 @@ def is_local_client(client_host: str | None) -> bool:
     return client_host in ("127.0.0.1", "::1")
 
 
+def load_ip_users() -> Dict[str, str]:
+    """Carrega mapeamento IP -> nome de usuário (app/data/ip_users.json)."""
+    settings = get_settings()
+    path = settings.paths.data_dir / "ip_users.json"
+    if not path.exists():
+        return {}
+    try:
+        with path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def save_ip_users(mapping: Dict[str, str]) -> None:
+    """Salva mapeamento IP -> nome em app/data/ip_users.json."""
+    settings = get_settings()
+    path = settings.paths.data_dir / "ip_users.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(mapping, f, ensure_ascii=False, indent=2)
+
+
 def _load_report_json(path: Path) -> Optional[Dict[str, Any]]:
     try:
         with path.open("r", encoding="utf-8") as f:
@@ -233,6 +256,8 @@ def list_store_files(
                     continue
                 out.append({
                     "name": f.name,
+                    "stem": Path(f.name).stem,
+                    "extension": Path(f.name).suffix,
                     "doc_type": type_path.name,
                     "path": f,
                     "mtime": mtime,

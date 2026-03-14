@@ -19,7 +19,12 @@
 {% endif %}
 
 <div class="upload-identify muted">
-    <strong>Identificação:</strong> envio a partir do IP <code>{{ client_ip }}</code>
+    <strong>Identificação:</strong>
+    {% if client_name %}
+    <span>{{ client_name }}</span> (IP: <code>{{ client_ip }}</code>)
+    {% else %}
+    envio a partir do IP <code>{{ client_ip }}</code>
+    {% endif %}
 </div>
 
 <form method="post" action="/upload" enctype="multipart/form-data" class="upload-form">

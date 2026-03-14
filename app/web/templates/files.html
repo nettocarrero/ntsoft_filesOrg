@@ -50,7 +50,7 @@
         </thead>
         <tbody>
             {% for f in files %}
-            <tr class="file-row" title="{{ f.hint }}" data-path="{{ f.path|e }}" data-store="{{ selected_store|e }}">
+            <tr class="file-row" title="{{ f.hint }}" data-path="{{ f.path|e }}" data-store="{{ selected_store|e }}" data-extension="{{ f.extension|e }}">
                 <td class="col-name" title="{{ f.hint }}">{{ f.name }}</td>
                 <td>{{ f.doc_type }}</td>
                 <td class="col-date">{{ f.mtime_br or '-' }}</td>
@@ -113,19 +113,31 @@
         if (e.target.classList.contains('btn-rename')) {
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
-            var currentName = nameTd.textContent.trim();
-            row._originalName = currentName;
+            var fullName = nameTd.textContent.trim();
+            var lastDot = fullName.lastIndexOf('.');
+            var stem = lastDot >= 0 ? fullName.slice(0, lastDot) : fullName;
+            var ext = lastDot >= 0 ? fullName.slice(lastDot) : '';
+            row._originalName = fullName;
+            row._extension = ext;
             nameTd.textContent = '';
             var input = document.createElement('input');
             input.type = 'text';
-            input.value = currentName;
+            input.value = stem;
             input.className = 'inline-rename-input';
-            input.setAttribute('size', '20');
+            input.placeholder = 'Nome (extensão será mantida)';
             nameTd.appendChild(input);
             input.focus();
             row.querySelector('.action-buttons').style.display = 'none';
             row.querySelector('.action-edit-buttons').style.display = 'inline';
             row._renameInput = input;
+            var invalidChars = /[\\/:*?"<>|]/g;
+            input.addEventListener('input', function() {
+                this.value = this.value.replace(invalidChars, '');
+            });
+            input.addEventListener('keydown', function(ev) {
+                if (ev.key === 'Enter') row.querySelector('.btn-save-rename').click();
+                if (ev.key === 'Escape') row.querySelector('.btn-cancel-rename').click();
+            });
             return;
         }
 
@@ -133,8 +145,11 @@
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
             var input = row._renameInput || nameTd.querySelector('input.inline-rename-input');
-            var newName = input && input.value ? input.value.trim() : '';
-            if (!newName) return;
+            var invalidChars = /[\\/:*?"<>|]/g;
+            var stem = input && input.value ? input.value.replace(invalidChars, '').trim() : '';
+            if (!stem) return;
+            var ext = row._extension != null ? row._extension : (row.getAttribute('data-extension') || '');
+            var newName = stem + ext;
             pathInput.value = row.getAttribute('data-path') || '';
             storeInput.value = row.getAttribute('data-store') || '';
             newNameInput.value = newName;
@@ -145,7 +160,7 @@
         if (e.target.classList.contains('btn-cancel-rename')) {
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
-            var originalName = row._originalName != null ? row._originalName : nameTd.textContent.trim();
+            var originalName = row._originalName != null ? row._originalName : (nameTd.querySelector('input.inline-rename-input') ? (nameTd.querySelector('input.inline-rename-input').value + (row._extension || '')) : nameTd.textContent.trim());
             nameTd.textContent = originalName || '';
             row.querySelector('.action-buttons').style.display = 'inline';
             row.querySelector('.action-edit-buttons').style.display = 'none';

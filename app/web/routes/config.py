@@ -8,7 +8,7 @@ from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
 
 from app.config import PROJECT_ROOT, save_local_config
-from app.web.helpers import get_settings, system_status, is_local_client
+from app.web.helpers import get_settings, system_status, is_local_client, load_ip_users, save_ip_users
 
 router = APIRouter()
 
@@ -73,6 +73,7 @@ async def config_page(
     settings = get_settings()
     status = system_status(settings)
     config = _config_dict(settings)
+    ip_users = load_ip_users()
     client_host = request.client.host if request.client else None
     allow_management = is_local_client(client_host)
     return request.app.state.templates.TemplateResponse(
@@ -81,6 +82,7 @@ async def config_page(
             "request": request,
             "config": config,
             "status": status,
+            "ip_users": ip_users,
             "saved": saved == "1",
             "watcher_started": watcher_started == "1",
             "watcher_started_error": watcher_started == "0",
@@ -147,3 +149,24 @@ async def start_watcher(request: Request):
         url="/config?watcher_started=1" if ok else "/config?watcher_started=0",
         status_code=303,
     )
+
+
+@router.post("/config/ip-users", response_class=RedirectResponse)
+async def config_ip_users(
+    request: Request,
+    action: str = Form(...),
+    ip: str = Form(""),
+    name: str = Form(""),
+):
+    """Adiciona ou remove vínculo IP -> nome de usuário (apenas localhost)."""
+    if not is_local_client(request.client.host if request.client else None):
+        return PlainTextResponse("Apenas o PC principal pode editar o mapeamento.", status_code=403)
+    mapping = load_ip_users()
+    ip = ip.strip()
+    if action == "add" and ip:
+        mapping[ip] = name.strip()
+        save_ip_users(mapping)
+    elif action == "remove" and ip:
+        mapping.pop(ip, None)
+        save_ip_users(mapping)
+    return RedirectResponse(url="/config#ip-users", status_code=303)
