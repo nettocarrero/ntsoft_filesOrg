@@ -61,11 +61,11 @@
 </section>
 
 {% if stats.por_loja %}
-<section class="section">
+<section class="section-card">
     <h3>Total por loja (hoje)</h3>
     <div class="cards-small">
         {% for code, count in stats.por_loja.items() %}
-        <div class="card card-small">
+        <div class="card-small">
             <span class="card-value">{{ count }}</span>
             <span class="card-label">{{ store_names.get(code, code) }}</span>
         </div>
@@ -74,7 +74,7 @@
 </section>
 {% endif %}
 
-<section class="section">
+<section class="section-card">
     <h3>Últimos arquivos processados</h3>
     {% if stats.ultimos_itens %}
     <div class="table-wrap">

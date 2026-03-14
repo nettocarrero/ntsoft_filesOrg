@@ -3,6 +3,7 @@
 {% block content %}
 <h2>Explorador por loja</h2>
 
+<section class="section-card">
 <form method="get" action="/files" class="filters">
     <label>Loja
         <select name="store">
@@ -28,6 +29,7 @@
     {% endif %}
     <button type="submit" class="btn">Filtrar</button>
 </form>
+</section>
 
 {% if renamed %}
 <p class="msg msg-success">Arquivo renomeado com sucesso.</p>
@@ -36,7 +38,7 @@
 <p class="msg msg-success">Arquivo excluído com sucesso.</p>
 {% endif %}
 {% if selected_store %}
-<section class="section">
+<section class="section-card">
     <h3>{{ store_name }}</h3>
     {% if files %}
     <div class="table-wrap">
@@ -79,7 +81,11 @@
     </table>
     </div>
     {% else %}
-    <p>Nenhum documento encontrado para esta loja{% if filter_tipo or filter_nome or filter_data_de or filter_data_ate %} com os filtros aplicados{% endif %}.</p>
+    <div class="empty-state">
+        <div class="empty-state-icon">📁</div>
+        <h3>Nenhum documento encontrado</h3>
+        <p>Nenhum arquivo para esta loja{% if filter_tipo or filter_nome or filter_data_de or filter_data_ate %} com os filtros aplicados{% endif %}. Ajuste os filtros ou escolha outra loja.</p>
+    </div>
     {% endif %}
 </section>
 
@@ -91,12 +97,15 @@
 </form>
 {% endif %}
 {% else %}
-<p>Selecione uma loja para listar os documentos.</p>
-<ul class="store-links">
-    {% for s in stores %}
-    <li><a href="/files?store={{ s.code }}">{{ s.name }}</a></li>
-    {% endfor %}
-</ul>
+<section class="section-card">
+    <h3>Selecione uma loja</h3>
+    <p class="muted" style="margin-bottom: 1rem;">Escolha uma loja abaixo para listar os documentos organizados.</p>
+    <ul class="store-links">
+        {% for s in stores %}
+        <li><a href="/files?store={{ s.code }}">{{ s.name }}</a></li>
+        {% endfor %}
+    </ul>
+</section>
 {% endif %}
 
 {% endblock %}

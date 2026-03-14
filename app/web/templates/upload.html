@@ -27,13 +27,14 @@
     {% endif %}
 </div>
 
+<section class="section-card">
 <form method="post" action="/upload" enctype="multipart/form-data" class="upload-form" id="upload-form">
-  <section class="section">
+  <div class="section" style="margin-bottom: 1.5rem;">
     <label class="upload-label">Observação sobre os arquivos <span class="required">*</span></label>
     <textarea name="observation" rows="3" required placeholder="Ex.: Notas fiscais da loja de Ubajara – março/2025" class="upload-textarea"></textarea>
     <p class="muted" style="margin-top: 0.25rem;">Descreva brevemente a que se referem os documentos (obrigatório).</p>
-  </section>
-  <section class="section">
+  </div>
+  <div class="section" style="margin-bottom: 1.5rem;">
     <label class="upload-label">Arquivos (PDF, ZIP ou RAR)</label>
     <div class="upload-drop-zone" id="drop-zone" tabindex="0">
       <input type="file" name="files" multiple accept=".pdf,.zip,.rar" class="upload-input" id="file-input">
@@ -41,11 +42,12 @@
       <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: var(--color-text-muted);">Formatos aceitos: PDF, ZIP, RAR</p>
       <ul class="upload-file-list" id="file-list" aria-live="polite"></ul>
     </div>
-  </section>
-  <section class="section">
-    <button type="submit" class="btn">Enviar e classificar</button>
-  </section>
+  </div>
+  <div class="section">
+    <button type="submit" class="btn btn-primary">Enviar e classificar</button>
+  </div>
 </form>
+</section>
 {% endblock %}
 {% block scripts %}
 <script>
