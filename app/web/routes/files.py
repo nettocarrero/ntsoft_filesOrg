@@ -31,6 +31,7 @@ async def files_page(
     data_de: str | None = Query(None, description="Data inicial (YYYY-MM-DD)"),
     data_ate: str | None = Query(None, description="Data final (YYYY-MM-DD)"),
     renamed: str | None = Query(None),
+    deleted: str | None = Query(None),
 ):
     settings = get_settings()
     stores = list_output_stores(settings.paths.output_dir, settings.aliases)
@@ -63,6 +64,7 @@ async def files_page(
             "filter_data_de": data_de or "",
             "filter_data_ate": data_ate or "",
             "renamed": renamed == "1",
+            "deleted": deleted == "1",
         },
     )
 
@@ -169,4 +171,22 @@ async def files_rename_do(
             status_code=303,
         )
     back = f"/files?store={quote(store, safe='')}&renamed=1" if store else "/files?renamed=1"
+    return RedirectResponse(url=back, status_code=303)
+
+
+@router.post("/files/delete", response_class=RedirectResponse)
+async def files_delete(
+    path: str = Form(...),
+    store: str = Form(""),
+):
+    """Exclui o arquivo. Redireciona de volta ao explorador."""
+    settings = get_settings()
+    resolved = _resolve_output_path(path, settings.paths.output_dir)
+    if not resolved:
+        return RedirectResponse(url="/files?error=arquivo_nao_encontrado", status_code=303)
+    try:
+        resolved.unlink()
+    except OSError:
+        return RedirectResponse(url="/files?error=erro_excluir", status_code=303)
+    back = f"/files?store={quote(store, safe='')}&deleted=1" if store else "/files?deleted=1"
     return RedirectResponse(url=back, status_code=303)

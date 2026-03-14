@@ -313,3 +313,72 @@ code {
     width: auto;
     margin: 0;
 }
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal-box {
+    background: var(--color-bg-main);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    min-width: 320px;
+    max-width: 90vw;
+}
+
+.modal-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+}
+
+.modal-field {
+    margin: 0 0 0.75rem 0;
+}
+
+.modal-actions {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Upload / Enviar para classificação */
+.upload-identify {
+    margin-bottom: 1rem;
+}
+
+.upload-form .upload-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+}
+
+.upload-form .required {
+    color: var(--color-msg-error-text);
+}
+
+.upload-form .upload-textarea {
+    width: 100%;
+    max-width: 480px;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--color-border-input);
+    border-radius: 4px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.upload-form .upload-input {
+    display: block;
+    margin-top: 0.25rem;
+}

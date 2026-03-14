@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Enviar para classificação — Organizador de Documentos{% endblock %}
+{% block content %}
+<h2>Enviar para classificação</h2>
+
+<p class="muted">Envie PDF, ZIP ou RAR. Informe uma observação sobre o conteúdo. Os arquivos serão salvos na pasta de entrada e processados pela mesma rotina de classificação (incluindo OCR quando necessário).</p>
+
+{% if request.query_params.get('success') == '1' %}
+<p class="msg msg-success">Arquivos enviados e classificados com sucesso.</p>
+{% endif %}
+{% if request.query_params.get('error') == 'nenhum_arquivo' %}
+<p class="msg msg-error">Nenhum arquivo selecionado. Selecione ao menos um arquivo (PDF, ZIP ou RAR).</p>
+{% endif %}
+{% if request.query_params.get('error') == 'extensao_invalida' %}
+<p class="msg msg-error">Apenas arquivos PDF, ZIP e RAR são aceitos.</p>
+{% endif %}
+{% if request.query_params.get('error') == 'erro_processamento' %}
+<p class="msg msg-error">Erro durante o processamento. Verifique os relatórios ou o log.</p>
+{% endif %}
+
+<div class="upload-identify muted">
+    <strong>Identificação:</strong> envio a partir do IP <code>{{ client_ip }}</code>
+</div>
+
+<form method="post" action="/upload" enctype="multipart/form-data" class="upload-form">
+  <section class="section">
+    <label class="upload-label">Observação sobre os arquivos <span class="required">*</span></label>
+    <textarea name="observation" rows="3" required placeholder="Ex.: Notas fiscais da loja de Ubajara – março/2025" class="upload-textarea"></textarea>
+    <p class="muted" style="margin-top: 0.25rem;">Descreva brevemente a que se referem os documentos (obrigatório).</p>
+  </section>
+  <section class="section">
+    <label class="upload-label">Arquivos (PDF, ZIP ou RAR)</label>
+    <input type="file" name="files" multiple accept=".pdf,.zip,.rar" class="upload-input">
+  </section>
+  <section class="section">
+    <button type="submit" class="btn">Enviar e classificar</button>
+  </section>
+</form>
+{% endblock %}
