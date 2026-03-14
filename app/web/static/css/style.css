@@ -199,7 +199,7 @@ h2 {
     font-size: 1.1rem;
 }
 
-/* ---- CARDS (métricas dashboard) ---- */
+/* ---- CARDS (métricas dashboard) — estilo minimalista ---- */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -208,19 +208,19 @@ h2 {
 }
 
 .card {
-    background: var(--color-bg-main);
+    background: #fff;
     padding: 1.5rem 1.75rem;
     border-radius: 10px;
-    box-shadow: 0 2px 8px var(--color-shadow-card);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
     border: 1px solid var(--color-border-light);
 }
 
 .card-modern {
-    background: var(--color-bg-main);
+    background: #fff;
     padding: 1.5rem 1.75rem;
     border-radius: 10px;
-    box-shadow: 0 2px 8px var(--color-shadow-card);
-    border: 1px solid var(--color-border-light);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eee;
     display: flex;
     align-items: flex-start;
     gap: 1rem;
@@ -229,7 +229,8 @@ h2 {
 .card-modern .card-icon {
     font-size: 1.75rem;
     line-height: 1;
-    opacity: 0.8;
+    opacity: 0.6;
+    color: var(--color-text-muted);
 }
 
 .card-modern .card-body {
@@ -246,23 +247,27 @@ h2 {
 }
 
 .card-modern .card-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--color-text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
 }
 
-/* Cards de métricas com cor por tipo */
-.card-metric-blue { border-left: 4px solid var(--color-metric-blue); background: var(--color-metric-blue-bg); }
+/* Cor apenas no número (e ícone discreto) — fundo branco, sem borda lateral */
 .card-metric-blue .card-value { color: var(--color-metric-blue); }
-.card-metric-purple { border-left: 4px solid var(--color-metric-purple); background: var(--color-metric-purple-bg); }
+.card-metric-blue .card-icon { color: var(--color-metric-blue); opacity: 0.75; }
+
 .card-metric-purple .card-value { color: var(--color-metric-purple); }
-.card-metric-orange { border-left: 4px solid var(--color-metric-orange); background: var(--color-metric-orange-bg); }
+.card-metric-purple .card-icon { color: var(--color-metric-purple); opacity: 0.75; }
+
 .card-metric-orange .card-value { color: var(--color-metric-orange); }
-.card-metric-green { border-left: 4px solid var(--color-metric-green); background: var(--color-metric-green-bg); }
+.card-metric-orange .card-icon { color: var(--color-metric-orange); opacity: 0.75; }
+
 .card-metric-green .card-value { color: var(--color-metric-green); }
-.card-metric-red { border-left: 4px solid var(--color-metric-red); background: var(--color-metric-red-bg); }
+.card-metric-green .card-icon { color: var(--color-metric-green); opacity: 0.75; }
+
 .card-metric-red .card-value { color: var(--color-metric-red); }
+.card-metric-red .card-icon { color: var(--color-metric-red); opacity: 0.75; }
 
 .card-value {
     display: block;
