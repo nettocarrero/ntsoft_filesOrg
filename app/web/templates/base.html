@@ -17,15 +17,13 @@
             <a href="/upload" class="sidebar-link{% if request.url.path == '/upload' %} active{% endif %}"><span class="nav-icon">↑</span>Enviar para classificação</a>
             <a href="/config" class="sidebar-link{% if request.url.path.startswith('/config') %} active{% endif %}"><span class="nav-icon">⚙</span>Configurações</a>
         </nav>
+        <div class="sidebar-footer">Painel local — ntsoft-orgfiles</div>
     </aside>
     <main class="main">
         <div class="page-content">
             {% block content %}{% endblock %}
         </div>
     </main>
-    <footer class="footer">
-        Painel local — ntsoft-orgfiles
-    </footer>
     <script src="/static/js/main.js"></script>
     {% block scripts %}{% endblock %}
 </body>
