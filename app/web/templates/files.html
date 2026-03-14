@@ -105,6 +105,9 @@
 (function() {
     var modal = document.getElementById('rename-modal');
     if (!modal) return;
+    // Coloca o modal no final do body para sempre aparecer sobreposto (não no fluxo da página)
+    document.body.appendChild(modal);
+
     var form = document.getElementById('rename-form');
     var pathInput = document.getElementById('rename-path');
     var storeInput = document.getElementById('rename-store');
