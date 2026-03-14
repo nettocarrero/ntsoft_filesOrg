@@ -6,8 +6,8 @@ from __future__ import annotations
 
 import json
 import shutil
-from datetime import datetime
 from pathlib import Path
+from datetime import date, datetime
 from typing import Any, Dict, List, Optional
 
 from app.config import load_settings
@@ -201,10 +201,13 @@ def list_store_files(
     store_code: str,
     doc_type_filter: Optional[str] = None,
     name_filter: Optional[str] = None,
+    date_from: Optional[date] = None,
+    date_to: Optional[date] = None,
 ) -> List[Dict[str, Any]]:
     """
     Lista arquivos de uma loja em output/.
-    Filtros opcionais: tipo de documento, substring no nome.
+    Filtros opcionais: tipo, nome, data (de/até).
+    Ordenação: mais recente primeiro (mtime decrescente).
     """
     store_path = output_dir / store_code
     if not store_path.exists() or not store_path.is_dir():
@@ -223,6 +226,11 @@ def list_store_files(
             try:
                 mtime = f.stat().st_mtime
                 dt = datetime.fromtimestamp(mtime)
+                file_date = dt.date()
+                if date_from is not None and file_date < date_from:
+                    continue
+                if date_to is not None and file_date > date_to:
+                    continue
                 out.append({
                     "name": f.name,
                     "doc_type": type_path.name,
@@ -234,7 +242,7 @@ def list_store_files(
                 })
             except OSError:
                 pass
-    out.sort(key=lambda x: (x["doc_type"], x["mtime"]), reverse=True)
+    out.sort(key=lambda x: x["mtime"], reverse=True)
     return out
 
 

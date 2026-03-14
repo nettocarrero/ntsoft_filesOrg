@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Renomear arquivo — Organizador de Documentos{% endblock %}
+{% block content %}
+<h2>Renomear arquivo</h2>
+
+{% if request.query_params.get('error') == 'nome_vazio' %}
+<p class="msg msg-error">Informe o novo nome do arquivo.</p>
+{% elif request.query_params.get('error') == 'ja_existe' %}
+<p class="msg msg-error">Já existe um arquivo com esse nome neste diretório.</p>
+{% elif request.query_params.get('error') == 'erro' %}
+<p class="msg msg-error">Não foi possível renomear. Verifique permissões ou se o arquivo está em uso.</p>
+{% endif %}
+
+<form method="post" action="/files/rename" class="config-form">
+  <input type="hidden" name="path" value="{{ path_value }}">
+  <input type="hidden" name="store" value="{{ store }}">
+  <section class="section">
+    <label>Nome atual <input type="text" value="{{ current_name }}" disabled class="input-path" style="max-width: 100%;"></label>
+    <label>Novo nome <input type="text" name="new_name" value="{{ current_name }}" required class="input-path" style="max-width: 100%;" autofocus></label>
+  </section>
+  <section class="section">
+    <button type="submit" class="btn">Renomear</button>
+    <a href="/files{% if store %}?store={{ store }}{% endif %}" class="btn" style="margin-left: 0.5rem;">Cancelar</a>
+  </section>
+</form>
+{% endblock %}

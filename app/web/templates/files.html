@@ -13,6 +13,12 @@
         </select>
     </label>
     {% if selected_store %}
+    <label>Data de
+        <input type="date" name="data_de" value="{{ filter_data_de }}">
+    </label>
+    <label>Data até
+        <input type="date" name="data_ate" value="{{ filter_data_ate }}">
+    </label>
     <label>Tipo
         <input type="text" name="tipo" value="{{ filter_tipo }}" placeholder="ex: boleto">
     </label>
@@ -23,6 +29,9 @@
     <button type="submit" class="btn">Filtrar</button>
 </form>
 
+{% if renamed %}
+<p class="msg msg-success">Arquivo renomeado com sucesso.</p>
+{% endif %}
 {% if selected_store %}
 <section class="section">
     <h3>{{ store_name }}</h3>
@@ -42,13 +51,17 @@
                 <td class="col-name" title="{{ f.hint }}">{{ f.name }}</td>
                 <td>{{ f.doc_type }}</td>
                 <td class="col-date">{{ f.mtime_br or '-' }}</td>
-                <td><a href="/files/download?path={{ f.path_url }}" class="btn btn-sm">Baixar</a></td>
+                <td>
+                    <a href="/files/view?path={{ f.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
+                    <a href="/files/download?path={{ f.path_url }}" class="btn btn-sm">Baixar</a>
+                    <a href="/files/rename?path={{ f.path_url }}&store={{ selected_store }}" class="btn btn-sm">Renomear</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
-    <p>Nenhum documento encontrado para esta loja{% if filter_tipo or filter_nome %} com os filtros aplicados{% endif %}.</p>
+    <p>Nenhum documento encontrado para esta loja{% if filter_tipo or filter_nome or filter_data_de or filter_data_ate %} com os filtros aplicados{% endif %}.</p>
     {% endif %}
 </section>
 {% else %}

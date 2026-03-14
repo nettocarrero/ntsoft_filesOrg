@@ -41,9 +41,15 @@ def _resolve_review_path(path_str: str, review_dir: Path) -> Path | None:
 async def review_file_view(
     path: str = Query(..., description="Caminho do arquivo em review_manual"),
 ):
-    """Serve o arquivo para visualização (ex.: abrir PDF)."""
+    """Serve o arquivo para visualização (abre em nova aba em vez de baixar)."""
     settings = get_settings()
     resolved = _resolve_review_path(path, settings.paths.review_manual_dir)
     if not resolved:
         return {"error": "Arquivo não encontrado"}
-    return FileResponse(resolved, filename=resolved.name)
+    media_type = "application/pdf" if resolved.suffix.lower() == ".pdf" else None
+    return FileResponse(
+        resolved,
+        filename=resolved.name,
+        media_type=media_type,
+        headers={"Content-Disposition": "inline"},
+    )
