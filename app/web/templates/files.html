@@ -50,19 +50,25 @@
         </thead>
         <tbody>
             {% for f in files %}
-            <tr title="{{ f.hint }}">
+            <tr class="file-row" title="{{ f.hint }}" data-path="{{ f.path|e }}" data-store="{{ selected_store|e }}">
                 <td class="col-name" title="{{ f.hint }}">{{ f.name }}</td>
                 <td>{{ f.doc_type }}</td>
                 <td class="col-date">{{ f.mtime_br or '-' }}</td>
-                <td>
-                    <a href="/files/view?path={{ f.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
-                    <a href="/files/download?path={{ f.path_url }}" class="btn btn-sm">Baixar</a>
-                    <button type="button" class="btn btn-sm btn-rename" data-path="{{ f.path|e }}" data-name="{{ f.name|e }}" data-store="{{ selected_store|e }}">Renomear</button>
-                    <form method="post" action="/files/delete" style="display: inline;" onsubmit="return confirm('Excluir este arquivo? Esta ação não pode ser desfeita.');">
-                        <input type="hidden" name="path" value="{{ f.path|e }}">
-                        <input type="hidden" name="store" value="{{ selected_store }}">
-                        <button type="submit" class="btn btn-sm" style="background: var(--color-msg-error-bg); color: var(--color-msg-error-text); border: 1px solid var(--color-msg-error-border);">Excluir</button>
-                    </form>
+                <td class="col-actions">
+                    <span class="action-buttons">
+                        <a href="/files/view?path={{ f.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
+                        <a href="/files/download?path={{ f.path_url }}" class="btn btn-sm">Baixar</a>
+                        <button type="button" class="btn btn-sm btn-rename">Renomear</button>
+                        <form method="post" action="/files/delete" style="display: inline;" onsubmit="return confirm('Excluir este arquivo? Esta ação não pode ser desfeita.');">
+                            <input type="hidden" name="path" value="{{ f.path|e }}">
+                            <input type="hidden" name="store" value="{{ selected_store }}">
+                            <button type="submit" class="btn btn-sm" style="background: var(--color-msg-error-bg); color: var(--color-msg-error-text); border: 1px solid var(--color-msg-error-border);">Excluir</button>
+                        </form>
+                    </span>
+                    <span class="action-edit-buttons" style="display: none;">
+                        <button type="button" class="btn btn-sm btn-save-rename">Salvar</button>
+                        <button type="button" class="btn btn-sm btn-cancel-rename">Cancelar</button>
+                    </span>
                 </td>
             </tr>
             {% endfor %}
@@ -74,21 +80,11 @@
 </section>
 
 {% if selected_store and files %}
-<div id="rename-modal" class="modal-overlay" role="dialog" aria-labelledby="rename-modal-title" aria-modal="true" hidden>
-    <div class="modal-box">
-        <h3 id="rename-modal-title" class="modal-title">Renomear arquivo</h3>
-        <form method="post" action="/files/rename" id="rename-form">
-            <input type="hidden" name="path" id="rename-path">
-            <input type="hidden" name="store" id="rename-store">
-            <p class="modal-field"><strong>Nome atual:</strong> <span id="rename-current-name"></span></p>
-            <label class="modal-field">Novo nome <input type="text" name="new_name" id="rename-new-name" required class="input-path" style="width: 100%; max-width: none;"></label>
-            <div class="modal-actions">
-                <button type="submit" class="btn">Renomear</button>
-                <button type="button" class="btn btn-modal-cancel">Cancelar</button>
-            </div>
-        </form>
-    </div>
-</div>
+<form id="inline-rename-form" method="post" action="/files/rename" style="display: none;">
+    <input type="hidden" name="path" id="inline-rename-path">
+    <input type="hidden" name="store" id="inline-rename-store">
+    <input type="hidden" name="new_name" id="inline-rename-new-name" value="">
+</form>
 {% endif %}
 {% else %}
 <p>Selecione uma loja para listar os documentos.</p>
@@ -103,45 +99,60 @@
 {% block scripts %}
 <script>
 (function() {
-    var modal = document.getElementById('rename-modal');
-    if (!modal) return;
-    // Coloca o modal no final do body para sempre aparecer sobreposto (não no fluxo da página)
-    document.body.appendChild(modal);
+    var form = document.getElementById('inline-rename-form');
+    if (!form) return;
 
-    var form = document.getElementById('rename-form');
-    var pathInput = document.getElementById('rename-path');
-    var storeInput = document.getElementById('rename-store');
-    var currentNameEl = document.getElementById('rename-current-name');
-    var newNameInput = document.getElementById('rename-new-name');
-    var cancelBtn = modal.querySelector('.btn-modal-cancel');
+    var pathInput = document.getElementById('inline-rename-path');
+    var storeInput = document.getElementById('inline-rename-store');
+    var newNameInput = document.getElementById('inline-rename-new-name');
 
-    function openModal(path, name, store) {
-        pathInput.value = path;
-        storeInput.value = store || '';
-        currentNameEl.textContent = name || '';
-        newNameInput.value = name || '';
-        modal.removeAttribute('hidden');
-        newNameInput.focus();
-    }
-    function closeModal() {
-        modal.setAttribute('hidden', '');
-    }
+    document.querySelector('.table-files tbody').addEventListener('click', function(e) {
+        var row = e.target.closest('tr.file-row');
+        if (!row) return;
 
-    document.querySelectorAll('.btn-rename').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            openModal(
-                this.getAttribute('data-path'),
-                this.getAttribute('data-name'),
-                this.getAttribute('data-store')
-            );
-        });
-    });
-    cancelBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeModal();
-    });
-    modal.querySelector('.modal-box').addEventListener('click', function(e) {
-        e.stopPropagation();
+        if (e.target.classList.contains('btn-rename')) {
+            e.preventDefault();
+            var nameTd = row.querySelector('td.col-name');
+            var currentName = nameTd.textContent.trim();
+            row._originalName = currentName;
+            nameTd.textContent = '';
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentName;
+            input.className = 'inline-rename-input';
+            input.setAttribute('size', '20');
+            nameTd.appendChild(input);
+            input.focus();
+            row.querySelector('.action-buttons').style.display = 'none';
+            row.querySelector('.action-edit-buttons').style.display = 'inline';
+            row._renameInput = input;
+            return;
+        }
+
+        if (e.target.classList.contains('btn-save-rename')) {
+            e.preventDefault();
+            var nameTd = row.querySelector('td.col-name');
+            var input = row._renameInput || nameTd.querySelector('input.inline-rename-input');
+            var newName = input && input.value ? input.value.trim() : '';
+            if (!newName) return;
+            pathInput.value = row.getAttribute('data-path') || '';
+            storeInput.value = row.getAttribute('data-store') || '';
+            newNameInput.value = newName;
+            form.submit();
+            return;
+        }
+
+        if (e.target.classList.contains('btn-cancel-rename')) {
+            e.preventDefault();
+            var nameTd = row.querySelector('td.col-name');
+            var originalName = row._originalName != null ? row._originalName : nameTd.textContent.trim();
+            nameTd.textContent = originalName || '';
+            row.querySelector('.action-buttons').style.display = 'inline';
+            row.querySelector('.action-edit-buttons').style.display = 'none';
+            delete row._renameInput;
+            delete row._originalName;
+            return;
+        }
     });
 })();
 </script>
