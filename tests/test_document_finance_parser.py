@@ -6,6 +6,7 @@ from app.services.document_finance_parser import (
     extract_payment_info,
     read_payment_meta_file,
     write_payment_meta_file,
+    detect_boleto_signals,
 )
 
 
@@ -40,6 +41,7 @@ def test_extract_payment_info_empty():
     assert info["due_date"] is None
     assert info["amount"] is None
     assert info["confidence"] == "low"
+    assert info["is_boleto"] is False
 
 
 def test_extract_payment_info_multiple_dates_prioritizes_near_keyword():
@@ -50,6 +52,28 @@ def test_extract_payment_info_multiple_dates_prioritizes_near_keyword():
     info = extract_payment_info(text)
     assert info["due_date"] == "2026-03-20"
     assert info["amount"] == 100.0
+
+
+def test_detect_boleto_by_keywords_and_bank():
+    text = """
+    Recibo do pagador
+    Beneficiário: Banco do Brasil
+    Pagador: Empresa XYZ
+    Nosso número: 123456789
+    Vencimento: 10/03/2026
+    Valor do documento: 1.871,00
+    """
+    info = extract_payment_info(text)
+    assert info["is_boleto"] is True
+    assert info["boleto_score"] >= 4
+
+
+def test_detect_boleto_by_linha_digitavel_only():
+    text = "23790.75209 90000.000118 82000.694503 1 13810000187100"
+    info = extract_payment_info(text)
+    assert info["is_boleto"] is True
+    assert info["has_linha_digitavel"] is True
+    assert info["boleto_score"] >= 5
 
 
 def test_write_and_read_payment_meta_file(tmp_path):

@@ -12,6 +12,7 @@ from app.services.cnpj_service import (
     extract_cnpjs_with_ocr_robust,
     build_cnpj_index,
 )
+from app.services.document_finance_parser import detect_boleto_signals
 
 
 def _build_store_alias_index(aliases_cfg: Dict[str, Any]) -> Dict[str, Dict[str, str]]:
@@ -241,6 +242,20 @@ def classify_document(doc: DocumentInfo, settings: Settings) -> DocumentInfo:
     doc_type_scores: Dict[DocumentType, int] = {}
     if doc.text:
         doc_type_scores = _score_doc_type(doc.text, settings.document_keywords, type_evidence)
+
+        # Reforço específico para boletos usando sinais fortes (linha digitável, palavras-chave, bancos)
+        boleto_signals = detect_boleto_signals(doc.text)
+        if boleto_signals.get("is_boleto"):
+            current = doc_type_scores.get(DocumentType.BOLETO, 0)
+            # Bônus suficiente para ultrapassar o doc_type_min_score padrão
+            doc_type_scores[DocumentType.BOLETO] = current + 6
+            type_evidence.append(
+                {
+                    "doc_type": DocumentType.BOLETO.value,
+                    "keyword": f"detected_boleto_signals(score={boleto_signals.get('score')}, linha_digitavel={boleto_signals.get('has_linha_digitavel')})",
+                    "location": "text",
+                }
+            )
 
     best_doc_type, ordered_doc_type_scores = None, {}
     if doc_type_scores:

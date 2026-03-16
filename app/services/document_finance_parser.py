@@ -21,6 +21,7 @@ VENCIMENTO_KEYWORDS = [
     r"pagar\s+at[eé]",
     r"validade",
     r"data\s+de\s+pagamento",
+    r"vencimento\s+do\s+boleto",
 ]
 
 # Padrões de data: dd/mm/yyyy ou dd-mm-yyyy (com possível ruído)
@@ -47,7 +48,83 @@ VALOR_KEYWORDS = [
     r"valor\s+do\s+documento",
     r"valor\s+a\s+pagar",
     r"valor\s+do\s+boleto",
+    r"valor\s+documento",
 ]
+
+# Padrão aproximado de linha digitável de boleto:
+# 5 blocos de números com separadores opcionais (espaço, ponto, hífen)
+LINHA_DIGITAVEL_PATTERN = re.compile(
+    # Padrão mais tolerante: pelo menos ~40 dígitos agrupados em blocos, aceitando espaços/pontos/hífens
+    r"(?:\d[\s\.\-]?){40,60}"
+)
+
+# Palavras-chave fortemente associadas a boletos
+BOLETO_STRONG_KEYWORDS = [
+    "recibo do pagador",
+    "beneficiario",
+    "pagador",
+    "nosso numero",
+    "agencia",
+    "codigo do beneficiario",
+    "valor documento",
+    "vencimento",
+    "autenticacao mecanica",
+    "carteira",
+    "linha digitavel",
+    "boleto bancario",
+]
+
+# Nomes de bancos comuns (normalizados)
+BOLETO_BANK_KEYWORDS = [
+    "bradesco",
+    "banco do brasil",
+    "caixa economica",
+    "caixa economica federal",
+    "itau",
+    "santander",
+    "sicoob",
+    "sicredi",
+]
+
+
+def detect_boleto_signals(text: str) -> Dict[str, Any]:
+    """
+    Detecta sinais fortes de que o documento é um boleto bancário com base no texto.
+    Usa:
+    - presença de linha digitável
+    - palavras-chave clássicas de boleto
+    - nomes de bancos típicos
+    Retorna um dict com flags e score simples.
+    """
+    if not text:
+        return {"is_boleto": False, "score": 0, "has_linha_digitavel": False}
+
+    text_norm = _normalize_whitespace(text).lower()
+    score = 0
+
+    has_linha_digitavel = LINHA_DIGITAVEL_PATTERN.search(text_norm) is not None
+    if has_linha_digitavel:
+        score += 5  # linha digitável é evidência muito forte
+
+    # Palavras-chave fortes de boleto
+    for kw in BOLETO_STRONG_KEYWORDS:
+        if kw in text_norm:
+            score += 1
+
+    # A própria palavra "boleto" (ex.: "Boleto Pix") é um sinal forte
+    if "boleto" in text_norm:
+        score += 3
+
+    # Nomes de bancos
+    for bank in BOLETO_BANK_KEYWORDS:
+        if bank in text_norm:
+            score += 1
+
+    return {
+        "is_boleto": score >= 4,
+        "score": score,
+        "has_linha_digitavel": has_linha_digitavel,
+    }
 
 
 def _normalize_whitespace(text: str) -> str:
@@ -187,8 +264,12 @@ def extract_payment_info(text: str) -> Dict[str, Any]:
             "due_date": None,
             "amount": None,
             "confidence": "low",
+            "is_boleto": False,
+            "boleto_score": 0,
+            "has_linha_digitavel": False,
         }
 
+    boleto_info = detect_boleto_signals(text)
     due_date, conf_date = _find_due_date(text)
     amount, conf_amount = _find_amount(text)
 
@@ -208,6 +289,9 @@ def extract_payment_info(text: str) -> Dict[str, Any]:
         "due_date": due_date,
         "amount": amount,
         "confidence": confidence,
+        "is_boleto": boleto_info["is_boleto"],
+        "boleto_score": boleto_info["score"],
+        "has_linha_digitavel": boleto_info["has_linha_digitavel"],
     }
 
 

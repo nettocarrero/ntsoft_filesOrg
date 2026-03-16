@@ -92,6 +92,32 @@ def test_unknown_document_type(tmp_path):
     assert classified.type_confidence == 0.0 or classified.type_confidence < 0.2
 
 
+def test_boleto_with_strong_text_signals_is_classified_as_boleto(tmp_path):
+    settings = load_settings()
+    pdf_path = tmp_path / "boleto_teste.pdf"
+    pdf_path.write_text("dummy", encoding="utf-8")
+
+    text = """
+    Boleto Bancário
+    Recibo do Pagador
+    Beneficiário: Banco Bradesco
+    Pagador: VAREJAO CHOCOBALAS COMERCIAL DE ALIMENTOS LTDA
+    Nosso número: 123456789
+    Agência / Código do Beneficiário: 1234/56789
+    Vencimento: 10/03/2026
+    Valor do documento: 1.871,00
+    Linha Digitavel: 23790.75209 90000.000118 82000.694503 1 13810000187100
+    """
+
+    doc = DocumentInfo(original_path=pdf_path)
+    doc.text = text
+    doc.text_status = "ok"
+
+    classified = classify_document(doc, settings)
+
+    assert classified.suggested_doc_type == DocumentType.BOLETO
+
+
 def test_sent_to_review_when_no_store(tmp_path):
     settings = load_settings()
     pdf_path = tmp_path / "documento_generico.pdf"

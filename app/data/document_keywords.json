@@ -26,7 +26,13 @@
       "nota fiscal de servico",
       "prestador",
       "tomador",
-      "servico"
+      "servico",
+      "declaracao de prestacao de servicos",
+      "dps",
+      "n do rps",
+      "secretaria municipal de financas",
+      "local da prestacao",
+      "prestacao de servicos"
     ]
   },
   "taxa": {
