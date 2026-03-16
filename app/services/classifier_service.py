@@ -288,6 +288,22 @@ def classify_document(doc: DocumentInfo, settings: Settings) -> DocumentInfo:
                 }
             )
 
+        # Casos como "NOTA FISCAL ELETRÔNICA DE PRESTAÇÃO DE SERVIÇOS"
+        # (título completo sem a sigla NFS-e): se aparecer essa combinação
+        # de palavras, reforça fortemente como nota de serviço.
+        if "nota fiscal eletronica de prestacao de servicos" in text_norm or (
+            "nota fiscal" in text_norm and "prestacao de servicos" in text_norm
+        ):
+            current = doc_type_scores.get(DocumentType.NOTA_SERVICO, 0)
+            doc_type_scores[DocumentType.NOTA_SERVICO] = current + 6
+            type_evidence.append(
+                {
+                    "doc_type": DocumentType.NOTA_SERVICO.value,
+                    "keyword": "nota_fiscal_eletronica_prestacao_servicos",
+                    "location": "text",
+                }
+            )
+
     best_doc_type, ordered_doc_type_scores = None, {}
     if doc_type_scores:
         temp = {dt.value: score for dt, score in doc_type_scores.items()}
