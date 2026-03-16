@@ -305,9 +305,15 @@ def list_store_months(output_dir: Path, store_code: str, year: str) -> List[str]
         return []
     months = []
     for p in period_path.iterdir():
-        if p.is_dir() and len(p.name) == 2 and p.name.isdigit() and 1 <= int(p.name) <= 12:
+        if (
+            p.is_dir()
+            and len(p.name) == 2
+            and p.name.isdigit()
+            and 1 <= int(p.name) <= 12
+        ):
             months.append(p.name)
-    return sorted(months, reverse=True)
+    # Ordena meses do mais antigo para o mais recente: 01, 02, 03, ...
+    return sorted(months)
 
 
 def list_store_types_in_period(
