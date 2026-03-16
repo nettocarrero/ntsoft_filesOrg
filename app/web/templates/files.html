@@ -227,7 +227,10 @@
         var row = e.target.closest('tr.file-row');
         if (!row) return;
 
-        if (e.target.classList.contains('btn-rename')) {
+        var target = e.target.closest('button, a');
+        if (!target) return;
+
+        if (target.classList.contains('btn-rename')) {
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
             var fullName = nameTd.textContent.trim();
@@ -244,7 +247,8 @@
             input.placeholder = 'Nome (extensão mantida)';
             nameTd.appendChild(input);
             input.focus();
-            row.querySelector('.action-buttons').style.display = 'none';
+            var actions = row.querySelector('.action-icons');
+            if (actions) actions.style.display = 'none';
             row.querySelector('.action-edit-buttons').style.display = 'inline';
             row._renameInput = input;
             var invalidChars = /[\\/:*?"<>|]/g;
@@ -255,7 +259,7 @@
             });
             return;
         }
-        if (e.target.classList.contains('btn-save-rename')) {
+        if (target.classList.contains('btn-save-rename')) {
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
             var input = row._renameInput || nameTd.querySelector('input.inline-rename-input');
@@ -269,12 +273,13 @@
             form.submit();
             return;
         }
-        if (e.target.classList.contains('btn-cancel-rename')) {
+        if (target.classList.contains('btn-cancel-rename')) {
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
             var originalName = row._originalName != null ? row._originalName : (nameTd.querySelector('input.inline-rename-input') ? nameTd.querySelector('input.inline-rename-input').value + (row._extension || '') : '');
             nameTd.innerHTML = '<span class="file-icon" aria-hidden="true"><i data-lucide="file-text"></i></span> ' + (originalName || '');
-            row.querySelector('.action-buttons').style.display = 'inline';
+            var actions = row.querySelector('.action-icons');
+            if (actions) actions.style.display = 'inline';
             row.querySelector('.action-edit-buttons').style.display = 'none';
             delete row._renameInput;
             delete row._originalName;

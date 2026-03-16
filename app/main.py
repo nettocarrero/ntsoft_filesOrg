@@ -9,7 +9,7 @@ from typing import Iterable, List, Callable
 from app.config import Settings, load_settings, clear_temp_dir
 from app.logger import setup_logging
 from app.models import DocumentInfo, ProcessingResult
-from app.models.enums import ProcessingStatus
+from app.models.enums import ProcessingStatus, DocumentType
 from app.services import (
     scan_input_files,
     extract_zip,
@@ -274,17 +274,23 @@ def _process_pdf(
             doc.decision_reason = reason
             return ProcessingResult(document=doc, status=ProcessingStatus.SUCCESS)
 
-        # Se possível, usar a data de vencimento como "document_date" antes de organizar
+        # Extrai possíveis informações financeiras (data de vencimento/valor),
+        # mas só usaremos a data como "document_date" se o documento for um pagamento.
         payment_info = extract_payment_info(doc.text or "")
+
+        doc = classify_document(doc, settings)
+
+        # Para boletos/guias (pagamentos), usar due_date como document_date.
+        # Isso evita que notas de serviço/fiscais sejam organizadas usando datas de competência antigas.
         due_iso = payment_info.get("due_date")
-        if due_iso:
+        if due_iso and doc.suggested_doc_type in (DocumentType.BOLETO, DocumentType.TAXA):
             from datetime import datetime
+
             try:
                 doc.document_date = datetime.fromisoformat(due_iso).date()
             except ValueError:
                 pass
 
-        doc = classify_document(doc, settings)
         doc = organize_document(doc, settings.paths)
 
         # Se o documento foi organizado em "pagamentos", gravar metadados para o painel
