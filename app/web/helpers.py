@@ -283,6 +283,23 @@ def list_output_stores(output_dir: Path, aliases: Dict[str, Any]) -> List[Dict[s
     for p in sorted(output_dir.iterdir()):
         if p.is_dir():
             out.append({"code": p.name, "name": store_names.get(p.name, p.name)})
+
+    # Reordena lojas na ordem desejada no explorador:
+    # UBAJARA, IBIAPINA, SÃO BENEDITO, GUARACIABA, e por último L&C / KLC.
+    def _store_sort_key(item: Dict[str, str]) -> tuple[int, str]:
+        code = item.get("code", "")
+        order_map = {
+            "ljUbj": 1,  # Ubajara
+            "ljIbi": 2,  # Ibiapina
+            "ljSb": 3,   # São Benedito
+            "ljGba": 4,  # Guaraciaba
+            "ljLc": 5,   # L&C (Sobral)
+            "ljKlc": 6,  # KLC (Sobral)
+        }
+        base = order_map.get(code, 100)
+        return (base, item.get("name", "").lower())
+
+    out.sort(key=_store_sort_key)
     return out
 
 
