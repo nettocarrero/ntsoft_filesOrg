@@ -152,9 +152,35 @@ def _parse_br_date(match: re.Match) -> Optional[str]:
 def _find_due_date(text: str) -> Tuple[Optional[str], str]:
     """
     Encontra data de vencimento no texto.
-    Prioriza datas próximas a palavras-chave de vencimento.
+    Estratégia:
+      1) Tenta achar datas na mesma linha (ou logo abaixo) de palavras como "Vencimento".
+      2) Se não encontrar, cai para heurística global baseada em distância.
     Retorna (data_iso, "high"|"medium"|"low").
     """
+    # 1) Busca linha a linha: datas próximas da palavra "vencimento"
+    lines = text.splitlines()
+    for idx, raw_line in enumerate(lines):
+        line = raw_line.strip()
+        lower = line.lower()
+        if any(re.search(kw, lower, re.IGNORECASE) for kw in VENCIMENTO_KEYWORDS):
+            # procura data na mesma linha
+            for pattern in DATE_PATTERNS:
+                m = pattern.search(line)
+                if m:
+                    iso = _parse_br_date(m)
+                    if iso:
+                        return (iso, "high")
+            # se não achar, tenta na próxima linha (muitos boletos escrevem "Vencimento" e a data na linha de baixo)
+            if idx + 1 < len(lines):
+                next_line = lines[idx + 1]
+                for pattern in DATE_PATTERNS:
+                    m = pattern.search(next_line)
+                    if m:
+                        iso = _parse_br_date(m)
+                        if iso:
+                            return (iso, "medium")
+
+    # 2) Heurística global anterior (fallback)
     text_norm = _normalize_whitespace(text)
     text_lower = text_norm.lower()
     candidates: List[Tuple[int, str]] = []  # (pos_keyword_nearest, date_iso)
@@ -165,13 +191,13 @@ def _find_due_date(text: str) -> Tuple[Optional[str], str]:
             if not iso:
                 continue
             start = m.start()
-            # Distância mínima até alguma keyword; priorizar data que vem *após* a keyword (ex.: "Vencimento: 20/03/2026")
+            # Distância mínima até alguma keyword; priorizar data que vem *após* a keyword
             min_dist = len(text_norm) + 1
             for kw in VENCIMENTO_KEYWORDS:
                 for km in re.finditer(kw, text_lower, re.IGNORECASE):
                     kw_end = km.end()
                     dist = abs(km.start() - start)
-                    # Data antes da keyword (ex.: "01/02/2025. Vencimento") recebe penalidade
+                    # Data antes da keyword recebe penalidade forte
                     if start < kw_end:
                         dist += 10000
                     if dist < min_dist:
@@ -179,7 +205,7 @@ def _find_due_date(text: str) -> Tuple[Optional[str], str]:
             candidates.append((min_dist, iso))
 
     if not candidates:
-        # Fallback: primeira data válida no texto (baixa confiança)
+        # Fallback final: primeira data válida no texto (baixa confiança)
         for pattern in DATE_PATTERNS:
             m = pattern.search(text_norm)
             if m:
@@ -191,9 +217,9 @@ def _find_due_date(text: str) -> Tuple[Optional[str], str]:
     candidates.sort(key=lambda x: x[0])
     best_dist, best_date = candidates[0]
     if best_dist <= 80:
-        confidence = "high"
-    elif best_dist <= 200:
         confidence = "medium"
+    elif best_dist <= 200:
+        confidence = "low"
     else:
         confidence = "low"
     return (best_date, confidence)
@@ -326,6 +352,30 @@ def update_payment_status(
         data["paid_at"] = paid_at
     if paid_value is not None:
         data["paid_value"] = paid_value
+
+    with open(meta_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+def update_payment_due_date(
+    pdf_path: Path,
+    due_date: Optional[str],
+) -> None:
+    """
+    Atualiza a data de vencimento no .meta.json (formato YYYY-MM-DD).
+    """
+    meta_path = _meta_path_for_pdf(pdf_path)
+    if not meta_path.exists():
+        return
+    try:
+        with open(meta_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, dict):
+            data = {}
+    except (OSError, json.JSONDecodeError):
+        data = {}
+
+    data["due_date"] = due_date
 
     with open(meta_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)

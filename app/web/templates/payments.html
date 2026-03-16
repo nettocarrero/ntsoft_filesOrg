@@ -48,6 +48,11 @@
                         <a href="/files/view?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Ver</a>
                         <a href="/files/download?path={{ p.path_url }}" class="btn btn-sm">Baixar</a>
                         <a href="{{ p.explorer_url }}" class="btn btn-sm">Pasta</a>
+                        <form method="post" action="/payments/update-due-date" style="display:inline;">
+                            <input type="hidden" name="path" value="{{ p.path }}">
+                            <input type="date" name="new_due_date" value="{{ p.due_date[:10] }}" class="payment-due-input" title="Corrigir vencimento">
+                            <button type="submit" class="btn btn-sm" title="Salvar vencimento">Salvar</button>
+                        </form>
                         <form method="post" action="/payments/mark-paid" style="display:inline;">
                             <input type="hidden" name="path" value="{{ p.path }}">
                             <button type="submit" class="btn btn-sm btn-mark-paid" title="Marcar como pago">Marcar pago</button>
@@ -88,6 +93,11 @@
                         <a href="/files/view?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Ver</a>
                         <a href="/files/download?path={{ p.path_url }}" class="btn btn-sm">Baixar</a>
                         <a href="{{ p.explorer_url }}" class="btn btn-sm">Pasta</a>
+                        <form method="post" action="/payments/update-due-date" style="display:inline;">
+                            <input type="hidden" name="path" value="{{ p.path }}">
+                            <input type="date" name="new_due_date" value="{{ p.due_date[:10] }}" class="payment-due-input" title="Corrigir vencimento">
+                            <button type="submit" class="btn btn-sm" title="Salvar vencimento">Salvar</button>
+                        </form>
                         <form method="post" action="/payments/mark-paid" style="display:inline;">
                             <input type="hidden" name="path" value="{{ p.path }}">
                             <button type="submit" class="btn btn-sm btn-mark-paid" title="Marcar como pago">Marcar pago</button>
@@ -128,6 +138,11 @@
                         <a href="/files/view?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Ver</a>
                         <a href="/files/download?path={{ p.path_url }}" class="btn btn-sm">Baixar</a>
                         <a href="{{ p.explorer_url }}" class="btn btn-sm">Pasta</a>
+                        <form method="post" action="/payments/update-due-date" style="display:inline;">
+                            <input type="hidden" name="path" value="{{ p.path }}">
+                            <input type="date" name="new_due_date" value="{{ p.due_date[:10] }}" class="payment-due-input" title="Corrigir vencimento">
+                            <button type="submit" class="btn btn-sm" title="Salvar vencimento">Salvar</button>
+                        </form>
                         <form method="post" action="/payments/mark-paid" style="display:inline;">
                             <input type="hidden" name="path" value="{{ p.path }}">
                             <button type="submit" class="btn btn-sm btn-mark-paid" title="Marcar como pago">Marcar pago</button>

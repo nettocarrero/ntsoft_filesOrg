@@ -16,7 +16,7 @@ from app.services.payment_index_service import (
     get_payments_due_today,
     get_payments_due_in_days,
 )
-from app.services.document_finance_parser import update_payment_status
+from app.services.document_finance_parser import update_payment_status, update_payment_due_date
 
 
 router = APIRouter()
@@ -115,5 +115,20 @@ async def mark_payment_as_paid(path: str = Form(...)):
         update_payment_status(pdf_path, status="paid")
     except Exception:
         # Em caso de erro, apenas ignora e volta para a tela
+        pass
+    return RedirectResponse(url="/payments", status_code=303)
+
+
+@router.post("/payments/update-due-date", response_class=RedirectResponse)
+async def update_due_date(path: str = Form(...), new_due_date: str = Form(...)):
+    """
+    Corrige manualmente a data de vencimento de um pagamento (YYYY-MM-DD).
+    """
+    pdf_path = Path(path)
+    try:
+        # Campo de input type="date" já vem no formato YYYY-MM-DD
+        cleaned = (new_due_date or "").strip() or None
+        update_payment_due_date(pdf_path, cleaned)
+    except Exception:
         pass
     return RedirectResponse(url="/payments", status_code=303)
