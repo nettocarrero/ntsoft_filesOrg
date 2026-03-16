@@ -423,6 +423,17 @@ async def files_rename_do(
         )
     try:
         resolved.rename(new_path)
+        # Se for PDF, renomeia também o arquivo de metadados .meta.json (se existir)
+        if resolved.suffix.lower() == ".pdf":
+            from pathlib import Path as _Path
+            old_meta = resolved.parent / (resolved.name + ".meta.json")
+            new_meta = new_path.parent / (new_path.name + ".meta.json")
+            try:
+                if old_meta.exists():
+                    old_meta.rename(new_meta)
+            except OSError:
+                # Falha ao renomear meta não deve impedir o rename principal
+                pass
     except OSError:
         return RedirectResponse(
             url=f"/files/rename?path={quote(path, safe='')}&store={quote(store, safe='')}&error=erro",
