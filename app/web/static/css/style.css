@@ -455,6 +455,15 @@ h2 {
     margin-bottom: 0.25rem;
 }
 
+.btn-mark-paid {
+    background: #16a34a;
+    border: 1px solid #15803d;
+}
+
+.btn-mark-paid:hover {
+    background: #15803d;
+}
+
 .payment-row.status-overdue {
     background: #fef2f2;
 }
