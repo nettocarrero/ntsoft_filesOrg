@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Texto extraído — {{ file_name }}{% endblock %}
+{% block content %}
+<h2>Texto extraído</h2>
+
+<section class="section-card">
+    <h3>{{ file_name }}</h3>
+    <p class="muted">Status da extração: <strong>{{ status }}</strong></p>
+    <p class="muted"><code>{{ path }}</code></p>
+</section>
+
+<section class="section-card">
+    <h3>Conteúdo</h3>
+    <pre class="payment-text-dump">{{ text }}</pre>
+</section>
+{% endblock %}

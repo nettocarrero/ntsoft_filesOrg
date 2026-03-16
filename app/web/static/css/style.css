@@ -1035,3 +1035,16 @@ code {
 .modal-title { margin: 0 0 1rem 0; font-size: 1.1rem; }
 .modal-field { margin: 0 0 0.75rem 0; }
 .modal-actions { margin-top: 1.25rem; display: flex; gap: 0.5rem; }
+
+/* Texto extraído (debug de pagamentos) */
+.payment-text-dump {
+    max-height: 70vh;
+    overflow: auto;
+    white-space: pre-wrap;
+    background: #0f172a;
+    color: #e5e7eb;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.8rem;
+}

@@ -7,7 +7,7 @@ from datetime import date
 from pathlib import Path
 from urllib.parse import quote
 
-from fastapi import APIRouter, Request, Form
+from fastapi import APIRouter, Request, Form, Query
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.web.helpers import get_settings, list_output_stores
@@ -17,6 +17,7 @@ from app.services.payment_index_service import (
     get_payments_due_in_days,
 )
 from app.services.document_finance_parser import update_payment_status, update_payment_due_date
+from app.services import extract_pdf_text
 
 
 router = APIRouter()
@@ -132,3 +133,24 @@ async def update_due_date(path: str = Form(...), new_due_date: str = Form(...)):
     except Exception:
         pass
     return RedirectResponse(url="/payments", status_code=303)
+
+
+@router.get("/payments/text", response_class=HTMLResponse)
+async def view_payment_text(request: Request, path: str = Query(..., description="Caminho absoluto do PDF")):
+    """
+    Mostra o texto extraído do PDF (modo debug/inspeção).
+    """
+    pdf_path = Path(path)
+    if not pdf_path.exists() or not pdf_path.is_file():
+        return HTMLResponse("<h1>Arquivo não encontrado</h1>", status_code=404)
+    text, status = extract_pdf_text(pdf_path)
+    return request.app.state.templates.TemplateResponse(
+        "payment_text.html",
+        {
+            "request": request,
+            "file_name": pdf_path.name,
+            "path": str(pdf_path),
+            "status": status,
+            "text": text or "",
+        },
+    )
