@@ -50,35 +50,35 @@
 
 <section class="cards">
     <div class="card card-modern card-metric-blue">
-        <span class="card-icon" aria-hidden="true">📄</span>
+        <span class="card-icon" aria-hidden="true"><i data-lucide="file"></i></span>
         <div class="card-body">
             <span class="card-value">{{ stats.total_hoje }}</span>
             <span class="card-label">Arquivos hoje</span>
         </div>
     </div>
     <div class="card card-modern card-metric-purple">
-        <span class="card-icon" aria-hidden="true">🔍</span>
+        <span class="card-icon" aria-hidden="true"><i data-lucide="scan-search"></i></span>
         <div class="card-body">
             <span class="card-value">{{ stats.ocr_hoje }}</span>
             <span class="card-label">OCR utilizados</span>
         </div>
     </div>
     <div class="card card-modern card-metric-orange">
-        <span class="card-icon" aria-hidden="true">📋</span>
+        <span class="card-icon" aria-hidden="true"><i data-lucide="clipboard"></i></span>
         <div class="card-body">
             <span class="card-value">{{ stats.revisao_manual_hoje }}</span>
             <span class="card-label">Revisão manual</span>
         </div>
     </div>
     <div class="card card-modern card-metric-green">
-        <span class="card-icon" aria-hidden="true">✓</span>
+        <span class="card-icon" aria-hidden="true"><i data-lucide="check-circle"></i></span>
         <div class="card-body">
             <span class="card-value">{% if stats.ultimo_relatorio and stats.ultimo_relatorio.get('resumo') %}{{ stats.ultimo_relatorio.resumo.total_classificados_automaticamente|default(0) }}{% else %}0{% endif %}</span>
             <span class="card-label">Classificados automaticamente</span>
         </div>
     </div>
     <div class="card card-modern card-metric-red">
-        <span class="card-icon" aria-hidden="true">⚠</span>
+        <span class="card-icon" aria-hidden="true"><i data-lucide="triangle-alert"></i></span>
         <div class="card-body">
             <span class="card-value">{% if stats.ultimo_relatorio and stats.ultimo_relatorio.get('resumo') %}{{ stats.ultimo_relatorio.resumo.total_erros|default(0) }}{% else %}0{% endif %}</span>
             <span class="card-label">Erros de processamento</span>

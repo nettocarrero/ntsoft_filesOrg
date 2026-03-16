@@ -1,47 +1,59 @@
 {% extends "base.html" %}
 {% block title %}Explorador — Organizador de Documentos{% endblock %}
 {% block content %}
-<h2>Explorador</h2>
+<div class="page-header explorer-header">
+    <div class="page-title-wrap">
+        <h2>Explorador</h2>
+        {% if breadcrumb %}
+        <nav class="explorer-breadcrumb" aria-label="Navegação">
+            {% for item in breadcrumb %}
+            {% if not loop.first %}<span class="breadcrumb-sep">&gt;</span>{% endif %}
+            <a href="{{ item.url }}" class="breadcrumb-link">{{ item.label }}</a>
+            {% endfor %}
+        </nav>
+        {% endif %}
+    </div>
+    {% if selected_store %}
+    <div class="explorer-context">
+        {% if selected_store_name %}
+        <span class="explorer-context-item"><strong>Loja:</strong> {{ selected_store_name }}</span>
+        {% endif %}
+        {% if filter_ano %}
+        <span class="explorer-context-item"><strong>Ano:</strong> {{ filter_ano }}</span>
+        {% endif %}
+        {% if filter_mes %}
+        <span class="explorer-context-item"><strong>Mês:</strong> {{ filter_mes }}</span>
+        {% endif %}
+        {% if filter_tipo %}
+        <span class="explorer-context-item"><strong>Tipo:</strong> {{ filter_tipo }}</span>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
 
-<section class="section-card explorer-toolbar">
-    <nav class="explorer-breadcrumb" aria-label="Navegação">
-        {% for item in breadcrumb %}
-        {% if not loop.first %}<span class="breadcrumb-sep">/</span>{% endif %}
-        <a href="{{ item.url }}" class="breadcrumb-link">{{ item.label }}</a>
-        {% endfor %}
-    </nav>
+{% if selected_store %}
+<section class="section-card explorer-filters-card">
     <form method="get" action="/files" class="explorer-filters">
-        {% if selected_store %}
         {% if level == 'legacy' or level == 'legacy_files' %}
         <input type="hidden" name="legacy" value="1">
         {% endif %}
-        <label class="filter-label">Loja
-            <select name="store" class="filter-select" onchange="this.form.submit()">
-                <option value="">— Selecione —</option>
-                {% for s in stores %}
-                <option value="{{ s.code }}" {% if selected_store == s.code %}selected{% endif %}>{{ s.name }}</option>
-                {% endfor %}
-            </select>
+        {% if selected_store %}
+        <input type="hidden" name="store" value="{{ selected_store }}">
+        {% endif %}
+        {% if filter_ano %}
+        <input type="hidden" name="ano" value="{{ filter_ano }}">
+        {% endif %}
+        {% if filter_mes %}
+        <input type="hidden" name="mes" value="{{ filter_mes }}">
+        {% endif %}
+        <label class="filter-label">
+            Nome
+            <input type="text" name="nome" value="{{ filter_nome }}" placeholder="Filtrar por nome" class="filter-input">
         </label>
-        <label class="filter-label">Ano
-            <select name="ano" class="filter-select" onchange="this.form.submit()">
-                <option value="">—</option>
-                {% for y in years %}
-                <option value="{{ y }}" {% if filter_ano == y %}selected{% endif %}>{{ y }}</option>
-                {% endfor %}
-            </select>
-        </label>
-        <label class="filter-label">Mês
-            <select name="mes" class="filter-select" onchange="this.form.submit()">
-                <option value="">—</option>
-                {% for m in months %}
-                <option value="{{ m }}" {% if filter_mes == m %}selected{% endif %}>{{ m }}</option>
-                {% endfor %}
-            </select>
-        </label>
-        <label class="filter-label">Tipo
-            <select name="tipo" class="filter-select" onchange="this.form.submit()">
-                <option value="">—</option>
+        <label class="filter-label">
+            Tipo
+            <select name="tipo" class="filter-select">
+                <option value="">— Todos —</option>
                 {% if types_in_period %}
                 {% for t in types_in_period %}
                 <option value="{{ t }}" {% if filter_tipo == t %}selected{% endif %}>{{ t }}</option>
@@ -53,17 +65,20 @@
                 {% endif %}
             </select>
         </label>
-        <label class="filter-label">Nome
-            <input type="text" name="nome" value="{{ filter_nome }}" placeholder="Filtrar por nome" class="filter-input">
+        <label class="filter-label">
+            Data inicial
+            <input type="date" name="data_de" value="{{ filter_data_de }}" class="filter-input">
         </label>
-        <label class="filter-label">Data
-            <input type="date" name="data_de" value="{{ filter_data_de }}" class="filter-input" title="De">
-            <input type="date" name="data_ate" value="{{ filter_data_ate }}" class="filter-input" title="Até">
+        <label class="filter-label">
+            Data final
+            <input type="date" name="data_ate" value="{{ filter_data_ate }}" class="filter-input">
         </label>
-        <button type="submit" class="btn btn-sm">Filtrar</button>
-        {% endif %}
+        <div class="explorer-filters-actions">
+            <button type="submit" class="btn btn-sm">Aplicar filtros</button>
+        </div>
     </form>
 </section>
+{% endif %}
 
 {% if renamed %}
 <p class="msg msg-success">Arquivo renomeado com sucesso.</p>
@@ -79,8 +94,13 @@
     <div class="explorer-folders">
         {% for s in stores %}
         <a href="/files?store={{ s.code }}" class="folder-card">
-            <span class="folder-icon" aria-hidden="true">📁</span>
-            <span class="folder-name">{{ s.name }}</span>
+            <span class="folder-icon" aria-hidden="true"><i data-lucide="folder"></i></span>
+            <span class="folder-main">
+                <span class="folder-name">{{ s.name }}</span>
+                {% if s.count is not none %}
+                <span class="folder-meta">{{ s.count }} arquivo{{ 's' if s.count != 1 }}</span>
+                {% endif %}
+            </span>
         </a>
         {% endfor %}
     </div>
@@ -91,14 +111,19 @@
     <div class="explorer-folders">
         {% for folder in folders %}
         <a href="{{ folder.url }}" class="folder-card">
-            <span class="folder-icon" aria-hidden="true">📁</span>
-            <span class="folder-name">{{ folder.name }}</span>
+            <span class="folder-icon" aria-hidden="true"><i data-lucide="folder"></i></span>
+            <span class="folder-main">
+                <span class="folder-name">{{ folder.name }}</span>
+                {% if folder.count is not none %}
+                <span class="folder-meta">{{ folder.count }} arquivo{{ 's' if folder.count != 1 }}</span>
+                {% endif %}
+            </span>
         </a>
         {% endfor %}
     </div>
     {% else %}
     <div class="empty-state">
-        <div class="empty-state-icon">📁</div>
+        <div class="empty-state-icon"><i data-lucide="folder"></i></div>
         <h3>Nenhuma pasta aqui</h3>
         <p>Esta loja ainda não tem pastas na estrutura atual. Use o breadcrumb acima para voltar.</p>
     </div>
@@ -123,25 +148,36 @@
             <tbody>
                 {% for f in files %}
                 <tr class="file-row" title="{{ f.hint }}" data-path="{{ f.path|e }}" data-store="{{ selected_store|e }}" data-extension="{{ f.extension|e }}">
-                    <td class="col-name" title="{{ f.hint }}"><span class="file-icon">📄</span> {{ f.name }}</td>
+                    <td class="col-name" title="{{ f.hint }}">
+                        <span class="file-icon" aria-hidden="true"><i data-lucide="file-text"></i></span>
+                        {{ f.name }}
+                    </td>
                     <td><span class="badge badge-tipo-{{ f.doc_type }}">{{ f.doc_type }}</span></td>
                     <td class="col-date">{{ f.mtime_br or '-' }}</td>
                     <td class="col-date">{{ f.payment_due_date_br or '-' }}</td>
                     <td>{{ f.payment_amount_br or '-' }}</td>
                     <td>{{ f.sent_by or '-' }}</td>
                     <td class="col-actions">
-                        <span class="action-buttons">
-                            <a href="/files/view?path={{ f.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
-                            <a href="/files/download?path={{ f.path_url }}" class="btn btn-sm">Baixar</a>
-                            <button type="button" class="btn btn-sm btn-rename">Renomear</button>
-                            <form method="post" action="/files/delete" style="display: inline;" onsubmit="return confirm('Excluir este arquivo?');">
+                        <span class="action-icons">
+                            <a href="/files/view?path={{ f.path_url }}" target="_blank" class="action-icon" title="Visualizar">
+                                <i data-lucide="eye"></i>
+                            </a>
+                            <a href="/files/download?path={{ f.path_url }}" class="action-icon" title="Baixar">
+                                <i data-lucide="download"></i>
+                            </a>
+                            <button type="button" class="action-icon action-icon-rename btn-rename" title="Renomear">
+                                <i data-lucide="edit-3"></i>
+                            </button>
+                            <form method="post" action="/files/delete" class="inline-form" onsubmit="return confirm('Excluir este arquivo?');">
                                 <input type="hidden" name="path" value="{{ f.path|e }}">
                                 <input type="hidden" name="store" value="{{ selected_store }}">
                                 <input type="hidden" name="ano" value="{{ filter_ano }}">
                                 <input type="hidden" name="mes" value="{{ filter_mes }}">
                                 <input type="hidden" name="tipo" value="{{ filter_tipo }}">
                                 <input type="hidden" name="legacy" value="{{ '1' if level == 'legacy_files' else '' }}">
-                                <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                                <button type="submit" class="action-icon action-icon-danger" title="Excluir">
+                                    <i data-lucide="trash-2"></i>
+                                </button>
                             </form>
                         </span>
                         <span class="action-edit-buttons" style="display: none;">
@@ -156,7 +192,7 @@
     </div>
     {% else %}
     <div class="empty-state">
-        <div class="empty-state-icon">📄</div>
+        <div class="empty-state-icon"><i data-lucide="file-text"></i></div>
         <h3>Nenhum arquivo nesta pasta</h3>
         <p>Não há documentos aqui{% if filter_nome or filter_data_de or filter_data_ate %} com os filtros aplicados{% endif %}. Ajuste os filtros ou use o breadcrumb para navegar.</p>
     </div>
@@ -194,13 +230,13 @@
         if (e.target.classList.contains('btn-rename')) {
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
-            var fullName = nameTd.textContent.replace(/^\s*📄\s*/, '').trim();
+            var fullName = nameTd.textContent.trim();
             var lastDot = fullName.lastIndexOf('.');
             var stem = lastDot >= 0 ? fullName.slice(0, lastDot) : fullName;
             var ext = lastDot >= 0 ? fullName.slice(lastDot) : '';
             row._originalName = fullName;
             row._extension = ext;
-            nameTd.innerHTML = '<span class="file-icon">📄</span> ';
+            nameTd.innerHTML = '<span class="file-icon" aria-hidden="true"><i data-lucide="file-text"></i></span> ';
             var input = document.createElement('input');
             input.type = 'text';
             input.value = stem;
@@ -237,7 +273,7 @@
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
             var originalName = row._originalName != null ? row._originalName : (nameTd.querySelector('input.inline-rename-input') ? nameTd.querySelector('input.inline-rename-input').value + (row._extension || '') : '');
-            nameTd.innerHTML = '<span class="file-icon">📄</span> ' + (originalName || '');
+            nameTd.innerHTML = '<span class="file-icon" aria-hidden="true"><i data-lucide="file-text"></i></span> ' + (originalName || '');
             row.querySelector('.action-buttons').style.display = 'inline';
             row.querySelector('.action-edit-buttons').style.display = 'none';
             delete row._renameInput;
