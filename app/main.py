@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import argparse
 import logging
+import re
 import shutil
+from datetime import date, datetime
 from pathlib import Path
 from typing import Iterable, List, Callable
 
@@ -30,6 +32,46 @@ from app.utils.file_utils import is_pdf, is_zip, is_rar
 
 
 logger = logging.getLogger(__name__)
+
+
+def _parse_br_date(s: str) -> date | None:
+    """
+    Converte 'dd/mm/aaaa' ou 'dd-mm-aaaa' em date, com validação simples.
+    """
+    m = re.search(r"(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})", s)
+    if not m:
+        return None
+    d, mth, y = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    if y < 100:
+        y = 2000 + y if y < 50 else 1900 + y
+    try:
+        return date(y, mth, d)
+    except ValueError:
+        return None
+
+
+def _extract_nfse_competence_date(text: str) -> date | None:
+    """
+    NFS-e: tenta extrair a 'Competência da NFS-e' como data principal.
+    Restringe o ano para evitar cair em datas muito antigas por engano.
+    """
+    if not text:
+        return None
+    # Procura bloco contendo 'Competência da NFS-e' e uma data perto
+    m = re.search(
+        r"compet[eê]ncia\s+da\s+nfs-e.{0,80}?(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})",
+        text,
+        re.IGNORECASE | re.DOTALL,
+    )
+    if not m:
+        return None
+    dt = _parse_br_date(m.group(1))
+    if not dt:
+        return None
+    # Evita anos muito antigos por ruído de OCR (ex.: 2001, 2008)
+    if dt.year < 2015:
+        return None
+    return dt
 
 
 def process() -> None:
@@ -280,12 +322,17 @@ def _process_pdf(
 
         doc = classify_document(doc, settings)
 
+        # Para NFS-e, tentar usar explicitamente a "Competência da NFS-e"
+        # como data principal do documento.
+        if doc.suggested_doc_type == DocumentType.NOTA_SERVICO and doc.text:
+            nfse_dt = _extract_nfse_competence_date(doc.text)
+            if nfse_dt:
+                doc.document_date = nfse_dt
+
         # Para boletos/guias (pagamentos), usar due_date como document_date.
-        # Isso evita que notas de serviço/fiscais sejam organizadas usando datas de competência antigas.
+        # Isso evita que outros tipos de documento sejam organizados usando datas de vencimento/competência.
         due_iso = payment_info.get("due_date")
         if due_iso and doc.suggested_doc_type in (DocumentType.BOLETO, DocumentType.TAXA):
-            from datetime import datetime
-
             try:
                 doc.document_date = datetime.fromisoformat(due_iso).date()
             except ValueError:
