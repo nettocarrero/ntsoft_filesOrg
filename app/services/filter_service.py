@@ -32,6 +32,14 @@ def should_ignore_document(doc: DocumentInfo, settings: Settings) -> Tuple[bool,
     else:
         normalized_text = ""
 
+    # Regra específica: boletos emitidos POR nós (saída), onde nosso nome
+    # aparece como BENEFICIÁRIO (não como pagador).
+    # Ex.: "Nome do Beneficiário  VAREJAO CHOCOBALAS COMERCIAL DE ALIMENTO"
+    # Usamos a sequência normalizada "beneficiario varejao chocobalas comercial de alimento"
+    # para evitar ignorar documentos em que o nome apareça em outro contexto.
+    if normalized_text and "beneficiario varejao chocobalas comercial de alimento" in normalized_text:
+        return True, "Ignorado por ser boleto emitido como beneficiário (chocobalas saída)"
+
     # regras genéricas: se aparecerem no nome OU no texto, ignorar
     for rule in generic_rules:
         norm_rule = normalize_text(rule)
