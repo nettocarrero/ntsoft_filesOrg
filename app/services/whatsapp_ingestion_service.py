@@ -12,6 +12,10 @@ from app.config import Settings
 from app.utils.file_utils import is_pdf, is_zip, is_rar
 from app.services.watcher_service import wait_until_file_is_ready
 from app.web.helpers import add_path_to_whatsapp_origins
+from app.services.processed_registry_service import (
+    is_already_processed,
+    mark_as_processed,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -70,6 +74,11 @@ class WhatsAppIngestionHandler(FileSystemEventHandler):
         cfg = self.settings.whatsapp_ingestion
         logger.info("Arquivo detectado na pasta do WhatsApp: %s", path)
 
+        # Evita recopiarmos do WhatsApp arquivos idênticos já ingeridos em execuções anteriores.
+        if is_already_processed(self.settings.paths.data_dir, path):
+            logger.info("Arquivo do WhatsApp já ingerido anteriormente (registro persistente), ignorando: %s", path)
+            return
+
         if not wait_until_file_is_ready(
             path, timeout=cfg.stabilize_timeout, interval=cfg.stabilize_interval
         ):
@@ -92,6 +101,8 @@ class WhatsAppIngestionHandler(FileSystemEventHandler):
 
             shutil.copy2(path, dest)
             add_path_to_whatsapp_origins(dest)
+            # Marca o arquivo de origem do WhatsApp como já ingerido no registro persistente.
+            mark_as_processed(self.settings.paths.data_dir, path)
             logger.info("Arquivo copiado da pasta do WhatsApp para input: %s -> %s", path, dest)
         except Exception as exc:
             logger.error("Erro ao copiar arquivo do WhatsApp para input %s: %s", path, exc)
