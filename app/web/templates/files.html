@@ -223,19 +223,20 @@
     var storeInput = document.getElementById('inline-rename-store');
     var newNameInput = document.getElementById('inline-rename-new-name');
 
-    document.querySelector('.table-files tbody').addEventListener('click', function(e) {
-        var row = e.target.closest ? e.target.closest('tr.file-row') : null;
+    var tbody = document.querySelector('.table-files tbody');
+    if (!tbody) return;
+
+    tbody.addEventListener('click', function(e) {
+        if (!e.target || !e.target.closest) return;
+        var row = e.target.closest('tr.file-row');
         if (!row) return;
 
-        var el = e.target;
-        if (el && el.nodeType !== 1) {
-            el = el.parentElement;
-        }
-        if (!el || !el.closest) return;
-        var target = el.closest('button, a');
-        if (!target) return;
+        // Descobre qual tipo de botão foi clicado
+        var renameBtn = e.target.closest('.btn-rename');
+        var saveBtn = e.target.closest('.btn-save-rename');
+        var cancelBtn = e.target.closest('.btn-cancel-rename');
 
-        if (target.classList.contains('btn-rename')) {
+        if (renameBtn) {
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
             var fullName = nameTd.textContent.trim();
@@ -249,6 +250,9 @@
             input.type = 'text';
             input.value = stem;
             input.className = 'inline-rename-input';
+            // Garante que o campo fique visível e com largura adequada
+            input.style.display = 'inline-block';
+            input.style.width = '260px';
             input.placeholder = 'Nome (extensão mantida)';
             nameTd.appendChild(input);
             input.focus();
@@ -264,7 +268,7 @@
             });
             return;
         }
-        if (target.classList.contains('btn-save-rename')) {
+        if (saveBtn) {
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
             var input = row._renameInput || nameTd.querySelector('input.inline-rename-input');
@@ -278,7 +282,7 @@
             form.submit();
             return;
         }
-        if (target.classList.contains('btn-cancel-rename')) {
+        if (cancelBtn) {
             e.preventDefault();
             var nameTd = row.querySelector('td.col-name');
             var originalName = row._originalName != null ? row._originalName : (nameTd.querySelector('input.inline-rename-input') ? nameTd.querySelector('input.inline-rename-input').value + (row._extension || '') : '');
