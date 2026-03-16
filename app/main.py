@@ -274,6 +274,16 @@ def _process_pdf(
             doc.decision_reason = reason
             return ProcessingResult(document=doc, status=ProcessingStatus.SUCCESS)
 
+        # Se possível, usar a data de vencimento como "document_date" antes de organizar
+        payment_info = extract_payment_info(doc.text or "")
+        due_iso = payment_info.get("due_date")
+        if due_iso:
+            from datetime import datetime
+            try:
+                doc.document_date = datetime.fromisoformat(due_iso).date()
+            except ValueError:
+                pass
+
         doc = classify_document(doc, settings)
         doc = organize_document(doc, settings.paths)
 
@@ -281,12 +291,11 @@ def _process_pdf(
         if doc.destination_path and doc.destination_path.suffix.lower() == ".pdf":
             dest_parent = doc.destination_path.parent
             if dest_parent.name == "pagamentos":
-                info = extract_payment_info(doc.text or "")
-                extracted = bool(info.get("due_date") or info.get("amount"))
+                extracted = bool(payment_info.get("due_date") or payment_info.get("amount"))
                 write_payment_meta_file(
                     doc.destination_path,
-                    due_date=info.get("due_date"),
-                    amount=info.get("amount"),
+                    due_date=payment_info.get("due_date"),
+                    amount=payment_info.get("amount"),
                     extracted=extracted,
                 )
 

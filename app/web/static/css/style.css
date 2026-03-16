@@ -455,13 +455,6 @@ h2 {
     margin-bottom: 0.25rem;
 }
 
-.payment-due-input {
-    width: 9rem;
-    font-size: 0.8rem;
-    padding: 0.25rem 0.4rem;
-    margin-right: 0.25rem;
-}
-
 .btn-mark-paid {
     background: #16a34a;
     border: 1px solid #15803d;

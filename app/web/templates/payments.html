@@ -38,21 +38,17 @@
             </thead>
             <tbody>
                 {% for p in overdue %}
-                <tr class="payment-row status-overdue">
+                <tr class="payment-row status-overdue" data-path="{{ p.path }}" data-due="{{ p.due_date }}">
                     <td class="col-name">{{ p.file_name }}</td>
                     <td>{{ p.store_name }}</td>
-                    <td>{{ p.due_date_br }}</td>
+                    <td class="col-date payment-due-cell" title="Clique para editar vencimento">{{ p.due_date_br }}</td>
                     <td>{{ p.amount_br }}</td>
                     <td>{{ p.days_remaining }} dias atrás</td>
                     <td class="col-actions">
                         <a href="/files/view?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Ver</a>
                         <a href="/files/download?path={{ p.path_url }}" class="btn btn-sm">Baixar</a>
                         <a href="{{ p.explorer_url }}" class="btn btn-sm">Pasta</a>
-                        <form method="post" action="/payments/update-due-date" style="display:inline;">
-                            <input type="hidden" name="path" value="{{ p.path }}">
-                            <input type="date" name="new_due_date" value="{{ p.due_date[:10] }}" class="payment-due-input" title="Corrigir vencimento">
-                            <button type="submit" class="btn btn-sm" title="Salvar vencimento">Salvar</button>
-                        </form>
+                        <button type="button" class="btn btn-sm btn-edit-due" title="Editar vencimento">Editar venc.</button>
                         <form method="post" action="/payments/mark-paid" style="display:inline;">
                             <input type="hidden" name="path" value="{{ p.path }}">
                             <button type="submit" class="btn btn-sm btn-mark-paid" title="Marcar como pago">Marcar pago</button>
@@ -83,21 +79,17 @@
             </thead>
             <tbody>
                 {% for p in due_today %}
-                <tr class="payment-row status-today">
+                <tr class="payment-row status-today" data-path="{{ p.path }}" data-due="{{ p.due_date }}">
                     <td class="col-name">{{ p.file_name }}</td>
                     <td>{{ p.store_name }}</td>
-                    <td>{{ p.due_date_br }}</td>
+                    <td class="col-date payment-due-cell" title="Clique para editar vencimento">{{ p.due_date_br }}</td>
                     <td>{{ p.amount_br }}</td>
                     <td>Hoje</td>
                     <td class="col-actions">
                         <a href="/files/view?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Ver</a>
                         <a href="/files/download?path={{ p.path_url }}" class="btn btn-sm">Baixar</a>
                         <a href="{{ p.explorer_url }}" class="btn btn-sm">Pasta</a>
-                        <form method="post" action="/payments/update-due-date" style="display:inline;">
-                            <input type="hidden" name="path" value="{{ p.path }}">
-                            <input type="date" name="new_due_date" value="{{ p.due_date[:10] }}" class="payment-due-input" title="Corrigir vencimento">
-                            <button type="submit" class="btn btn-sm" title="Salvar vencimento">Salvar</button>
-                        </form>
+                        <button type="button" class="btn btn-sm btn-edit-due" title="Editar vencimento">Editar venc.</button>
                         <form method="post" action="/payments/mark-paid" style="display:inline;">
                             <input type="hidden" name="path" value="{{ p.path }}">
                             <button type="submit" class="btn btn-sm btn-mark-paid" title="Marcar como pago">Marcar pago</button>
@@ -128,21 +120,17 @@
             </thead>
             <tbody>
                 {% for p in due_in_7 %}
-                <tr class="payment-row status-upcoming">
+                <tr class="payment-row status-upcoming" data-path="{{ p.path }}" data-due="{{ p.due_date }}">
                     <td class="col-name">{{ p.file_name }}</td>
                     <td>{{ p.store_name }}</td>
-                    <td>{{ p.due_date_br }}</td>
+                    <td class="col-date payment-due-cell" title="Clique para editar vencimento">{{ p.due_date_br }}</td>
                     <td>{{ p.amount_br }}</td>
                     <td>{{ p.days_remaining }} dias</td>
                     <td class="col-actions">
                         <a href="/files/view?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Ver</a>
                         <a href="/files/download?path={{ p.path_url }}" class="btn btn-sm">Baixar</a>
                         <a href="{{ p.explorer_url }}" class="btn btn-sm">Pasta</a>
-                        <form method="post" action="/payments/update-due-date" style="display:inline;">
-                            <input type="hidden" name="path" value="{{ p.path }}">
-                            <input type="date" name="new_due_date" value="{{ p.due_date[:10] }}" class="payment-due-input" title="Corrigir vencimento">
-                            <button type="submit" class="btn btn-sm" title="Salvar vencimento">Salvar</button>
-                        </form>
+                        <button type="button" class="btn btn-sm btn-edit-due" title="Editar venc.</button>
                         <form method="post" action="/payments/mark-paid" style="display:inline;">
                             <input type="hidden" name="path" value="{{ p.path }}">
                             <button type="submit" class="btn btn-sm btn-mark-paid" title="Marcar como pago">Marcar pago</button>
@@ -165,4 +153,69 @@
     </div>
 </section>
 {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  function isoToBr(iso) {
+    if (!iso || iso.length < 10) return '';
+    var y = iso.slice(0, 4), m = iso.slice(5, 7), d = iso.slice(8, 10);
+    return d + '/' + m + '/' + y;
+  }
+  function brToIso(br) {
+    if (!br) return null;
+    var m = br.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})$/);
+    if (!m) return null;
+    var d = m[1].padStart(2, '0');
+    var mo = m[2].padStart(2, '0');
+    var y = m[3];
+    if (y.length === 2) {
+      y = (parseInt(y, 10) < 50 ? '20' : '19') + y;
+    }
+    return y + '-' + mo + '-' + d;
+  }
+
+  function openEditPrompt(row) {
+    var iso = row.getAttribute('data-due') || '';
+    var currentBr = isoToBr(iso);
+    var input = prompt('Nova data de vencimento (dd/mm/aaaa):', currentBr);
+    if (!input) return;
+    var isoNew = brToIso(input.trim());
+    if (!isoNew) {
+      alert('Formato inválido. Use dd/mm/aaaa.');
+      return;
+    }
+    var form = document.createElement('form');
+    form.method = 'post';
+    form.action = '/payments/update-due-date';
+    var pathInput = document.createElement('input');
+    pathInput.type = 'hidden';
+    pathInput.name = 'path';
+    pathInput.value = row.getAttribute('data-path');
+    var dateInput = document.createElement('input');
+    dateInput.type = 'hidden';
+    dateInput.name = 'new_due_date';
+    dateInput.value = isoNew;
+    form.appendChild(pathInput);
+    form.appendChild(dateInput);
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+  document.querySelectorAll('.payment-row').forEach(function (row) {
+    var dueCell = row.querySelector('.payment-due-cell');
+    var editBtn = row.querySelector('.btn-edit-due');
+    if (dueCell) {
+      dueCell.addEventListener('click', function () { openEditPrompt(row); });
+    }
+    if (editBtn) {
+      editBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openEditPrompt(row);
+      });
+    }
+  });
+});
+</script>
 {% endblock %}
