@@ -1,8 +1,12 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Dict, Any
+
+
+logger = logging.getLogger(__name__)
 
 
 def _registry_path(data_dir: Path) -> Path:
@@ -45,6 +49,7 @@ def mark_as_processed(data_dir: Path, file_path: Path) -> None:
     """Marca um arquivo como processado (path absoluto, tamanho, mtime)."""
     reg_path = _registry_path(data_dir)
     registry = _load_registry(reg_path)
+    created_now = not reg_path.exists()
     try:
         st = file_path.stat()
     except OSError:
@@ -52,6 +57,8 @@ def mark_as_processed(data_dir: Path, file_path: Path) -> None:
     key = str(file_path.resolve())
     registry[key] = {"size": st.st_size, "mtime": st.st_mtime}
     _save_registry(reg_path, registry)
+    if created_now:
+        logger.info("processed_input_registry.json criado em: %s", reg_path)
 
 
 def clear_processed_registry(data_dir: Path) -> None:
