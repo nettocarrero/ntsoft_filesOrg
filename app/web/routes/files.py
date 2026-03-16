@@ -77,13 +77,16 @@ def _build_files_context(
 
     base = [{"label": "Explorador", "url": "/files"}, {"label": store_name, "url": f"/files?store={quote(store, safe='')}"}]
 
-    if legacy:
+        if legacy:
         # Navegação legada: store → Arquivos legados → tipo → arquivos
         breadcrumb = base + [{"label": "Arquivos legados", "url": f"/files?store={quote(store, safe='')}&legacy=1"}]
         if not tipo:
             level = "legacy"
             folders = [
-                {"name": t, "url": f"/files?store={quote(store, safe='')}&legacy=1&tipo={quote(t, safe='')}"}
+                {
+                    "name": t.upper(),
+                    "url": f"/files?store={quote(store, safe='')}&legacy=1&tipo={quote(t, safe='')}",
+                }
                 for t in sorted(legacy_types)
             ]
         else:
@@ -114,9 +117,20 @@ def _build_files_context(
     if not ano:
         level = "store_root"
         breadcrumb = base
-        folders = [{"name": y, "url": f"/files?store={quote(store, safe='')}&ano={quote(y, safe='')}"} for y in years]
+        folders = [
+            {
+                "name": str(y).upper(),
+                "url": f"/files?store={quote(store, safe='')}&ano={quote(y, safe='')}",
+            }
+            for y in years
+        ]
         if legacy_types:
-            folders.append({"name": "Arquivos legados", "url": f"/files?store={quote(store, safe='')}&legacy=1"})
+            folders.append(
+                {
+                    "name": "ARQUIVOS LEGADOS",
+                    "url": f"/files?store={quote(store, safe='')}&legacy=1",
+                }
+            )
         return {
             "level": level,
             "breadcrumb": breadcrumb,
@@ -137,7 +151,10 @@ def _build_files_context(
         level = "year"
         breadcrumb = base + [{"label": ano, "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}"}]
         folders = [
-            {"name": f"{m} - {MONTH_NAMES.get(m, m)}", "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}&mes={quote(m, safe='')}"}
+            {
+                "name": f"{m} - {MONTH_NAMES.get(m, m)}".upper(),
+                "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}&mes={quote(m, safe='')}",
+            }
             for m in months
         ]
         return {
@@ -158,13 +175,16 @@ def _build_files_context(
     types_in_period = list_store_types_in_period(output_dir, store, ano, mes)
     if not tipo:
         level = "month"
-        mes_label = f"{mes} - {MONTH_NAMES.get(mes, mes)}"
+        mes_label = f"{mes} - {MONTH_NAMES.get(mes, mes)}".upper()
         breadcrumb = base + [
             {"label": ano, "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}"},
             {"label": mes_label, "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}&mes={quote(mes, safe='')}"},
         ]
         folders = [
-            {"name": t, "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}&mes={quote(mes, safe='')}&tipo={quote(t, safe='')}"}
+            {
+                "name": t.upper(),
+                "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}&mes={quote(mes, safe='')}&tipo={quote(t, safe='')}",
+            }
             for t in sorted(types_in_period)
         ]
         return {
