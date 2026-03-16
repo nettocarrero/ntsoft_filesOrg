@@ -24,6 +24,16 @@ VENCIMENTO_KEYWORDS = [
     r"vencimento\s+do\s+boleto",
 ]
 
+# Palavras-chave que indicam datas que NÃO são vencimento (emissão, processamento etc.)
+NON_DUE_DATE_KEYWORDS = [
+    r"data\s+do\s+documento",
+    r"data\s+documento",
+    r"data\s+de\s+emiss[aã]o",
+    r"emiss[aã]o",
+    r"data\s+processamento",
+    r"processamento",
+]
+
 # Padrões de data: dd/mm/yyyy ou dd-mm-yyyy (com possível ruído)
 DATE_PATTERNS = [
     re.compile(
@@ -191,7 +201,15 @@ def _find_due_date(text: str) -> Tuple[Optional[str], str]:
             if not iso:
                 continue
             start = m.start()
-            # Distância mínima até alguma keyword; priorizar data que vem *após* a keyword
+
+            # Ignora datas em janelas de texto claramente ligadas a emissão/processamento
+            win_start = max(0, start - 60)
+            win_end = min(len(text_lower), start + 60)
+            window = text_lower[win_start:win_end]
+            if any(re.search(kw, window, re.IGNORECASE) for kw in NON_DUE_DATE_KEYWORDS):
+                continue
+
+            # Distância mínima até alguma keyword de vencimento; priorizar data que vem *após* a keyword
             min_dist = len(text_norm) + 1
             for kw in VENCIMENTO_KEYWORDS:
                 for km in re.finditer(kw, text_lower, re.IGNORECASE):
@@ -223,6 +241,55 @@ def _find_due_date(text: str) -> Tuple[Optional[str], str]:
     else:
         confidence = "low"
     return (best_date, confidence)
+
+
+def _refine_boleto_due_date(
+    text: str, current_due: Optional[str], current_conf: str
+) -> Tuple[Optional[str], str]:
+    """
+    Heurística extra para boletos:
+    - considera todas as datas válidas que NÃO estejam perto de palavras de emissão/processamento;
+    - escolhe a maior data (boleto normalmente tem vencimento após emissão);
+    - se não houver data melhor, mantém o resultado atual.
+    """
+    text_norm = _normalize_whitespace(text)
+    text_lower = text_norm.lower()
+
+    all_dates: List[str] = []
+
+    for pattern in DATE_PATTERNS:
+        for m in pattern.finditer(text_norm):
+            iso = _parse_br_date(m)
+            if not iso:
+                continue
+
+            start = m.start()
+            win_start = max(0, start - 60)
+            win_end = min(len(text_lower), start + 60)
+            window = text_lower[win_start:win_end]
+            if any(re.search(kw, window, re.IGNORECASE) for kw in NON_DUE_DATE_KEYWORDS):
+                continue
+
+            all_dates.append(iso)
+
+    if not all_dates:
+        return current_due, current_conf
+
+    latest_date = max(all_dates)  # ISO YYYY-MM-DD permite comparação lexicográfica
+
+    if current_due is None:
+        return latest_date, "medium"
+
+    # Se já temos uma data e a maior encontrada é posterior, assumimos que ela é o vencimento.
+    if latest_date > current_due:
+        # Mantém confiança atual se já for alta, senão pelo menos "medium"
+        order = {"low": 1, "medium": 2, "high": 3}
+        new_conf = current_conf
+        if order.get(current_conf, 1) < order["medium"]:
+            new_conf = "medium"
+        return latest_date, new_conf
+
+    return current_due, current_conf
 
 
 def _parse_amount_str(s: str) -> Optional[float]:
@@ -297,6 +364,9 @@ def extract_payment_info(text: str) -> Dict[str, Any]:
 
     boleto_info = detect_boleto_signals(text)
     due_date, conf_date = _find_due_date(text)
+    # Para boletos, aplicamos uma heurística extra: em geral o vencimento é a MAIOR data do documento.
+    if boleto_info["is_boleto"]:
+        due_date, conf_date = _refine_boleto_due_date(text, due_date, conf_date)
     amount, conf_amount = _find_amount(text)
 
     order = {"high": 3, "medium": 2, "low": 1}

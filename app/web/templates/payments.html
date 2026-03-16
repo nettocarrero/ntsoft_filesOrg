@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Pagamentos e vencimentos — Organizador de Documentos{% endblock %}
 {% block content %}
-<h2>Pagamentos e vencimentos</h2>
+<div class="page-header">
+    <div class="page-title-wrap">
+        <h2>Pagamentos e vencimentos</h2>
+    </div>
+    <div class="page-actions">
+        {% if show_all %}
+        <a href="/payments" class="btn btn-sm">Ver apenas vencimentos próximos</a>
+        {% else %}
+        <a href="/payments?all=1" class="btn btn-sm">Exibir todos os boletos</a>
+        {% endif %}
+    </div>
+</div>
 
 <section class="section-card">
     <h3>Resumo</h3>
@@ -147,7 +158,61 @@
 </section>
 {% endif %}
 
-{% if not overdue and not due_today and not due_in_7 %}
+{% if show_all and all_payments %}
+<section class="section-card">
+    <h3>Todos os boletos</h3>
+    <div class="table-wrap">
+        <table class="table table-payments">
+            <thead>
+                <tr>
+                    <th>Arquivo</th>
+                    <th>Loja</th>
+                    <th>Vencimento</th>
+                    <th>Valor</th>
+                    <th>Dias restantes</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in all_payments %}
+                <tr class="payment-row status-{{ p.status }}" data-path="{{ p.path }}" data-due="{{ p.due_date }}">
+                    <td class="col-name">{{ p.file_name }}</td>
+                    <td>{{ p.store_name }}</td>
+                    <td class="col-date payment-due-cell" title="Clique para editar vencimento">{{ p.due_date_br }}</td>
+                    <td>{{ p.amount_br }}</td>
+                    <td>
+                        {% if p.days_remaining is not none %}
+                            {% if p.days_remaining < 0 %}
+                                {{ (p.days_remaining * -1) }} dias atrás
+                            {% elif p.days_remaining == 0 %}
+                                Hoje
+                            {% else %}
+                                {{ p.days_remaining }} dias
+                            {% endif %}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="col-actions">
+                        <a href="/files/view?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Ver</a>
+                        <a href="/files/download?path={{ p.path_url }}" class="btn btn-sm">Baixar</a>
+                        <a href="{{ p.explorer_url }}" class="btn btn-sm">Pasta</a>
+                        <a href="/payments/text?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Texto</a>
+                        <button type="button" class="btn btn-sm btn-edit-due" title="Editar vencimento">Editar venc.</button>
+                        <form method="post" action="/payments/mark-paid" style="display:inline;">
+                            <input type="hidden" name="path" value="{{ p.path }}">
+                            <button type="submit" class="btn btn-sm btn-mark-paid" title="Marcar como pago">Marcar pago</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endif %}
+
+{% if not overdue and not due_today and not due_in_7 and not show_all %}
 <section class="section-card">
     <div class="empty-state">
         <div class="empty-state-icon"><i data-lucide="clipboard"></i></div>

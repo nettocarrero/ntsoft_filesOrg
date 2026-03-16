@@ -15,6 +15,7 @@ from app.services.payment_index_service import (
     get_overdue_payments,
     get_payments_due_today,
     get_payments_due_in_days,
+    scan_payments,
 )
 from app.services.document_finance_parser import update_payment_status, update_payment_due_date
 from app.services import extract_pdf_text
@@ -81,14 +82,34 @@ def _enrich_payment_item(item: dict, store_names: dict) -> dict:
 
 
 @router.get("/payments", response_class=HTMLResponse)
-async def payments_page(request: Request):
+async def payments_page(
+    request: Request,
+    show_all: bool = Query(False, alias="all"),
+):
     settings = get_settings()
     store_list = list_output_stores(settings.paths.output_dir, settings.aliases)
     store_names = {s["code"]: s["name"] for s in store_list}
 
-    overdue = [ _enrich_payment_item(dict(p), store_names) for p in get_overdue_payments(settings.paths.output_dir) ]
-    due_today = [ _enrich_payment_item(dict(p), store_names) for p in get_payments_due_today(settings.paths.output_dir) ]
-    due_in_7 = [ _enrich_payment_item(dict(p), store_names) for p in get_payments_due_in_days(settings.paths.output_dir, 7) ]
+    overdue = [
+        _enrich_payment_item(dict(p), store_names)
+        for p in get_overdue_payments(settings.paths.output_dir)
+    ]
+    due_today = [
+        _enrich_payment_item(dict(p), store_names)
+        for p in get_payments_due_today(settings.paths.output_dir)
+    ]
+    due_in_7 = [
+        _enrich_payment_item(dict(p), store_names)
+        for p in get_payments_due_in_days(settings.paths.output_dir, 7)
+    ]
+
+    all_payments = []
+    if show_all:
+        base_list = scan_payments(settings.paths.output_dir)
+        all_payments = [
+            _enrich_payment_item(dict(p), store_names) for p in base_list
+        ]
+        all_payments.sort(key=lambda x: (x.get("due_date") or "9999-12-31"))
 
     return request.app.state.templates.TemplateResponse(
         "payments.html",
@@ -100,6 +121,8 @@ async def payments_page(request: Request):
             "count_overdue": len(overdue),
             "count_today": len(due_today),
             "count_in_7": len(due_in_7),
+            "show_all": show_all,
+            "all_payments": all_payments,
         },
     )
 
