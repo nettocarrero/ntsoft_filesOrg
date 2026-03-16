@@ -84,6 +84,15 @@
   </ul>
 </section>
 
+<section class="section-card">
+  <h3>Cache de arquivos processados</h3>
+  <p class="muted">O sistema mantém um registro dos arquivos de <code>input/</code> já processados (incluindo os que vieram do WhatsApp) para evitar retrabalho quando você roda o identificador novamente.</p>
+  <form method="post" action="/config/processed-registry/clear" style="margin-top: 0.5rem;">
+    <button type="submit" class="btn btn-sm">Limpar registro de arquivos processados</button>
+    <span class="muted">Use este botão apenas se quiser forçar o reprocessamento de todos os arquivos ainda presentes em <code>input/</code>.</span>
+  </form>
+</section>
+
 <section class="section-card" id="ip-users">
   <h3>Identificação por IP (quem enviou)</h3>
   <p class="muted">Vincule IPs a nomes de usuário. Ao enviar arquivos para classificação, o sistema identifica quem enviou pelo IP e grava o nome nos relatórios de upload.</p>

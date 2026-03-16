@@ -8,7 +8,14 @@ from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
 
 from app.config import PROJECT_ROOT, save_local_config
-from app.web.helpers import get_settings, system_status, is_local_client, load_ip_users, save_ip_users
+from app.web.helpers import (
+    get_settings,
+    system_status,
+    is_local_client,
+    load_ip_users,
+    save_ip_users,
+    clear_processed_input_registry,
+)
 
 router = APIRouter()
 
@@ -149,6 +156,15 @@ async def start_watcher(request: Request):
         url="/config?watcher_started=1" if ok else "/config?watcher_started=0",
         status_code=303,
     )
+
+
+@router.post("/config/processed-registry/clear", response_class=RedirectResponse)
+async def config_clear_processed_registry(request: Request):
+    """Limpa o registro de arquivos de input já processados (força reprocessamento)."""
+    if not is_local_client(request.client.host if request.client else None):
+        return PlainTextResponse("Apenas o PC principal pode limpar o cache de arquivos processados.", status_code=403)
+    clear_processed_input_registry()
+    return RedirectResponse(url="/config?saved=1", status_code=303)
 
 
 @router.post("/config/ip-users", response_class=RedirectResponse)

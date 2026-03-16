@@ -22,6 +22,10 @@ from app.services import (
     organize_document,
     generate_reports,
 )
+from app.services.processed_registry_service import (
+    is_already_processed,
+    mark_as_processed,
+)
 from app.services.document_finance_parser import (
     extract_payment_info,
     write_payment_meta_file,
@@ -106,6 +110,10 @@ def process_input_files(paths: Iterable[Path], settings: Settings) -> List[Proce
     results: List[ProcessingResult] = []
 
     for path in paths:
+        # Evita reprocessar arquivos idênticos já processados anteriormente.
+        if is_already_processed(settings.paths.data_dir, path):
+            logger.info("Arquivo já processado anteriormente, ignorando: %s", path)
+            continue
         if is_zip(path):
             logger.info("Processando ZIP: %s", path)
             per_file_results = _process_zip(path, settings)
@@ -128,6 +136,10 @@ def process_input_files(paths: Iterable[Path], settings: Settings) -> List[Proce
 
         results.extend(per_file_results)
         _handle_processed_input_file(path, per_file_results, settings)
+
+        # Se todos os resultados desse arquivo foram bem-sucedidos, marca como processado.
+        if per_file_results and all(r.status != ProcessingStatus.ERROR for r in per_file_results):
+            mark_as_processed(settings.paths.data_dir, path)
 
     generate_reports(settings.paths.reports_dir, results)
     return results

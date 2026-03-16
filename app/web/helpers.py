@@ -11,6 +11,7 @@ from datetime import date, datetime
 from typing import Any, Dict, List, Optional
 
 from app.config import load_settings
+from app.services.processed_registry_service import clear_processed_registry
 from app.services.document_finance_parser import read_payment_meta_file
 from app.services.organizer_service import OUTPUT_FOLDERS
 
@@ -519,3 +520,9 @@ def system_status(settings) -> Dict[str, Any]:
         "total_ultimo_relatorio": resumo.get("total_arquivos"),
         "erros_ultimo_relatorio": resumo.get("total_erros"),
     }
+
+
+def clear_processed_input_registry() -> None:
+    """Limpa o registro de arquivos de input já processados."""
+    settings = get_settings()
+    clear_processed_registry(settings.paths.data_dir)
