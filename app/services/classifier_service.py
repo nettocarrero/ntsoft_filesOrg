@@ -243,6 +243,8 @@ def classify_document(doc: DocumentInfo, settings: Settings) -> DocumentInfo:
     if doc.text:
         doc_type_scores = _score_doc_type(doc.text, settings.document_keywords, type_evidence)
 
+        text_norm = normalize_text(doc.text)
+
         # Reforço específico para boletos usando sinais fortes (linha digitável, palavras-chave, bancos)
         boleto_signals = detect_boleto_signals(doc.text)
         if boleto_signals.get("is_boleto"):
@@ -253,6 +255,35 @@ def classify_document(doc: DocumentInfo, settings: Settings) -> DocumentInfo:
                 {
                     "doc_type": DocumentType.BOLETO.value,
                     "keyword": f"detected_boleto_signals(score={boleto_signals.get('score')}, linha_digitavel={boleto_signals.get('has_linha_digitavel')})",
+                    "location": "text",
+                }
+            )
+
+        # Reforço específico para NFS-e x NF-e:
+        # - NFSe / DANFSe -> nota_servico
+        # - NFe / DANFE (sem NFSe) -> nota_fiscal
+        has_nfse = ("nfse" in text_norm) or ("nfs e" in text_norm) or ("nfs-e" in text_norm)
+        has_danfse = "danfse" in text_norm
+        has_nfe = ("nfe" in text_norm) or ("nf e" in text_norm) or ("nf-e" in text_norm)
+        has_danfe = "danfe" in text_norm
+
+        if has_nfse or has_danfse:
+            current = doc_type_scores.get(DocumentType.NOTA_SERVICO, 0)
+            doc_type_scores[DocumentType.NOTA_SERVICO] = current + 6
+            type_evidence.append(
+                {
+                    "doc_type": DocumentType.NOTA_SERVICO.value,
+                    "keyword": "nfse_danfse_strong_signal",
+                    "location": "text",
+                }
+            )
+        elif has_nfe or has_danfe:
+            current = doc_type_scores.get(DocumentType.NOTA_FISCAL, 0)
+            doc_type_scores[DocumentType.NOTA_FISCAL] = current + 4
+            type_evidence.append(
+                {
+                    "doc_type": DocumentType.NOTA_FISCAL.value,
+                    "keyword": "nfe_danfe_signal",
                     "location": "text",
                 }
             )

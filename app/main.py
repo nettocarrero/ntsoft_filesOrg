@@ -20,6 +20,10 @@ from app.services import (
     organize_document,
     generate_reports,
 )
+from app.services.document_finance_parser import (
+    extract_payment_info,
+    write_payment_meta_file,
+)
 from app.services.whatsapp_ingestion_service import start_whatsapp_ingestion
 from app.services.filter_service import should_ignore_document
 from app.utils.file_utils import is_pdf, is_zip, is_rar
@@ -272,6 +276,19 @@ def _process_pdf(
 
         doc = classify_document(doc, settings)
         doc = organize_document(doc, settings.paths)
+
+        # Se o documento foi organizado em "pagamentos", gravar metadados para o painel
+        if doc.destination_path and doc.destination_path.suffix.lower() == ".pdf":
+            dest_parent = doc.destination_path.parent
+            if dest_parent.name == "pagamentos":
+                info = extract_payment_info(doc.text or "")
+                extracted = bool(info.get("due_date") or info.get("amount"))
+                write_payment_meta_file(
+                    doc.destination_path,
+                    due_date=info.get("due_date"),
+                    amount=info.get("amount"),
+                    extracted=extracted,
+                )
 
         return ProcessingResult(document=doc, status=ProcessingStatus.SUCCESS)
     except Exception as exc:
