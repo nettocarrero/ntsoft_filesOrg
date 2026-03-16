@@ -77,7 +77,7 @@ def _build_files_context(
 
     base = [{"label": "Explorador", "url": "/files"}, {"label": store_name, "url": f"/files?store={quote(store, safe='')}"}]
 
-        if legacy:
+    if legacy:
         # Navegação legada: store → Arquivos legados → tipo → arquivos
         breadcrumb = base + [{"label": "Arquivos legados", "url": f"/files?store={quote(store, safe='')}&legacy=1"}]
         if not tipo:
