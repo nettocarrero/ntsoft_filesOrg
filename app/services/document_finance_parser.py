@@ -34,6 +34,15 @@ NON_DUE_DATE_KEYWORDS = [
     r"processamento",
 ]
 
+# Palavras-chave comuns em datas de multa/juros (não são vencimento)
+PENALTY_DATE_KEYWORDS = [
+    r"a\s+partir\s+de",
+    r"mora",
+    r"multa",
+    r"juros",
+    r"encargos",
+]
+
 # Padrões de data: dd/mm/yyyy ou dd-mm-yyyy (com possível ruído)
 DATE_PATTERNS = [
     re.compile(
@@ -255,6 +264,10 @@ def _refine_boleto_due_date(
     text_norm = _normalize_whitespace(text)
     text_lower = text_norm.lower()
 
+    # Se já encontramos vencimento com boa confiança (perto de keyword), não substituímos.
+    if current_due is not None and current_conf in ("high", "medium"):
+        return current_due, current_conf
+
     all_dates: List[str] = []
 
     for pattern in DATE_PATTERNS:
@@ -268,6 +281,9 @@ def _refine_boleto_due_date(
             win_end = min(len(text_lower), start + 60)
             window = text_lower[win_start:win_end]
             if any(re.search(kw, window, re.IGNORECASE) for kw in NON_DUE_DATE_KEYWORDS):
+                continue
+            # Ignora datas de "mora/multa/juros a partir de ..."
+            if any(re.search(kw, window, re.IGNORECASE) for kw in PENALTY_DATE_KEYWORDS):
                 continue
 
             all_dates.append(iso)
