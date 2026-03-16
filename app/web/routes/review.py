@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import shutil
+from datetime import date
 from pathlib import Path
 from urllib.parse import quote
 
@@ -8,6 +9,12 @@ from fastapi import APIRouter, Request, Query, Form
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
 
 from app.models.enums import DocumentType
+from app.services.document_finance_parser import (
+    extract_payment_info,
+    write_payment_meta_file,
+)
+from app.services.organizer_service import doc_type_value_to_output_folder
+from app.services.pdf_service import extract_pdf_text
 from app.web.helpers import get_settings, list_review_files, list_output_stores
 
 router = APIRouter()
@@ -101,7 +108,7 @@ async def review_correct_do(
     store: str = Form(...),
     doc_type: str = Form(...),
 ):
-    """Move o arquivo de review_manual para output/store/doc_type/."""
+    """Move o arquivo de review_manual para output/store/ano/mes/tipo/ (nova estrutura)."""
     settings = get_settings()
     resolved = _resolve_review_path(path, settings.paths.review_manual_dir)
     if not resolved:
@@ -123,13 +130,30 @@ async def review_correct_do(
         return RedirectResponse(url="/review?error=loja_invalida", status_code=303)
     if "/" in doc_type or "\\" in doc_type or ".." in doc_type:
         return RedirectResponse(url="/review?error=tipo_invalido", status_code=303)
-    dest_dir = settings.paths.output_dir / store / doc_type
+    today = date.today()
+    year = str(today.year)
+    month = f"{today.month:02d}"
+    type_folder = doc_type_value_to_output_folder(doc_type)
+    if "/" in type_folder or "\\" in type_folder or ".." in type_folder:
+        return RedirectResponse(url="/review?error=tipo_invalido", status_code=303)
+    dest_dir = settings.paths.output_dir / store / year / month / type_folder
     dest_dir.mkdir(parents=True, exist_ok=True)
     dest_file = _safe_destination(dest_dir, resolved.name)
     try:
         shutil.move(str(resolved), str(dest_file))
     except OSError:
         return RedirectResponse(url="/review?error=erro_ao_mover", status_code=303)
+    # Para documentos de pagamento (PDF), extrair vencimento/valor e salvar .meta.json
+    if type_folder == "pagamentos" and dest_file.suffix.lower() == ".pdf":
+        text, _ = extract_pdf_text(dest_file)
+        info = extract_payment_info(text or "")
+        extracted = info.get("due_date") is not None or info.get("amount") is not None
+        write_payment_meta_file(
+            dest_file,
+            due_date=info.get("due_date"),
+            amount=info.get("amount"),
+            extracted=extracted,
+        )
     return RedirectResponse(url="/review?corrected=1", status_code=303)
 
 

@@ -1,0 +1,39 @@
+{
+  "resumo": {
+    "total_arquivos": 1,
+    "total_de_zip": 0,
+    "total_classificados_automaticamente": 0,
+    "total_revisao_manual": 0,
+    "total_erros": 1,
+    "total_com_cnpj": 0
+  },
+  "itens": [
+    {
+      "nome_original": "BOLETOS LINEU PINZON .rar",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\input\\BOLETOS LINEU PINZON .rar",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "veio_de_arquivo_compactado": true,
+      "tipo_arquivo_compactado": "rar",
+      "arquivo_compactado_origem": "C:\\Projetos\\ntsoft-orgfiles\\input\\BOLETOS LINEU PINZON .rar",
+      "texto_extraido_status": "nao_processado",
+      "cnpjs_detectados": [],
+      "loja_sugerida": null,
+      "score_por_loja": {},
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {},
+      "store_confidence": 0.0,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.0,
+      "has_strong_store_evidence": false,
+      "strong_evidence_type": null,
+      "score_details": {},
+      "destino_final": null,
+      "motivo_decisao": "",
+      "explicacao_decisao": "",
+      "enviado_para_revisao": false,
+      "status_processamento": "error",
+      "erro": "Erro ao extrair arquivo RAR C:\\Projetos\\ntsoft-orgfiles\\input\\BOLETOS LINEU PINZON .rar: [Errno 2] No such file or directory: 'C:\\\\Projetos\\\\ntsoft-orgfiles\\\\temp\\\\BOLETOS LINEU PINZON \\\\247752-1.pdf'"
+    }
+  ]
+}

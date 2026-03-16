@@ -1,0 +1,686 @@
+{
+  "resumo": {
+    "total_arquivos": 8,
+    "total_de_zip": 0,
+    "total_classificados_automaticamente": 1,
+    "total_revisao_manual": 7,
+    "total_erros": 0,
+    "total_com_cnpj": 8
+  },
+  "itens": [
+    {
+      "nome_original": "DAM - ISS.pdf-ValmirAndrade20215691543-arquivo-1917-1-1545.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\input\\DAM - ISS.pdf-ValmirAndrade20215691543-arquivo-1917-1-1545.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "texto_extraido_status": "ok",
+      "cnpjs_detectados": [
+        "07439697000140"
+      ],
+      "loja_sugerida": "ljUbj",
+      "score_por_loja": {
+        "ljUbj": 26
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "taxa": 2,
+        "boleto": 1
+      },
+      "store_confidence": 0.8,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.4,
+      "score_details": {
+        "matched_store_aliases": [
+          {
+            "store": "ljUbj",
+            "alias": "ubajara",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          }
+        ],
+        "matched_store_sources": [
+          "text"
+        ],
+        "matched_type_keywords": [
+          {
+            "doc_type": "boleto",
+            "keyword": "vencimento",
+            "location": "text"
+          },
+          {
+            "doc_type": "taxa",
+            "keyword": "arrecadacao",
+            "location": "text"
+          },
+          {
+            "doc_type": "taxa",
+            "keyword": "imposto",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000140",
+            "store": "ljUbj",
+            "source": "pdf_text"
+          }
+        ]
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\review_manual\\ljUbj\\desconhecido\\DAM - ISS.pdf-ValmirAndrade20215691543-arquivo-1917-1-1545.pdf",
+      "motivo_decisao": "Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "explicacao_decisao": "Loja sugerida: ljUbj.\nScores por loja: {'ljUbj': 26}.\nEvidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}].\nFontes de evidência de loja: ['text'].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'taxa': 2, 'boleto': 1}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'taxa', 'keyword': 'arrecadacao', 'location': 'text'}, {'doc_type': 'taxa', 'keyword': 'imposto', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=0.8, type=0.0, overall=0.4.\nDecisão final: Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "enviado_para_revisao": true,
+      "status_processamento": "success",
+      "erro": null
+    },
+    {
+      "nome_original": "DARF - COFINS.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\input\\DARF - COFINS.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "texto_extraido_status": "ok",
+      "cnpjs_detectados": [
+        "07439697000140",
+        "50000446963097"
+      ],
+      "loja_sugerida": "ljUbj",
+      "score_por_loja": {
+        "ljUbj": 20
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "comprovante": 2,
+        "boleto": 1,
+        "taxa": 1
+      },
+      "store_confidence": 0.7,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.35,
+      "score_details": {
+        "matched_store_aliases": [],
+        "matched_store_sources": [],
+        "matched_type_keywords": [
+          {
+            "doc_type": "boleto",
+            "keyword": "vencimento",
+            "location": "text"
+          },
+          {
+            "doc_type": "taxa",
+            "keyword": "arrecadacao",
+            "location": "text"
+          },
+          {
+            "doc_type": "comprovante",
+            "keyword": "autenticacao",
+            "location": "text"
+          },
+          {
+            "doc_type": "comprovante",
+            "keyword": "autenticacao mecanica",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000140",
+            "store": "ljUbj",
+            "source": "pdf_text"
+          }
+        ]
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\review_manual\\ljUbj\\desconhecido\\DARF - COFINS.pdf",
+      "motivo_decisao": "Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "explicacao_decisao": "Loja sugerida: ljUbj.\nScores por loja: {'ljUbj': 20}.\nEvidências de loja (aliases e locais): [].\nFontes de evidência de loja: [].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'comprovante': 2, 'boleto': 1, 'taxa': 1}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'taxa', 'keyword': 'arrecadacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=0.7, type=0.0, overall=0.35.\nDecisão final: Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "enviado_para_revisao": true,
+      "status_processamento": "success",
+      "erro": null
+    },
+    {
+      "nome_original": "DARF - PIS.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\input\\DARF - PIS.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "texto_extraido_status": "ok",
+      "cnpjs_detectados": [
+        "07439697000140",
+        "50000446963097"
+      ],
+      "loja_sugerida": "ljUbj",
+      "score_por_loja": {
+        "ljUbj": 20
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "comprovante": 2,
+        "boleto": 1,
+        "taxa": 1
+      },
+      "store_confidence": 0.7,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.35,
+      "score_details": {
+        "matched_store_aliases": [],
+        "matched_store_sources": [],
+        "matched_type_keywords": [
+          {
+            "doc_type": "boleto",
+            "keyword": "vencimento",
+            "location": "text"
+          },
+          {
+            "doc_type": "taxa",
+            "keyword": "arrecadacao",
+            "location": "text"
+          },
+          {
+            "doc_type": "comprovante",
+            "keyword": "autenticacao",
+            "location": "text"
+          },
+          {
+            "doc_type": "comprovante",
+            "keyword": "autenticacao mecanica",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000140",
+            "store": "ljUbj",
+            "source": "pdf_text"
+          }
+        ]
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\review_manual\\ljUbj\\desconhecido\\DARF - PIS.pdf",
+      "motivo_decisao": "Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "explicacao_decisao": "Loja sugerida: ljUbj.\nScores por loja: {'ljUbj': 20}.\nEvidências de loja (aliases e locais): [].\nFontes de evidência de loja: [].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'comprovante': 2, 'boleto': 1, 'taxa': 1}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'taxa', 'keyword': 'arrecadacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=0.7, type=0.0, overall=0.35.\nDecisão final: Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "enviado_para_revisao": true,
+      "status_processamento": "success",
+      "erro": null
+    },
+    {
+      "nome_original": "GuiaPagamento_07439697000140_250220261626595075.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\input\\GuiaPagamento_07439697000140_250220261626595075.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "texto_extraido_status": "ok",
+      "cnpjs_detectados": [
+        "07439697000140",
+        "50000442229977"
+      ],
+      "loja_sugerida": "ljUbj",
+      "score_por_loja": {
+        "ljUbj": 20
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "comprovante": 2,
+        "boleto": 1,
+        "taxa": 1
+      },
+      "store_confidence": 0.7,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.35,
+      "score_details": {
+        "matched_store_aliases": [],
+        "matched_store_sources": [],
+        "matched_type_keywords": [
+          {
+            "doc_type": "boleto",
+            "keyword": "vencimento",
+            "location": "text"
+          },
+          {
+            "doc_type": "taxa",
+            "keyword": "arrecadacao",
+            "location": "text"
+          },
+          {
+            "doc_type": "comprovante",
+            "keyword": "autenticacao",
+            "location": "text"
+          },
+          {
+            "doc_type": "comprovante",
+            "keyword": "autenticacao mecanica",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000140",
+            "store": "ljUbj",
+            "source": "pdf_text"
+          }
+        ]
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\review_manual\\ljUbj\\desconhecido\\GuiaPagamento_07439697000140_250220261626595075.pdf",
+      "motivo_decisao": "Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "explicacao_decisao": "Loja sugerida: ljUbj.\nScores por loja: {'ljUbj': 20}.\nEvidências de loja (aliases e locais): [].\nFontes de evidência de loja: [].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'comprovante': 2, 'boleto': 1, 'taxa': 1}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'taxa', 'keyword': 'arrecadacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=0.7, type=0.0, overall=0.35.\nDecisão final: Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "enviado_para_revisao": true,
+      "status_processamento": "success",
+      "erro": null
+    },
+    {
+      "nome_original": "notafiscal 01 02.2026.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\input\\notafiscal 01 02.2026.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "texto_extraido_status": "ok",
+      "cnpjs_detectados": [
+        "07439697000574",
+        "51751292000135",
+        "23129081251751",
+        "29200013500000",
+        "00000014260229"
+      ],
+      "loja_sugerida": "ljIbi",
+      "score_por_loja": {
+        "ljIbi": 32,
+        "ljSb": 6
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "nota_servico": 5,
+        "nota_fiscal": 3
+      },
+      "store_confidence": 0.9,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.45,
+      "score_details": {
+        "matched_store_aliases": [
+          {
+            "store": "ljIbi",
+            "alias": "ibiapina",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljIbi",
+            "alias": "ibi",
+            "kind": "alias",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljSb",
+            "alias": "sb",
+            "kind": "alias",
+            "location": "text",
+            "context": null
+          }
+        ],
+        "matched_store_sources": [
+          "text"
+        ],
+        "matched_type_keywords": [
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "nota fiscal",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "chave de acesso",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "emissao",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs-e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "prestador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "tomador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "servico",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000574",
+            "store": "ljIbi",
+            "source": "pdf_text"
+          }
+        ]
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\output\\ljIbi\\desconhecido\\notafiscal 01 02.2026.pdf",
+      "motivo_decisao": "Classificado automaticamente com confiança adequada.",
+      "explicacao_decisao": "Loja sugerida: ljIbi.\nScores por loja: {'ljIbi': 32, 'ljSb': 6}.\nEvidências de loja (aliases e locais): [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljSb', 'alias': 'sb', 'kind': 'alias', 'location': 'text', 'context': None}].\nFontes de evidência de loja: ['text'].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'nota_servico': 5, 'nota_fiscal': 3}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'nota_fiscal', 'keyword': 'nota fiscal', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'chave de acesso', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs-e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'prestador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'tomador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=0.9, type=0.0, overall=0.45.\nDecisão final: Classificado automaticamente com confiança adequada.",
+      "enviado_para_revisao": false,
+      "status_processamento": "success",
+      "erro": null
+    },
+    {
+      "nome_original": "notafiscal 02 02.2026.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\input\\notafiscal 02 02.2026.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "texto_extraido_status": "ok",
+      "cnpjs_detectados": [
+        "07439697000140",
+        "51751292000135",
+        "23129081251751",
+        "29200013500000",
+        "00000013260280"
+      ],
+      "loja_sugerida": "ljUbj",
+      "score_por_loja": {
+        "ljUbj": 26
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "nota_servico": 5,
+        "nota_fiscal": 3
+      },
+      "store_confidence": 0.8,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.4,
+      "score_details": {
+        "matched_store_aliases": [
+          {
+            "store": "ljUbj",
+            "alias": "ubajara",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          }
+        ],
+        "matched_store_sources": [
+          "text"
+        ],
+        "matched_type_keywords": [
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "nota fiscal",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "chave de acesso",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "emissao",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs-e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "prestador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "tomador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "servico",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000140",
+            "store": "ljUbj",
+            "source": "pdf_text"
+          }
+        ]
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\review_manual\\ljUbj\\desconhecido\\notafiscal 02 02.2026.pdf",
+      "motivo_decisao": "Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "explicacao_decisao": "Loja sugerida: ljUbj.\nScores por loja: {'ljUbj': 26}.\nEvidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}].\nFontes de evidência de loja: ['text'].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'nota_servico': 5, 'nota_fiscal': 3}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'nota_fiscal', 'keyword': 'nota fiscal', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'chave de acesso', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs-e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'prestador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'tomador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=0.8, type=0.0, overall=0.4.\nDecisão final: Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "enviado_para_revisao": true,
+      "status_processamento": "success",
+      "erro": null
+    },
+    {
+      "nome_original": "notafiscal 02.2026.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\input\\notafiscal 02.2026.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "texto_extraido_status": "ok",
+      "cnpjs_detectados": [
+        "07439697000493",
+        "32125000000104",
+        "23129081232125",
+        "00000010400000",
+        "00000014260295"
+      ],
+      "loja_sugerida": "ljGba",
+      "score_por_loja": {
+        "ljGba": 26
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "nota_servico": 5,
+        "nota_fiscal": 3
+      },
+      "store_confidence": 0.8,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.4,
+      "score_details": {
+        "matched_store_aliases": [
+          {
+            "store": "ljGba",
+            "alias": "guaraciaba",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          }
+        ],
+        "matched_store_sources": [
+          "text"
+        ],
+        "matched_type_keywords": [
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "nota fiscal",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "chave de acesso",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "emissao",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs-e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "prestador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "tomador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "servico",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000493",
+            "store": "ljGba",
+            "source": "pdf_text"
+          }
+        ]
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\review_manual\\ljGba\\desconhecido\\notafiscal 02.2026.pdf",
+      "motivo_decisao": "Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "explicacao_decisao": "Loja sugerida: ljGba.\nScores por loja: {'ljGba': 26}.\nEvidências de loja (aliases e locais): [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}].\nFontes de evidência de loja: ['text'].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'nota_servico': 5, 'nota_fiscal': 3}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'nota_fiscal', 'keyword': 'nota fiscal', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'chave de acesso', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs-e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'prestador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'tomador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=0.8, type=0.0, overall=0.4.\nDecisão final: Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "enviado_para_revisao": true,
+      "status_processamento": "success",
+      "erro": null
+    },
+    {
+      "nome_original": "notafiscal02 02.2026.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\input\\notafiscal02 02.2026.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "texto_extraido_status": "ok",
+      "cnpjs_detectados": [
+        "07439697000302",
+        "32125000000104",
+        "23129081232125",
+        "00000010400000",
+        "00000013260279"
+      ],
+      "loja_sugerida": "ljSb",
+      "score_por_loja": {
+        "ljSb": 26
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "nota_servico": 5,
+        "nota_fiscal": 3
+      },
+      "store_confidence": 0.8,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.4,
+      "score_details": {
+        "matched_store_aliases": [
+          {
+            "store": "ljSb",
+            "alias": "sao benedito",
+            "kind": "alias",
+            "location": "text",
+            "context": null
+          }
+        ],
+        "matched_store_sources": [
+          "text"
+        ],
+        "matched_type_keywords": [
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "nota fiscal",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "chave de acesso",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "emissao",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs-e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "prestador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "tomador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "servico",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000302",
+            "store": "ljSb",
+            "source": "pdf_text"
+          }
+        ]
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\review_manual\\ljSb\\desconhecido\\notafiscal02 02.2026.pdf",
+      "motivo_decisao": "Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "explicacao_decisao": "Loja sugerida: ljSb.\nScores por loja: {'ljSb': 26}.\nEvidências de loja (aliases e locais): [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}].\nFontes de evidência de loja: ['text'].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'nota_servico': 5, 'nota_fiscal': 3}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'nota_fiscal', 'keyword': 'nota fiscal', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'chave de acesso', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs-e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'prestador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'tomador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=0.8, type=0.0, overall=0.4.\nDecisão final: Loja identificada, mas decisão enviada para revisão manual por baixa confiança.",
+      "enviado_para_revisao": true,
+      "status_processamento": "success",
+      "erro": null
+    }
+  ]
+}

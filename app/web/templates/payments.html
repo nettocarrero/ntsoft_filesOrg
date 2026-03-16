@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Pagamentos e vencimentos — Organizador de Documentos{% endblock %}
+{% block content %}
+<h2>Pagamentos e vencimentos</h2>
+
+<section class="section-card">
+    <h3>Resumo</h3>
+    <div class="payments-summary">
+        <div class="summary-item summary-overdue">
+            <span class="summary-value">{{ count_overdue }}</span>
+            <span class="summary-label">Vencidos</span>
+        </div>
+        <div class="summary-item summary-today">
+            <span class="summary-value">{{ count_today }}</span>
+            <span class="summary-label">Vencem hoje</span>
+        </div>
+        <div class="summary-item summary-upcoming">
+            <span class="summary-value">{{ count_in_7 }}</span>
+            <span class="summary-label">Próximos 7 dias</span>
+        </div>
+    </div>
+</section>
+
+{% if overdue %}
+<section class="section-card">
+    <h3>Pagamentos vencidos</h3>
+    <div class="table-wrap">
+        <table class="table table-payments">
+            <thead>
+                <tr>
+                    <th>Arquivo</th>
+                    <th>Loja</th>
+                    <th>Vencimento</th>
+                    <th>Valor</th>
+                    <th>Dias restantes</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in overdue %}
+                <tr class="payment-row status-overdue">
+                    <td class="col-name">{{ p.file_name }}</td>
+                    <td>{{ p.store_name }}</td>
+                    <td>{{ p.due_date_br }}</td>
+                    <td>{{ p.amount_br }}</td>
+                    <td>{{ p.days_remaining }} dias atrás</td>
+                    <td class="col-actions">
+                        <a href="/files/view?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
+                        <a href="/files/download?path={{ p.path_url }}" class="btn btn-sm">Baixar</a>
+                        <a href="{{ p.explorer_url }}" class="btn btn-sm">Abrir pasta</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endif %}
+
+{% if due_today %}
+<section class="section-card">
+    <h3>Vencendo hoje</h3>
+    <div class="table-wrap">
+        <table class="table table-payments">
+            <thead>
+                <tr>
+                    <th>Arquivo</th>
+                    <th>Loja</th>
+                    <th>Vencimento</th>
+                    <th>Valor</th>
+                    <th>Dias restantes</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in due_today %}
+                <tr class="payment-row status-today">
+                    <td class="col-name">{{ p.file_name }}</td>
+                    <td>{{ p.store_name }}</td>
+                    <td>{{ p.due_date_br }}</td>
+                    <td>{{ p.amount_br }}</td>
+                    <td>Hoje</td>
+                    <td class="col-actions">
+                        <a href="/files/view?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
+                        <a href="/files/download?path={{ p.path_url }}" class="btn btn-sm">Baixar</a>
+                        <a href="{{ p.explorer_url }}" class="btn btn-sm">Abrir pasta</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endif %}
+
+{% if due_in_7 %}
+<section class="section-card">
+    <h3>Próximos 7 dias</h3>
+    <div class="table-wrap">
+        <table class="table table-payments">
+            <thead>
+                <tr>
+                    <th>Arquivo</th>
+                    <th>Loja</th>
+                    <th>Vencimento</th>
+                    <th>Valor</th>
+                    <th>Dias restantes</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in due_in_7 %}
+                <tr class="payment-row status-upcoming">
+                    <td class="col-name">{{ p.file_name }}</td>
+                    <td>{{ p.store_name }}</td>
+                    <td>{{ p.due_date_br }}</td>
+                    <td>{{ p.amount_br }}</td>
+                    <td>{{ p.days_remaining }} dias</td>
+                    <td class="col-actions">
+                        <a href="/files/view?path={{ p.path_url }}" target="_blank" class="btn btn-sm">Visualizar</a>
+                        <a href="/files/download?path={{ p.path_url }}" class="btn btn-sm">Baixar</a>
+                        <a href="{{ p.explorer_url }}" class="btn btn-sm">Abrir pasta</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endif %}
+
+{% if not overdue and not due_today and not due_in_7 %}
+<section class="section-card">
+    <div class="empty-state">
+        <div class="empty-state-icon">📋</div>
+        <h3>Nenhum pagamento com vencimento próximo</h3>
+        <p>Não há boletos ou guias vencidos, vencendo hoje ou nos próximos 7 dias. Documentos em <strong>output/.../pagamentos/</strong> com <code>due_date</code> no .meta.json aparecem aqui.</p>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

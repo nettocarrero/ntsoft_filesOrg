@@ -13,7 +13,14 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from app.web.routes import dashboard_router, review_router, files_router, config_router, upload_router
+from app.web.routes import (
+    dashboard_router,
+    review_router,
+    files_router,
+    payments_router,
+    config_router,
+    upload_router,
+)
 
 APP_ROOT = Path(__file__).resolve().parent
 
@@ -33,6 +40,7 @@ app.mount("/static", StaticFiles(directory=str(APP_ROOT / "static")), name="stat
 app.include_router(dashboard_router, tags=["dashboard"])
 app.include_router(review_router, tags=["review"])
 app.include_router(files_router, tags=["files"])
+app.include_router(payments_router, tags=["payments"])
 app.include_router(config_router, tags=["config"])
 app.include_router(upload_router, tags=["upload"])
 

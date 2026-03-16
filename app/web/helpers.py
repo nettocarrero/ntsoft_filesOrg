@@ -11,6 +11,8 @@ from datetime import date, datetime
 from typing import Any, Dict, List, Optional
 
 from app.config import load_settings
+from app.services.document_finance_parser import read_payment_meta_file
+from app.services.organizer_service import OUTPUT_FOLDERS
 
 
 def get_settings():
@@ -284,9 +286,94 @@ def list_output_stores(output_dir: Path, aliases: Dict[str, Any]) -> List[Dict[s
     return out
 
 
+def list_store_years(output_dir: Path, store_code: str) -> List[str]:
+    """Lista anos presentes na loja (subdirs 4 dígitos). Estrutura nova."""
+    store_path = output_dir / store_code
+    if not store_path.exists() or not store_path.is_dir():
+        return []
+    years = []
+    for p in store_path.iterdir():
+        if p.is_dir() and len(p.name) == 4 and p.name.isdigit():
+            years.append(p.name)
+    return sorted(years, reverse=True)
+
+
+def list_store_months(output_dir: Path, store_code: str, year: str) -> List[str]:
+    """Lista meses presentes em output/loja/ano/ (subdirs 01-12)."""
+    period_path = output_dir / store_code / year
+    if not period_path.exists() or not period_path.is_dir():
+        return []
+    months = []
+    for p in period_path.iterdir():
+        if p.is_dir() and len(p.name) == 2 and p.name.isdigit() and 1 <= int(p.name) <= 12:
+            months.append(p.name)
+    return sorted(months, reverse=True)
+
+
+def list_store_types_in_period(
+    output_dir: Path, store_code: str, year: str, month: str
+) -> List[str]:
+    """Lista pastas de tipo em output/loja/ano/mes/ (pagamentos, notas_fiscais, etc.)."""
+    type_path = output_dir / store_code / year / month
+    if not type_path.exists() or not type_path.is_dir():
+        return []
+    return [p.name for p in type_path.iterdir() if p.is_dir()]
+
+
+def list_store_legacy_types(output_dir: Path, store_code: str) -> List[str]:
+    """Lista pastas de tipo na estrutura antiga (loja/tipo). Subdirs que não são 4 dígitos."""
+    store_path = output_dir / store_code
+    if not store_path.exists() or not store_path.is_dir():
+        return []
+    return [
+        p.name
+        for p in store_path.iterdir()
+        if p.is_dir() and not (len(p.name) == 4 and p.name.isdigit())
+    ]
+
+
+def _collect_files_from_dir(
+    type_path: Path,
+    type_name: str,
+    name_filter: Optional[str],
+    date_from: Optional[date],
+    date_to: Optional[date],
+) -> List[Dict[str, Any]]:
+    out = []
+    for f in type_path.iterdir():
+        if not f.is_file():
+            continue
+        if name_filter and name_filter.lower() not in f.name.lower():
+            continue
+        try:
+            mtime = f.stat().st_mtime
+            dt = datetime.fromtimestamp(mtime)
+            file_date = dt.date()
+            if date_from is not None and file_date < date_from:
+                continue
+            if date_to is not None and file_date > date_to:
+                continue
+            out.append({
+                "name": f.name,
+                "stem": Path(f.name).stem,
+                "extension": Path(f.name).suffix,
+                "doc_type": type_name,
+                "path": f,
+                "mtime": mtime,
+                "mtime_iso": dt.isoformat(),
+                "mtime_br": dt.strftime("%d/%m/%Y %H:%M:%S"),
+                "hint": str(f),
+            })
+        except OSError:
+            pass
+    return out
+
+
 def list_store_files(
     output_dir: Path,
     store_code: str,
+    year: Optional[str] = None,
+    month: Optional[str] = None,
     doc_type_filter: Optional[str] = None,
     name_filter: Optional[str] = None,
     date_from: Optional[date] = None,
@@ -294,49 +381,82 @@ def list_store_files(
 ) -> List[Dict[str, Any]]:
     """
     Lista arquivos de uma loja em output/.
-    Filtros opcionais: tipo, nome, data (de/até).
-    Ordenação: mais recente primeiro (mtime decrescente).
+    Nova estrutura: se year e month informados, usa output/loja/ano/mes/tipo/.
+    Estrutura legada: se year/month não informados, usa output/loja/tipo/ (subdirs que não são ano).
     """
     store_path = output_dir / store_code
     if not store_path.exists() or not store_path.is_dir():
         return []
     out = []
-    for type_path in store_path.iterdir():
-        if not type_path.is_dir():
-            continue
-        if doc_type_filter and type_path.name != doc_type_filter:
-            continue
-        for f in type_path.iterdir():
-            if not f.is_file():
+    if year and month:
+        period_path = store_path / year / month
+        if not period_path.exists() or not period_path.is_dir():
+            return []
+        for type_path in period_path.iterdir():
+            if not type_path.is_dir():
                 continue
-            if name_filter and name_filter.lower() not in f.name.lower():
+            if doc_type_filter and type_path.name != doc_type_filter:
                 continue
-            try:
-                mtime = f.stat().st_mtime
-                dt = datetime.fromtimestamp(mtime)
-                file_date = dt.date()
-                if date_from is not None and file_date < date_from:
-                    continue
-                if date_to is not None and file_date > date_to:
-                    continue
-                out.append({
-                    "name": f.name,
-                    "stem": Path(f.name).stem,
-                    "extension": Path(f.name).suffix,
-                    "doc_type": type_path.name,
-                    "path": f,
-                    "mtime": mtime,
-                    "mtime_iso": dt.isoformat(),
-                    "mtime_br": dt.strftime("%d/%m/%Y %H:%M:%S"),
-                    "hint": str(f),
-                })
-            except OSError:
-                pass
+            out.extend(
+                _collect_files_from_dir(
+                    type_path, type_path.name, name_filter, date_from, date_to
+                )
+            )
+    else:
+        for type_path in store_path.iterdir():
+            if not type_path.is_dir():
+                continue
+            if len(type_path.name) == 4 and type_path.name.isdigit():
+                continue
+            if doc_type_filter and type_path.name != doc_type_filter:
+                continue
+            out.extend(
+                _collect_files_from_dir(
+                    type_path, type_path.name, name_filter, date_from, date_to
+                )
+            )
     out.sort(key=lambda x: x["mtime"], reverse=True)
     registry = load_file_sender_registry()
     for item in out:
         item["sent_by"] = registry.get(str(item["path"].resolve()), "-")
+        _enrich_file_with_payment_meta(item)
     return out
+
+
+def _enrich_file_with_payment_meta(item: Dict[str, Any]) -> None:
+    """Preenche due_date e amount a partir de arquivo .meta.json, se existir."""
+    meta = read_payment_meta_file(item["path"])
+    if not meta:
+        item["payment_due_date"] = None
+        item["payment_due_date_br"] = None
+        item["payment_amount"] = None
+        item["payment_amount_br"] = None
+        return
+    due = meta.get("due_date")
+    amount = meta.get("amount")
+    item["payment_due_date"] = due
+    item["payment_due_date_br"] = _format_date_br(due) if due else None
+    item["payment_amount"] = amount
+    item["payment_amount_br"] = _format_amount_br(amount) if amount is not None else None
+
+
+def _format_date_br(iso_date: str) -> str:
+    """Converte YYYY-MM-DD em dd/mm/yyyy."""
+    if not iso_date or len(iso_date) < 10:
+        return "-"
+    try:
+        y, m, d = iso_date[:10].split("-")
+        return f"{d}/{m}/{y}"
+    except ValueError:
+        return "-"
+
+
+def _format_amount_br(value: float) -> str:
+    """Formata valor como R$ 1.234,56."""
+    try:
+        return f"R$ {value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    except (TypeError, ValueError):
+        return "-"
 
 
 def system_status(settings) -> Dict[str, Any]:

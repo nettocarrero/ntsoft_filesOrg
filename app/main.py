@@ -6,7 +6,7 @@ import shutil
 from pathlib import Path
 from typing import Iterable, List, Callable
 
-from app.config import Settings, load_settings
+from app.config import Settings, load_settings, clear_temp_dir
 from app.logger import setup_logging
 from app.models import DocumentInfo, ProcessingResult
 from app.models.enums import ProcessingStatus
@@ -36,6 +36,7 @@ def process() -> None:
     settings = load_settings()
 
     logger.info("Iniciando processamento de arquivos (modo pontual).")
+    clear_temp_dir(settings.paths)
 
     input_files = scan_input_files(settings.paths.input_dir)
     logger.info("Foram encontrados %d arquivos na pasta de entrada.", len(input_files))
@@ -231,6 +232,10 @@ def _process_pdf(
         extracted_path=pdf_path if came_from_archive else None,
     )
     try:
+        if came_from_archive and not pdf_path.exists():
+            raise FileNotFoundError(
+                f"Arquivo extraído não encontrado (pasta temp pode ter sido limpa): {pdf_path}"
+            )
         # Extração textual normal
         text, status = extract_pdf_text(pdf_path)
         doc.text = text
@@ -306,6 +311,7 @@ def main() -> None:
     if args.watch:
         setup_logging()
         settings = load_settings()
+        clear_temp_dir(settings.paths)
         from app.services.watcher_service import start_watcher
 
         logger.info("Iniciando modo watch para pasta: %s", settings.paths.input_dir)

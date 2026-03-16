@@ -1,0 +1,50 @@
+Resumo da execução
+- total_arquivos: 1
+- total_arquivos_compactados: 0
+- total_vindos_de_zip: 0
+- total_vindos_de_rar: 0
+- total_classificados_automaticamente: 1
+- total_revisao_manual: 0
+- total_erros: 0
+- total_com_cnpj: 1
+
+Detalhes por arquivo:
+
+Arquivo: COFINS 01 2026 L C EMPREENDIMENTOS.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\input\COFINS 01 2026 L C EMPREENDIMENTOS.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: False
+  Tipo arquivo compactado: None
+  Arquivo compactado origem: None
+  Texto extraído status: ok
+  Fonte do texto: pdf_text
+  OCR usado: False, sucesso: False
+  OCR metadata: {}
+  Ignorado por regra: False
+  CNPJs detectados: 37052558000120, 50000445633787
+  Loja sugerida: ljLc
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljLc\2026\03\outros\COFINS 01 2026 L C EMPREENDIMENTOS.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'filename', 'context': 'COFINS 01 2026 L C EMPREENDIMENTOS.pdf'}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['filename', 'text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'taxa', 'keyword': 'arrecadacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljLc.
+Scores por loja: {'ljLc': 30}.
+Evidências de loja (aliases e locais): [{'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'filename', 'context': 'COFINS 01 2026 L C EMPREENDIMENTOS.pdf'}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['filename', 'text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'comprovante': 2, 'boleto': 1, 'taxa': 1}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'taxa', 'keyword': 'arrecadacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+

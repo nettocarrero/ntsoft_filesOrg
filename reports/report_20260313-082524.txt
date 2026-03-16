@@ -1,9 +1,0 @@
-Resumo da execução
-- total_arquivos: 0
-- total_de_zip: 0
-- total_classificados_automaticamente: 0
-- total_revisao_manual: 0
-- total_erros: 0
-
-Detalhes por arquivo:
-

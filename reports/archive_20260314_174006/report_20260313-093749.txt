@@ -1,0 +1,406 @@
+Resumo da execução
+- total_arquivos: 12
+- total_de_zip: 0
+- total_classificados_automaticamente: 12
+- total_revisao_manual: 0
+- total_erros: 0
+- total_com_cnpj: 12
+
+Detalhes por arquivo:
+
+Arquivo: 247752-1.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247752-1.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000493, 13770000509720
+  Loja sugerida: ljGba
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljGba\desconhecido\247752-1.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljGba.
+Scores por loja: {'ljGba': 26}.
+Evidências de loja (aliases e locais): [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247752-2.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247752-2.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000493, 13870000509720
+  Loja sugerida: ljGba
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljGba\desconhecido\247752-2.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljGba.
+Scores por loja: {'ljGba': 26}.
+Evidências de loja (aliases e locais): [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247752-3.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247752-3.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000493, 13970000509720
+  Loja sugerida: ljGba
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljGba\desconhecido\247752-3.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljGba.
+Scores por loja: {'ljGba': 26}.
+Evidências de loja (aliases e locais): [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247753-1.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247753-1.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000302, 13770000487280
+  Loja sugerida: ljSb
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljSb\desconhecido\247753-1.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljSb.
+Scores por loja: {'ljSb': 26}.
+Evidências de loja (aliases e locais): [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247753-2.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247753-2.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000302, 13870000487280
+  Loja sugerida: ljSb
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljSb\desconhecido\247753-2.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljSb.
+Scores por loja: {'ljSb': 26}.
+Evidências de loja (aliases e locais): [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247753-3.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247753-3.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000302, 13970000487280
+  Loja sugerida: ljSb
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljSb\desconhecido\247753-3.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljSb.
+Scores por loja: {'ljSb': 26}.
+Evidências de loja (aliases e locais): [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247754-1.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247754-1.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000574, 13770000221520
+  Loja sugerida: ljIbi
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljIbi\desconhecido\247754-1.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljIbi.
+Scores por loja: {'ljIbi': 32}.
+Evidências de loja (aliases e locais): [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247754-2.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247754-2.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000574, 13870000221520
+  Loja sugerida: ljIbi
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljIbi\desconhecido\247754-2.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljIbi.
+Scores por loja: {'ljIbi': 32}.
+Evidências de loja (aliases e locais): [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247754-3.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247754-3.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000574, 13970000221520
+  Loja sugerida: ljIbi
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljIbi\desconhecido\247754-3.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljIbi.
+Scores por loja: {'ljIbi': 32}.
+Evidências de loja (aliases e locais): [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247755-1.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247755-1.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000140, 13770000665200
+  Loja sugerida: ljUbj
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljUbj\desconhecido\247755-1.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljUbj.
+Scores por loja: {'ljUbj': 26}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247755-2.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247755-2.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000140, 13870000665200
+  Loja sugerida: ljUbj
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljUbj\desconhecido\247755-2.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljUbj.
+Scores por loja: {'ljUbj': 26}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: 247755-3.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\BOLETOS LINEU PINZON\247755-3.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\BOLETOS LINEU PINZON.rar
+  CNPJs detectados: 88424585000118, 16578270000186, 07439697000140, 13970000665200
+  Loja sugerida: ljUbj
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljUbj\desconhecido\247755-3.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljUbj.
+Scores por loja: {'ljUbj': 26}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+

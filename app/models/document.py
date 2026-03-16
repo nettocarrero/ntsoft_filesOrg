@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import date
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 
@@ -30,6 +31,8 @@ class DocumentInfo:
     doc_type_scores: Dict[DocumentType, int] = field(default_factory=dict)
     suggested_store: Optional[str] = None
     suggested_doc_type: DocumentType = DocumentType.DESCONHECIDO
+    # Data do documento (para organização ano/mês); se None, usa data atual
+    document_date: Optional[date] = None
     # Confianças separadas
     store_confidence: float = 0.0
     type_confidence: float = 0.0

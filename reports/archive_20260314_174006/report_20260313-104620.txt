@@ -1,0 +1,49 @@
+Resumo da execução
+- total_arquivos: 1
+- total_arquivos_compactados: 0
+- total_vindos_de_zip: 0
+- total_vindos_de_rar: 0
+- total_classificados_automaticamente: 1
+- total_revisao_manual: 0
+- total_erros: 0
+- total_com_cnpj: 1
+
+Detalhes por arquivo:
+
+Arquivo: img20260sgrgsaev.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\input\img20260sgrgsaev.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: False
+  Tipo arquivo compactado: None
+  Arquivo compactado origem: None
+  Texto extraído status: ok
+  Fonte do texto: ocr
+  OCR usado: True, sucesso: True
+  OCR metadata: {'pages_processed': 1, 'ocr_engine': 'tesseract', 'text_length': 2053, 'success': True}
+  CNPJs detectados: 63310411000101, 14170004897797, 07439697000140
+  Loja sugerida: ljUbj
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljUbj\desconhecido\img20260sgrgsaev.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljUbj.
+Scores por loja: {'ljUbj': 26, 'ljLc': 6}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 5, 'comprovante': 2, 'nota_fiscal': 1}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'boleto', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'valor do documento', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+

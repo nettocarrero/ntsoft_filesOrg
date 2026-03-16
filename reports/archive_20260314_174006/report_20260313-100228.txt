@@ -1,0 +1,562 @@
+Resumo da execução
+- total_arquivos: 17
+- total_arquivos_compactados: 17
+- total_vindos_de_zip: 0
+- total_vindos_de_rar: 17
+- total_classificados_automaticamente: 16
+- total_revisao_manual: 1
+- total_erros: 0
+- total_com_cnpj: 7
+
+Detalhes por arquivo:
+
+Arquivo: CHOCOBALAS GBA (3).pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\GUARACIABA\CHOCOBALAS GBA (3).pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: 13810000236000, 19971435000101, 07439697000493
+  Loja sugerida: ljGba
+  Tipo sugerido: desconhecido
+  Confiança: store=1.0, type=0.0, overall=0.5
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljGba\desconhecido\CHOCOBALAS GBA (3).pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'folder', 'context': 'GUARACIABA'}, {'store': 'ljGba', 'alias': 'gba', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS GBA (3).pdf'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}]
+    matched_store_sources: ['filename', 'folder', 'text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljGba.
+Scores por loja: {'ljGba': 38, 'ljIbi': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'folder', 'context': 'GUARACIABA'}, {'store': 'ljGba', 'alias': 'gba', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS GBA (3).pdf'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['filename', 'folder', 'text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 3, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=1.0, type=0.0, overall=0.5.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: CHOCOBALAS GBA SERVIÇOS.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\GUARACIABA\CHOCOBALAS GBA SERVIÇOS.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: 13810000187100, 19971435000101, 07439697000493
+  Loja sugerida: ljGba
+  Tipo sugerido: desconhecido
+  Confiança: store=1.0, type=0.0, overall=0.5
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljGba\desconhecido\CHOCOBALAS GBA SERVIÇOS.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'folder', 'context': 'GUARACIABA'}, {'store': 'ljGba', 'alias': 'gba', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS GBA SERVIÇOS.pdf'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}]
+    matched_store_sources: ['filename', 'folder', 'text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljGba.
+Scores por loja: {'ljGba': 38, 'ljIbi': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'folder', 'context': 'GUARACIABA'}, {'store': 'ljGba', 'alias': 'gba', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS GBA SERVIÇOS.pdf'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['filename', 'folder', 'text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 3, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=1.0, type=0.0, overall=0.5.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: CHOCOBALAS GUARACIABA VAREJÃO .pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\GUARACIABA\CHOCOBALAS GUARACIABA VAREJÃO .pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: 09196603000347, 09196603000185
+  Loja sugerida: ljGba
+  Tipo sugerido: desconhecido
+  Confiança: store=1.0, type=0.0, overall=0.5
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljGba\desconhecido\CHOCOBALAS GUARACIABA VAREJÃO .pdf
+  Motivo decisão: Classificado automaticamente com confiança adequada.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'folder', 'context': 'GUARACIABA'}, {'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'filename', 'context': 'CHOCOBALAS GUARACIABA VAREJÃO .pdf'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljSb', 'alias': 'sb', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['filename', 'folder', 'text']
+    matched_type_keywords: [{'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljGba.
+Scores por loja: {'ljGba': 18, 'ljIbi': 12, 'ljSb': 12, 'ljLc': 6}.
+Evidências de loja (aliases e locais): [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'folder', 'context': 'GUARACIABA'}, {'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'filename', 'context': 'CHOCOBALAS GUARACIABA VAREJÃO .pdf'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljSb', 'alias': 'sb', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['filename', 'folder', 'text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'nota_servico': 1}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=1.0, type=0.0, overall=0.5.
+Decisão final: Classificado automaticamente com confiança adequada.
+  Status processamento: success
+
+Arquivo: NFE 2046 CHOCOBALAS GBA.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\GUARACIABA\NFE 2046 CHOCOBALAS GBA.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: nenhum
+  Loja sugerida: ljGba
+  Tipo sugerido: desconhecido
+  Confiança: store=0.9, type=0.0, overall=0.45
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljGba\desconhecido\NFE 2046 CHOCOBALAS GBA.pdf
+  Motivo decisão: Classificado automaticamente com confiança adequada.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'folder', 'context': 'GUARACIABA'}, {'store': 'ljGba', 'alias': 'gba', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 2046 CHOCOBALAS GBA.pdf'}]
+    matched_store_sources: ['filename', 'folder']
+    matched_type_keywords: []
+    matched_type_sources: []
+  Explicação detalhada da decisão:
+Loja sugerida: ljGba.
+Scores por loja: {'ljGba': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'folder', 'context': 'GUARACIABA'}, {'store': 'ljGba', 'alias': 'gba', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 2046 CHOCOBALAS GBA.pdf'}].
+Fontes de evidência de loja: ['filename', 'folder'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {}.
+Evidências de tipo (palavras‑chave): [].
+Fontes de evidência de tipo: [].
+Confianças: store=0.9, type=0.0, overall=0.45.
+Decisão final: Classificado automaticamente com confiança adequada.
+  Status processamento: success
+
+Arquivo: NFE 28 CHOCOBALAS GBA.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\GUARACIABA\NFE 28 CHOCOBALAS GBA.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: nenhum
+  Loja sugerida: ljGba
+  Tipo sugerido: desconhecido
+  Confiança: store=0.9, type=0.0, overall=0.45
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljGba\desconhecido\NFE 28 CHOCOBALAS GBA.pdf
+  Motivo decisão: Classificado automaticamente com confiança adequada.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'folder', 'context': 'GUARACIABA'}, {'store': 'ljGba', 'alias': 'gba', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 28 CHOCOBALAS GBA.pdf'}]
+    matched_store_sources: ['filename', 'folder']
+    matched_type_keywords: []
+    matched_type_sources: []
+  Explicação detalhada da decisão:
+Loja sugerida: ljGba.
+Scores por loja: {'ljGba': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'folder', 'context': 'GUARACIABA'}, {'store': 'ljGba', 'alias': 'gba', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 28 CHOCOBALAS GBA.pdf'}].
+Fontes de evidência de loja: ['filename', 'folder'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {}.
+Evidências de tipo (palavras‑chave): [].
+Fontes de evidência de tipo: [].
+Confianças: store=0.9, type=0.0, overall=0.45.
+Decisão final: Classificado automaticamente com confiança adequada.
+  Status processamento: success
+
+Arquivo: CHOCOBALAS IBIAPINA SERVIÇOS.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\IBIAPINA\CHOCOBALAS IBIAPINA SERVIÇOS.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: 13810000187100, 19971435000101, 07439697000574
+  Loja sugerida: ljIbi
+  Tipo sugerido: desconhecido
+  Confiança: store=1.0, type=0.0, overall=0.5
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljIbi\desconhecido\CHOCOBALAS IBIAPINA SERVIÇOS.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'folder', 'context': 'IBIAPINA'}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'folder', 'context': 'IBIAPINA'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'filename', 'context': 'CHOCOBALAS IBIAPINA SERVIÇOS.pdf'}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS IBIAPINA SERVIÇOS.pdf'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['filename', 'folder', 'text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljIbi.
+Scores por loja: {'ljIbi': 56}.
+Evidências de loja (aliases e locais): [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'folder', 'context': 'IBIAPINA'}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'folder', 'context': 'IBIAPINA'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'filename', 'context': 'CHOCOBALAS IBIAPINA SERVIÇOS.pdf'}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS IBIAPINA SERVIÇOS.pdf'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['filename', 'folder', 'text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 3, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=1.0, type=0.0, overall=0.5.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: NFE 30 CHOCOBALAS IBIAPINA.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\IBIAPINA\NFE 30 CHOCOBALAS IBIAPINA.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: nenhum
+  Loja sugerida: ljIbi
+  Tipo sugerido: desconhecido
+  Confiança: store=1.0, type=0.0, overall=0.5
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljIbi\desconhecido\NFE 30 CHOCOBALAS IBIAPINA.pdf
+  Motivo decisão: Classificado automaticamente com confiança adequada.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'folder', 'context': 'IBIAPINA'}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'folder', 'context': 'IBIAPINA'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'filename', 'context': 'NFE 30 CHOCOBALAS IBIAPINA.pdf'}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 30 CHOCOBALAS IBIAPINA.pdf'}]
+    matched_store_sources: ['filename', 'folder']
+    matched_type_keywords: []
+    matched_type_sources: []
+  Explicação detalhada da decisão:
+Loja sugerida: ljIbi.
+Scores por loja: {'ljIbi': 24}.
+Evidências de loja (aliases e locais): [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'folder', 'context': 'IBIAPINA'}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'folder', 'context': 'IBIAPINA'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'filename', 'context': 'NFE 30 CHOCOBALAS IBIAPINA.pdf'}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 30 CHOCOBALAS IBIAPINA.pdf'}].
+Fontes de evidência de loja: ['filename', 'folder'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {}.
+Evidências de tipo (palavras‑chave): [].
+Fontes de evidência de tipo: [].
+Confianças: store=1.0, type=0.0, overall=0.5.
+Decisão final: Classificado automaticamente com confiança adequada.
+  Status processamento: success
+
+Arquivo: CHOCOBALAS SB SERVIÇOS.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\SAO BENEDITO\CHOCOBALAS SB SERVIÇOS.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: 13810000187100, 19971435000101, 07439697000302
+  Loja sugerida: ljSb
+  Tipo sugerido: desconhecido
+  Confiança: store=1.0, type=0.0, overall=0.5
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljSb\desconhecido\CHOCOBALAS SB SERVIÇOS.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'folder', 'context': 'SAO BENEDITO'}, {'store': 'ljSb', 'alias': 'sb', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS SB SERVIÇOS.pdf'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['filename', 'folder', 'text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljSb.
+Scores por loja: {'ljSb': 38, 'ljIbi': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'folder', 'context': 'SAO BENEDITO'}, {'store': 'ljSb', 'alias': 'sb', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS SB SERVIÇOS.pdf'}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['filename', 'folder', 'text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 3, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=1.0, type=0.0, overall=0.5.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: CHOCOBALAS SÃO BENEDITOO.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\SAO BENEDITO\CHOCOBALAS SÃO BENEDITOO.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: nenhum
+  Loja sugerida: ljSb
+  Tipo sugerido: desconhecido
+  Confiança: store=0.9, type=0.0, overall=0.45
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljSb\desconhecido\CHOCOBALAS SÃO BENEDITOO.pdf
+  Motivo decisão: Classificado automaticamente com confiança adequada.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'folder', 'context': 'SAO BENEDITO'}, {'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS SÃO BENEDITOO.pdf'}]
+    matched_store_sources: ['filename', 'folder']
+    matched_type_keywords: []
+    matched_type_sources: []
+  Explicação detalhada da decisão:
+Loja sugerida: ljSb.
+Scores por loja: {'ljSb': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'folder', 'context': 'SAO BENEDITO'}, {'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS SÃO BENEDITOO.pdf'}].
+Fontes de evidência de loja: ['filename', 'folder'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {}.
+Evidências de tipo (palavras‑chave): [].
+Fontes de evidência de tipo: [].
+Confianças: store=0.9, type=0.0, overall=0.45.
+Decisão final: Classificado automaticamente com confiança adequada.
+  Status processamento: success
+
+Arquivo: NFE 2048 CHOCOBALAS SB.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\SAO BENEDITO\NFE 2048 CHOCOBALAS SB.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: nenhum
+  Loja sugerida: ljSb
+  Tipo sugerido: desconhecido
+  Confiança: store=0.9, type=0.0, overall=0.45
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljSb\desconhecido\NFE 2048 CHOCOBALAS SB.pdf
+  Motivo decisão: Classificado automaticamente com confiança adequada.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'folder', 'context': 'SAO BENEDITO'}, {'store': 'ljSb', 'alias': 'sb', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 2048 CHOCOBALAS SB.pdf'}]
+    matched_store_sources: ['filename', 'folder']
+    matched_type_keywords: []
+    matched_type_sources: []
+  Explicação detalhada da decisão:
+Loja sugerida: ljSb.
+Scores por loja: {'ljSb': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'folder', 'context': 'SAO BENEDITO'}, {'store': 'ljSb', 'alias': 'sb', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 2048 CHOCOBALAS SB.pdf'}].
+Fontes de evidência de loja: ['filename', 'folder'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {}.
+Evidências de tipo (palavras‑chave): [].
+Fontes de evidência de tipo: [].
+Confianças: store=0.9, type=0.0, overall=0.45.
+Decisão final: Classificado automaticamente com confiança adequada.
+  Status processamento: success
+
+Arquivo: NFE 29 CHOCOBALAS SB.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\SAO BENEDITO\NFE 29 CHOCOBALAS SB.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: nenhum
+  Loja sugerida: ljSb
+  Tipo sugerido: desconhecido
+  Confiança: store=0.9, type=0.0, overall=0.45
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljSb\desconhecido\NFE 29 CHOCOBALAS SB.pdf
+  Motivo decisão: Classificado automaticamente com confiança adequada.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'folder', 'context': 'SAO BENEDITO'}, {'store': 'ljSb', 'alias': 'sb', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 29 CHOCOBALAS SB.pdf'}]
+    matched_store_sources: ['filename', 'folder']
+    matched_type_keywords: []
+    matched_type_sources: []
+  Explicação detalhada da decisão:
+Loja sugerida: ljSb.
+Scores por loja: {'ljSb': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'folder', 'context': 'SAO BENEDITO'}, {'store': 'ljSb', 'alias': 'sb', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 29 CHOCOBALAS SB.pdf'}].
+Fontes de evidência de loja: ['filename', 'folder'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {}.
+Evidências de tipo (palavras‑chave): [].
+Fontes de evidência de tipo: [].
+Confianças: store=0.9, type=0.0, overall=0.45.
+Decisão final: Classificado automaticamente com confiança adequada.
+  Status processamento: success
+
+Arquivo: CHOCOBALAS SERVIÇOS.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\UBAJARA\CHOCOBALAS SERVIÇOS.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: 13810000212100, 19971435000101, 07439697000140
+  Loja sugerida: ljUbj
+  Tipo sugerido: desconhecido
+  Confiança: store=0.95, type=0.0, overall=0.475
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljUbj\desconhecido\CHOCOBALAS SERVIÇOS.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['folder', 'text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljUbj.
+Scores por loja: {'ljUbj': 34, 'ljIbi': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['folder', 'text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 3, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.95, type=0.0, overall=0.475.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: CHOCOBALAS UBAJARA VAREJÃO .pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\UBAJARA\CHOCOBALAS UBAJARA VAREJÃO .pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: nenhum
+  Loja sugerida: ljUbj
+  Tipo sugerido: desconhecido
+  Confiança: store=0.9, type=0.0, overall=0.45
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljUbj\desconhecido\CHOCOBALAS UBAJARA VAREJÃO .pdf
+  Motivo decisão: Classificado automaticamente com confiança adequada.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'filename', 'context': 'CHOCOBALAS UBAJARA VAREJÃO .pdf'}]
+    matched_store_sources: ['filename', 'folder']
+    matched_type_keywords: []
+    matched_type_sources: []
+  Explicação detalhada da decisão:
+Loja sugerida: ljUbj.
+Scores por loja: {'ljUbj': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'filename', 'context': 'CHOCOBALAS UBAJARA VAREJÃO .pdf'}].
+Fontes de evidência de loja: ['filename', 'folder'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {}.
+Evidências de tipo (palavras‑chave): [].
+Fontes de evidência de tipo: [].
+Confianças: store=0.9, type=0.0, overall=0.45.
+Decisão final: Classificado automaticamente com confiança adequada.
+  Status processamento: success
+
+Arquivo: CHOCOBALAS UBJ.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\UBAJARA\CHOCOBALAS UBJ.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: 13810000240000, 19971435000101, 07439697000140
+  Loja sugerida: ljUbj
+  Tipo sugerido: desconhecido
+  Confiança: store=1.0, type=0.0, overall=0.5
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljUbj\desconhecido\CHOCOBALAS UBJ.pdf
+  Motivo decisão: Classificado automaticamente com base em CNPJ válido da loja.
+  Evidência forte de loja: True (cnpj_match)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubj', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS UBJ.pdf'}, {'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['filename', 'folder', 'text']
+    matched_type_keywords: [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: ljUbj.
+Scores por loja: {'ljUbj': 38, 'ljIbi': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubj', 'kind': 'alias', 'location': 'filename', 'context': 'CHOCOBALAS UBJ.pdf'}, {'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['filename', 'folder', 'text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'boleto': 3, 'comprovante': 2}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'boleto', 'keyword': 'vencimento', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'pagador', 'location': 'text'}, {'doc_type': 'boleto', 'keyword': 'beneficiario', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao', 'location': 'text'}, {'doc_type': 'comprovante', 'keyword': 'autenticacao mecanica', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=1.0, type=0.0, overall=0.5.
+Evidência forte de loja: CNPJ válido correspondente à loja sugerida.
+Decisão final: Classificado automaticamente com base em CNPJ válido da loja.
+  Status processamento: success
+
+Arquivo: NFE 2047 CHOCOBALAS UBJ.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\UBAJARA\NFE 2047 CHOCOBALAS UBJ.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: nenhum
+  Loja sugerida: ljUbj
+  Tipo sugerido: desconhecido
+  Confiança: store=0.9, type=0.0, overall=0.45
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljUbj\desconhecido\NFE 2047 CHOCOBALAS UBJ.pdf
+  Motivo decisão: Classificado automaticamente com confiança adequada.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubj', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 2047 CHOCOBALAS UBJ.pdf'}]
+    matched_store_sources: ['filename', 'folder']
+    matched_type_keywords: []
+    matched_type_sources: []
+  Explicação detalhada da decisão:
+Loja sugerida: ljUbj.
+Scores por loja: {'ljUbj': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubj', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 2047 CHOCOBALAS UBJ.pdf'}].
+Fontes de evidência de loja: ['filename', 'folder'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {}.
+Evidências de tipo (palavras‑chave): [].
+Fontes de evidência de tipo: [].
+Confianças: store=0.9, type=0.0, overall=0.45.
+Decisão final: Classificado automaticamente com confiança adequada.
+  Status processamento: success
+
+Arquivo: NFE 31 CHOCOBALAS UBJ.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\UBAJARA\NFE 31 CHOCOBALAS UBJ.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: nenhum
+  Loja sugerida: ljUbj
+  Tipo sugerido: desconhecido
+  Confiança: store=0.9, type=0.0, overall=0.45
+  Enviado para revisão: False
+  Destino final: C:\Projetos\ntsoft-orgfiles\output\ljUbj\desconhecido\NFE 31 CHOCOBALAS UBJ.pdf
+  Motivo decisão: Classificado automaticamente com confiança adequada.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubj', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 31 CHOCOBALAS UBJ.pdf'}]
+    matched_store_sources: ['filename', 'folder']
+    matched_type_keywords: []
+    matched_type_sources: []
+  Explicação detalhada da decisão:
+Loja sugerida: ljUbj.
+Scores por loja: {'ljUbj': 12}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubj', 'kind': 'alias', 'location': 'filename', 'context': 'NFE 31 CHOCOBALAS UBJ.pdf'}].
+Fontes de evidência de loja: ['filename', 'folder'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {}.
+Evidências de tipo (palavras‑chave): [].
+Fontes de evidência de tipo: [].
+Confianças: store=0.9, type=0.0, overall=0.45.
+Decisão final: Classificado automaticamente com confiança adequada.
+  Status processamento: success
+
+Arquivo: SR LUCIANO CHOCOBALASS.pdf
+  Caminho original: C:\Projetos\ntsoft-orgfiles\temp\UNITEC MES 02\UNITEC MES 02\UBAJARA\SR LUCIANO CHOCOBALASS.pdf
+  Veio de ZIP (legado): False
+  Veio de arquivo compactado: True
+  Tipo arquivo compactado: rar
+  Arquivo compactado origem: C:\Projetos\ntsoft-orgfiles\input\UNITEC MES 02.rar
+  CNPJs detectados: nenhum
+  Loja sugerida: None
+  Tipo sugerido: desconhecido
+  Confiança: store=0.0, type=0.0, overall=0.0
+  Enviado para revisão: True
+  Destino final: C:\Projetos\ntsoft-orgfiles\review_manual\desconhecido\desconhecido\SR LUCIANO CHOCOBALASS.pdf
+  Motivo decisão: Loja não identificada com confiança suficiente.
+  Evidência forte de loja: False (None)
+  Evidências:
+    matched_store_aliases: [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}]
+    matched_store_sources: ['folder', 'text']
+    matched_type_keywords: [{'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}]
+    matched_type_sources: ['text']
+  Explicação detalhada da decisão:
+Loja sugerida: nenhuma.
+Scores por loja: {'ljUbj': 14, 'ljIbi': 12, 'ljLc': 6}.
+Evidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'folder', 'context': 'UBAJARA'}, {'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}].
+Fontes de evidência de loja: ['folder', 'text'].
+Tipo de documento sugerido: desconhecido.
+Scores por tipo: {'nota_servico': 1}.
+Evidências de tipo (palavras‑chave): [{'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].
+Fontes de evidência de tipo: ['text'].
+Confianças: store=0.0, type=0.0, overall=0.0.
+Decisão final: Loja não identificada com confiança suficiente.
+  Status processamento: success
+

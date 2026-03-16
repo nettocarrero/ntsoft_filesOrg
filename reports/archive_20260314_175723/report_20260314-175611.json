@@ -1,0 +1,624 @@
+{
+  "resumo": {
+    "total_arquivos": 4,
+    "total_arquivos_compactados": 4,
+    "total_vindos_de_zip": 0,
+    "total_vindos_de_rar": 4,
+    "total_classificados_automaticamente": 4,
+    "total_revisao_manual": 0,
+    "total_erros": 0,
+    "total_com_cnpj": 4
+  },
+  "itens": [
+    {
+      "nome_original": "notafiscal 04.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\temp\\NOTAS CONTABILIDADE FEV\\notafiscal 04.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "veio_de_arquivo_compactado": true,
+      "tipo_arquivo_compactado": "rar",
+      "arquivo_compactado_origem": "C:\\Projetos\\ntsoft-orgfiles\\input\\NOTAS CONTABILIDADE FEV.rar",
+      "texto_extraido_status": "ok",
+      "text_source": "pdf_text",
+      "ocr_used": false,
+      "ocr_success": false,
+      "ocr_metadata": {},
+      "cnpjs_detectados": [
+        "07439697000140",
+        "52991972000199",
+        "23129081252991",
+        "97200019900000",
+        "00001804260293"
+      ],
+      "loja_sugerida": "ljUbj",
+      "score_por_loja": {
+        "ljUbj": 38,
+        "ljLc": 12,
+        "ljKlc": 6
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "nota_servico": 5,
+        "nota_fiscal": 3
+      },
+      "store_confidence": 1.0,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.5,
+      "has_strong_store_evidence": true,
+      "strong_evidence_type": "cnpj_match",
+      "score_details": {
+        "matched_store_aliases": [
+          {
+            "store": "ljUbj",
+            "alias": "ubajara",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljUbj",
+            "alias": "ubajara ce",
+            "kind": "address",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljUbj",
+            "alias": "DOS CONSTITUINTES",
+            "kind": "address",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljLc",
+            "alias": "l & c",
+            "kind": "alias",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljKlc",
+            "alias": "sobral",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljLc",
+            "alias": "sobral ce",
+            "kind": "address",
+            "location": "text",
+            "context": null
+          }
+        ],
+        "matched_store_sources": [
+          "text"
+        ],
+        "matched_type_keywords": [
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "nota fiscal",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "chave de acesso",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "emissao",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs-e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "prestador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "tomador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "servico",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000140",
+            "store": "ljUbj",
+            "source": "pdf_text",
+            "detection_mode": "normal"
+          }
+        ],
+        "cnpj_detection_mode": "normal",
+        "cnpj_candidates": [
+          "07439697000140",
+          "52991972000199",
+          "23129081252991",
+          "97200019900000",
+          "00001804260293"
+        ],
+        "has_strong_store_evidence": true,
+        "strong_evidence_type": "cnpj_match"
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\output\\ljUbj\\2026\\03\\outros\\notafiscal 04.pdf",
+      "motivo_decisao": "Classificado automaticamente com base em CNPJ válido da loja.",
+      "explicacao_decisao": "Loja sugerida: ljUbj.\nScores por loja: {'ljUbj': 38, 'ljLc': 12, 'ljKlc': 6}.\nEvidências de loja (aliases e locais): [{'store': 'ljUbj', 'alias': 'ubajara', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljUbj', 'alias': 'ubajara ce', 'kind': 'address', 'location': 'text', 'context': None}, {'store': 'ljUbj', 'alias': 'DOS CONSTITUINTES', 'kind': 'address', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljKlc', 'alias': 'sobral', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'sobral ce', 'kind': 'address', 'location': 'text', 'context': None}].\nFontes de evidência de loja: ['text'].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'nota_servico': 5, 'nota_fiscal': 3}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'nota_fiscal', 'keyword': 'nota fiscal', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'chave de acesso', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs-e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'prestador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'tomador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=1.0, type=0.0, overall=0.5.\nEvidência forte de loja: CNPJ válido correspondente à loja sugerida.\nDecisão final: Classificado automaticamente com base em CNPJ válido da loja.",
+      "ignorado_por_regra": false,
+      "enviado_para_revisao": false,
+      "status_processamento": "success",
+      "erro": null
+    },
+    {
+      "nome_original": "notafiscal 01.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\temp\\NOTAS CONTABILIDADE FEV\\notafiscal 01.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "veio_de_arquivo_compactado": true,
+      "tipo_arquivo_compactado": "rar",
+      "arquivo_compactado_origem": "C:\\Projetos\\ntsoft-orgfiles\\input\\NOTAS CONTABILIDADE FEV.rar",
+      "texto_extraido_status": "ok",
+      "text_source": "pdf_text",
+      "ocr_used": false,
+      "ocr_success": false,
+      "ocr_metadata": {},
+      "cnpjs_detectados": [
+        "07439697000574",
+        "52991972000199",
+        "23129081252991",
+        "97200019900000",
+        "00001807260296"
+      ],
+      "loja_sugerida": "ljIbi",
+      "score_por_loja": {
+        "ljIbi": 38,
+        "ljLc": 12,
+        "ljKlc": 6
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "nota_servico": 5,
+        "nota_fiscal": 3
+      },
+      "store_confidence": 1.0,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.5,
+      "has_strong_store_evidence": true,
+      "strong_evidence_type": "cnpj_match",
+      "score_details": {
+        "matched_store_aliases": [
+          {
+            "store": "ljIbi",
+            "alias": "ibiapina",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljIbi",
+            "alias": "ibi",
+            "kind": "alias",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljIbi",
+            "alias": "ibiapina ce",
+            "kind": "address",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljLc",
+            "alias": "l & c",
+            "kind": "alias",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljKlc",
+            "alias": "sobral",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljLc",
+            "alias": "sobral ce",
+            "kind": "address",
+            "location": "text",
+            "context": null
+          }
+        ],
+        "matched_store_sources": [
+          "text"
+        ],
+        "matched_type_keywords": [
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "nota fiscal",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "chave de acesso",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "emissao",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs-e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "prestador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "tomador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "servico",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000574",
+            "store": "ljIbi",
+            "source": "pdf_text",
+            "detection_mode": "normal"
+          }
+        ],
+        "cnpj_detection_mode": "normal",
+        "cnpj_candidates": [
+          "07439697000574",
+          "52991972000199",
+          "23129081252991",
+          "97200019900000",
+          "00001807260296"
+        ],
+        "has_strong_store_evidence": true,
+        "strong_evidence_type": "cnpj_match"
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\output\\ljIbi\\2026\\03\\outros\\notafiscal 01.pdf",
+      "motivo_decisao": "Classificado automaticamente com base em CNPJ válido da loja.",
+      "explicacao_decisao": "Loja sugerida: ljIbi.\nScores por loja: {'ljIbi': 38, 'ljLc': 12, 'ljKlc': 6}.\nEvidências de loja (aliases e locais): [{'store': 'ljIbi', 'alias': 'ibiapina', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibi', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljIbi', 'alias': 'ibiapina ce', 'kind': 'address', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljKlc', 'alias': 'sobral', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'sobral ce', 'kind': 'address', 'location': 'text', 'context': None}].\nFontes de evidência de loja: ['text'].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'nota_servico': 5, 'nota_fiscal': 3}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'nota_fiscal', 'keyword': 'nota fiscal', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'chave de acesso', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs-e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'prestador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'tomador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=1.0, type=0.0, overall=0.5.\nEvidência forte de loja: CNPJ válido correspondente à loja sugerida.\nDecisão final: Classificado automaticamente com base em CNPJ válido da loja.",
+      "ignorado_por_regra": false,
+      "enviado_para_revisao": false,
+      "status_processamento": "success",
+      "erro": null
+    },
+    {
+      "nome_original": "notafiscal 02.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\temp\\NOTAS CONTABILIDADE FEV\\notafiscal 02.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "veio_de_arquivo_compactado": true,
+      "tipo_arquivo_compactado": "rar",
+      "arquivo_compactado_origem": "C:\\Projetos\\ntsoft-orgfiles\\input\\NOTAS CONTABILIDADE FEV.rar",
+      "texto_extraido_status": "ok",
+      "text_source": "pdf_text",
+      "ocr_used": false,
+      "ocr_success": false,
+      "ocr_metadata": {},
+      "cnpjs_detectados": [
+        "07439697000493",
+        "52991972000199",
+        "23129081252991",
+        "97200019900000",
+        "00001806260259"
+      ],
+      "loja_sugerida": "ljGba",
+      "score_por_loja": {
+        "ljGba": 32,
+        "ljLc": 12,
+        "ljKlc": 6
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "nota_servico": 5,
+        "nota_fiscal": 3
+      },
+      "store_confidence": 0.95,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.475,
+      "has_strong_store_evidence": true,
+      "strong_evidence_type": "cnpj_match",
+      "score_details": {
+        "matched_store_aliases": [
+          {
+            "store": "ljGba",
+            "alias": "guaraciaba",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljGba",
+            "alias": "guaraciaba do norte",
+            "kind": "address",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljLc",
+            "alias": "l & c",
+            "kind": "alias",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljKlc",
+            "alias": "sobral",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljLc",
+            "alias": "sobral ce",
+            "kind": "address",
+            "location": "text",
+            "context": null
+          }
+        ],
+        "matched_store_sources": [
+          "text"
+        ],
+        "matched_type_keywords": [
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "nota fiscal",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "chave de acesso",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "emissao",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs-e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "prestador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "tomador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "servico",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000493",
+            "store": "ljGba",
+            "source": "pdf_text",
+            "detection_mode": "normal"
+          }
+        ],
+        "cnpj_detection_mode": "normal",
+        "cnpj_candidates": [
+          "07439697000493",
+          "52991972000199",
+          "23129081252991",
+          "97200019900000",
+          "00001806260259"
+        ],
+        "has_strong_store_evidence": true,
+        "strong_evidence_type": "cnpj_match"
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\output\\ljGba\\2026\\03\\outros\\notafiscal 02.pdf",
+      "motivo_decisao": "Classificado automaticamente com base em CNPJ válido da loja.",
+      "explicacao_decisao": "Loja sugerida: ljGba.\nScores por loja: {'ljGba': 32, 'ljLc': 12, 'ljKlc': 6}.\nEvidências de loja (aliases e locais): [{'store': 'ljGba', 'alias': 'guaraciaba', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljGba', 'alias': 'guaraciaba do norte', 'kind': 'address', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljKlc', 'alias': 'sobral', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'sobral ce', 'kind': 'address', 'location': 'text', 'context': None}].\nFontes de evidência de loja: ['text'].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'nota_servico': 5, 'nota_fiscal': 3}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'nota_fiscal', 'keyword': 'nota fiscal', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'chave de acesso', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs-e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'prestador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'tomador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=0.95, type=0.0, overall=0.475.\nEvidência forte de loja: CNPJ válido correspondente à loja sugerida.\nDecisão final: Classificado automaticamente com base em CNPJ válido da loja.",
+      "ignorado_por_regra": false,
+      "enviado_para_revisao": false,
+      "status_processamento": "success",
+      "erro": null
+    },
+    {
+      "nome_original": "notafiscal 03.pdf",
+      "caminho_original": "C:\\Projetos\\ntsoft-orgfiles\\temp\\NOTAS CONTABILIDADE FEV\\notafiscal 03.pdf",
+      "veio_de_zip": false,
+      "zip_root": null,
+      "veio_de_arquivo_compactado": true,
+      "tipo_arquivo_compactado": "rar",
+      "arquivo_compactado_origem": "C:\\Projetos\\ntsoft-orgfiles\\input\\NOTAS CONTABILIDADE FEV.rar",
+      "texto_extraido_status": "ok",
+      "text_source": "pdf_text",
+      "ocr_used": false,
+      "ocr_success": false,
+      "ocr_metadata": {},
+      "cnpjs_detectados": [
+        "07439697000302",
+        "52991972000199",
+        "23129081252991",
+        "97200019900000",
+        "00001805260266"
+      ],
+      "loja_sugerida": "ljSb",
+      "score_por_loja": {
+        "ljSb": 32,
+        "ljLc": 12,
+        "ljKlc": 6
+      },
+      "tipo_sugerido": "desconhecido",
+      "score_por_tipo": {
+        "nota_servico": 5,
+        "nota_fiscal": 3
+      },
+      "store_confidence": 0.95,
+      "type_confidence": 0.0,
+      "overall_confidence": 0.475,
+      "has_strong_store_evidence": true,
+      "strong_evidence_type": "cnpj_match",
+      "score_details": {
+        "matched_store_aliases": [
+          {
+            "store": "ljSb",
+            "alias": "sao benedito",
+            "kind": "alias",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljSb",
+            "alias": "sao benedito ce",
+            "kind": "address",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljLc",
+            "alias": "l & c",
+            "kind": "alias",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljKlc",
+            "alias": "sobral",
+            "kind": "city",
+            "location": "text",
+            "context": null
+          },
+          {
+            "store": "ljLc",
+            "alias": "sobral ce",
+            "kind": "address",
+            "location": "text",
+            "context": null
+          }
+        ],
+        "matched_store_sources": [
+          "text"
+        ],
+        "matched_type_keywords": [
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "nota fiscal",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "chave de acesso",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_fiscal",
+            "keyword": "emissao",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs-e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "nfs e",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "prestador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "tomador",
+            "location": "text"
+          },
+          {
+            "doc_type": "nota_servico",
+            "keyword": "servico",
+            "location": "text"
+          }
+        ],
+        "matched_type_sources": [
+          "text"
+        ],
+        "cnpj_matches": [
+          {
+            "cnpj": "07439697000302",
+            "store": "ljSb",
+            "source": "pdf_text",
+            "detection_mode": "normal"
+          }
+        ],
+        "cnpj_detection_mode": "normal",
+        "cnpj_candidates": [
+          "07439697000302",
+          "52991972000199",
+          "23129081252991",
+          "97200019900000",
+          "00001805260266"
+        ],
+        "has_strong_store_evidence": true,
+        "strong_evidence_type": "cnpj_match"
+      },
+      "destino_final": "C:\\Projetos\\ntsoft-orgfiles\\output\\ljSb\\2026\\03\\outros\\notafiscal 03.pdf",
+      "motivo_decisao": "Classificado automaticamente com base em CNPJ válido da loja.",
+      "explicacao_decisao": "Loja sugerida: ljSb.\nScores por loja: {'ljSb': 32, 'ljLc': 12, 'ljKlc': 6}.\nEvidências de loja (aliases e locais): [{'store': 'ljSb', 'alias': 'sao benedito', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljSb', 'alias': 'sao benedito ce', 'kind': 'address', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'l & c', 'kind': 'alias', 'location': 'text', 'context': None}, {'store': 'ljKlc', 'alias': 'sobral', 'kind': 'city', 'location': 'text', 'context': None}, {'store': 'ljLc', 'alias': 'sobral ce', 'kind': 'address', 'location': 'text', 'context': None}].\nFontes de evidência de loja: ['text'].\nTipo de documento sugerido: desconhecido.\nScores por tipo: {'nota_servico': 5, 'nota_fiscal': 3}.\nEvidências de tipo (palavras‑chave): [{'doc_type': 'nota_fiscal', 'keyword': 'nota fiscal', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'chave de acesso', 'location': 'text'}, {'doc_type': 'nota_fiscal', 'keyword': 'emissao', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs-e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'nfs e', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'prestador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'tomador', 'location': 'text'}, {'doc_type': 'nota_servico', 'keyword': 'servico', 'location': 'text'}].\nFontes de evidência de tipo: ['text'].\nConfianças: store=0.95, type=0.0, overall=0.475.\nEvidência forte de loja: CNPJ válido correspondente à loja sugerida.\nDecisão final: Classificado automaticamente com base em CNPJ válido da loja.",
+      "ignorado_por_regra": false,
+      "enviado_para_revisao": false,
+      "status_processamento": "success",
+      "erro": null
+    }
+  ]
+}

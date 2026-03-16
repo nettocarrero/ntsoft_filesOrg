@@ -7,7 +7,15 @@ from urllib.parse import quote
 from fastapi import APIRouter, Request, Query, Form
 from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
 
-from app.web.helpers import get_settings, list_output_stores, list_store_files
+from app.web.helpers import (
+    get_settings,
+    list_output_stores,
+    list_store_files,
+    list_store_years,
+    list_store_months,
+    list_store_types_in_period,
+    list_store_legacy_types,
+)
 
 router = APIRouter()
 
@@ -22,35 +30,226 @@ def _parse_date(value: str | None):
         return None
 
 
+# Nomes dos meses para exibição no explorador
+MONTH_NAMES = {
+    "01": "Janeiro", "02": "Fevereiro", "03": "Março", "04": "Abril",
+    "05": "Maio", "06": "Junho", "07": "Julho", "08": "Agosto",
+    "09": "Setembro", "10": "Outubro", "11": "Novembro", "12": "Dezembro",
+}
+
+
+def _build_files_context(
+    settings,
+    store: str | None,
+    ano: str | None,
+    mes: str | None,
+    tipo: str | None,
+    legacy: bool,
+    store_name: str,
+    stores: list,
+):
+    """Decide nível de navegação e monta breadcrumb, folders e files."""
+    output_dir = settings.paths.output_dir
+    years = list_store_years(output_dir, store) if store else []
+    legacy_types = list_store_legacy_types(output_dir, store) if store else []
+    months: list = []
+    types_in_period: list = []
+    level = "none"
+    breadcrumb = []
+    folders = []
+    files_list: list = []
+
+    if not store:
+        return {
+            "level": "none",
+            "breadcrumb": [{"label": "Explorador", "url": "/files"}],
+            "folders": [],
+            "files": [],
+            "years": [],
+            "months": [],
+            "types_in_period": [],
+            "legacy_types": [],
+            "store_name": "",
+            "filter_ano": "",
+            "filter_mes": "",
+            "filter_tipo": "",
+        }
+
+    base = [{"label": "Explorador", "url": "/files"}, {"label": store_name, "url": f"/files?store={quote(store, safe='')}"}]
+
+    if legacy:
+        # Navegação legada: store → Arquivos legados → tipo → arquivos
+        breadcrumb = base + [{"label": "Arquivos legados", "url": f"/files?store={quote(store, safe='')}&legacy=1"}]
+        if not tipo:
+            level = "legacy"
+            folders = [
+                {"name": t, "url": f"/files?store={quote(store, safe='')}&legacy=1&tipo={quote(t, safe='')}"}
+                for t in sorted(legacy_types)
+            ]
+        else:
+            level = "legacy_files"
+            breadcrumb = breadcrumb + [{"label": tipo, "url": f"/files?store={quote(store, safe='')}&legacy=1&tipo={quote(tipo, safe='')}"}]
+            files_list = list_store_files(
+                output_dir, store, year=None, month=None,
+                doc_type_filter=tipo, name_filter=None, date_from=None, date_to=None,
+            )
+            for f in files_list:
+                f["path_url"] = quote(str(f["path"]), safe="")
+        return {
+            "level": level,
+            "breadcrumb": breadcrumb,
+            "folders": folders,
+            "files": files_list,
+            "years": years,
+            "months": [],
+            "types_in_period": [],
+            "legacy_types": legacy_types,
+            "store_name": store_name,
+            "filter_ano": ano or "",
+            "filter_mes": mes or "",
+            "filter_tipo": tipo or "",
+        }
+
+    # Estrutura nova: store → ano → mês → tipo → arquivos
+    if not ano:
+        level = "store_root"
+        breadcrumb = base
+        folders = [{"name": y, "url": f"/files?store={quote(store, safe='')}&ano={quote(y, safe='')}"} for y in years]
+        if legacy_types:
+            folders.append({"name": "Arquivos legados", "url": f"/files?store={quote(store, safe='')}&legacy=1"})
+        return {
+            "level": level,
+            "breadcrumb": breadcrumb,
+            "folders": folders,
+            "files": [],
+            "years": years,
+            "months": [],
+            "types_in_period": [],
+            "legacy_types": legacy_types,
+            "store_name": store_name,
+            "filter_ano": "",
+            "filter_mes": "",
+            "filter_tipo": "",
+        }
+
+    months = list_store_months(output_dir, store, ano)
+    if not mes:
+        level = "year"
+        breadcrumb = base + [{"label": ano, "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}"}]
+        folders = [
+            {"name": f"{m} - {MONTH_NAMES.get(m, m)}", "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}&mes={quote(m, safe='')}"}
+            for m in months
+        ]
+        return {
+            "level": level,
+            "breadcrumb": breadcrumb,
+            "folders": folders,
+            "files": [],
+            "years": years,
+            "months": months,
+            "types_in_period": [],
+            "legacy_types": legacy_types,
+            "store_name": store_name,
+            "filter_ano": ano,
+            "filter_mes": "",
+            "filter_tipo": "",
+        }
+
+    types_in_period = list_store_types_in_period(output_dir, store, ano, mes)
+    if not tipo:
+        level = "month"
+        mes_label = f"{mes} - {MONTH_NAMES.get(mes, mes)}"
+        breadcrumb = base + [
+            {"label": ano, "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}"},
+            {"label": mes_label, "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}&mes={quote(mes, safe='')}"},
+        ]
+        folders = [
+            {"name": t, "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}&mes={quote(mes, safe='')}&tipo={quote(t, safe='')}"}
+            for t in sorted(types_in_period)
+        ]
+        return {
+            "level": level,
+            "breadcrumb": breadcrumb,
+            "folders": folders,
+            "files": [],
+            "years": years,
+            "months": months,
+            "types_in_period": types_in_period,
+            "legacy_types": legacy_types,
+            "store_name": store_name,
+            "filter_ano": ano,
+            "filter_mes": mes,
+            "filter_tipo": "",
+        }
+
+    level = "files"
+    tipo_label = tipo
+    breadcrumb = base + [
+        {"label": ano, "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}"},
+        {"label": f"{mes} - {MONTH_NAMES.get(mes, mes)}", "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}&mes={quote(mes, safe='')}"},
+        {"label": tipo_label, "url": f"/files?store={quote(store, safe='')}&ano={quote(ano, safe='')}&mes={quote(mes, safe='')}&tipo={quote(tipo, safe='')}"},
+    ]
+    date_from = _parse_date(None)  # will pass from request
+    date_to = _parse_date(None)
+    files_list = list_store_files(
+        output_dir, store, year=ano, month=mes, doc_type_filter=tipo,
+        name_filter=None, date_from=date_from, date_to=date_to,
+    )
+    for f in files_list:
+        f["path_url"] = quote(str(f["path"]), safe="")
+    return {
+        "level": level,
+        "breadcrumb": breadcrumb,
+        "folders": [],
+        "files": files_list,
+        "years": years,
+        "months": months,
+        "types_in_period": types_in_period,
+        "legacy_types": legacy_types,
+        "store_name": store_name,
+        "filter_ano": ano,
+        "filter_mes": mes,
+        "filter_tipo": tipo,
+    }
+
+
 @router.get("/files", response_class=HTMLResponse)
 async def files_page(
     request: Request,
     store: str | None = Query(None),
+    ano: str | None = Query(None),
+    mes: str | None = Query(None),
     tipo: str | None = Query(None),
+    legacy: str | None = Query(None, description="1 = ver estrutura legada"),
     nome: str | None = Query(None),
-    data_de: str | None = Query(None, description="Data inicial (YYYY-MM-DD)"),
-    data_ate: str | None = Query(None, description="Data final (YYYY-MM-DD)"),
+    data_de: str | None = Query(None),
+    data_ate: str | None = Query(None),
     renamed: str | None = Query(None),
     deleted: str | None = Query(None),
 ):
     settings = get_settings()
     stores = list_output_stores(settings.paths.output_dir, settings.aliases)
-    files: list = []
-    store_name = ""
-    date_from = _parse_date(data_de)
-    date_to = _parse_date(data_ate)
-    if store:
-        store_name = next((s["name"] for s in stores if s["code"] == store), store)
-        files = list_store_files(
-            settings.paths.output_dir,
-            store,
-            doc_type_filter=tipo,
-            name_filter=nome,
-            date_from=date_from,
-            date_to=date_to,
+    store_name = next((s["name"] for s in stores if s["code"] == store), store) if store else ""
+    use_legacy = legacy == "1"
+
+    ctx = _build_files_context(
+        settings, store, ano, mes, tipo, use_legacy, store_name, stores
+    )
+    # Aplicar filtro por nome e data quando estamos em nível de arquivos
+    if ctx["files"] and (nome or data_de or data_ate):
+        date_from = _parse_date(data_de)
+        date_to = _parse_date(data_ate)
+        output_dir = settings.paths.output_dir
+        ctx["files"] = list_store_files(
+            output_dir, store,
+            year=None if use_legacy else (ctx.get("filter_ano") or None),
+            month=None if use_legacy else (ctx.get("filter_mes") or None),
+            doc_type_filter=ctx.get("filter_tipo") or None,
+            name_filter=nome, date_from=date_from, date_to=date_to,
         )
-        for f in files:
+        for f in ctx["files"]:
             f["path_url"] = quote(str(f["path"]), safe="")
+
     return request.app.state.templates.TemplateResponse(
         "files.html",
         {
@@ -58,8 +257,17 @@ async def files_page(
             "stores": stores,
             "selected_store": store,
             "store_name": store_name,
-            "files": files,
-            "filter_tipo": tipo or "",
+            "breadcrumb": ctx["breadcrumb"],
+            "level": ctx["level"],
+            "folders": ctx["folders"],
+            "files": ctx["files"],
+            "years": ctx["years"],
+            "months": ctx["months"],
+            "types_in_period": ctx["types_in_period"],
+            "legacy_types": ctx["legacy_types"],
+            "filter_ano": ctx["filter_ano"],
+            "filter_mes": ctx["filter_mes"],
+            "filter_tipo": ctx["filter_tipo"],
             "filter_nome": nome or "",
             "filter_data_de": data_de or "",
             "filter_data_ate": data_ate or "",
@@ -140,11 +348,41 @@ def _safe_basename(name: str) -> str:
     return Path(name).name.strip() if name else ""
 
 
+def _files_back_url(
+    store: str,
+    ano: str | None = None,
+    mes: str | None = None,
+    tipo: str | None = None,
+    legacy: bool = False,
+    extra: str = "",
+) -> str:
+    """Monta URL de retorno do explorador preservando nível de navegação."""
+    if not store:
+        return f"/files{extra}"
+    params = ["store=" + quote(store, safe="")]
+    if legacy:
+        params.append("legacy=1")
+        if tipo:
+            params.append("tipo=" + quote(tipo, safe=""))
+    else:
+        if ano:
+            params.append("ano=" + quote(ano, safe=""))
+        if mes:
+            params.append("mes=" + quote(mes, safe=""))
+        if tipo:
+            params.append("tipo=" + quote(tipo, safe=""))
+    return "/files?" + "&".join(params) + extra
+
+
 @router.post("/files/rename", response_class=RedirectResponse)
 async def files_rename_do(
     path: str = Form(...),
     new_name: str = Form(...),
     store: str = Form(""),
+    ano: str = Form(""),
+    mes: str = Form(""),
+    tipo: str = Form(""),
+    legacy: str = Form(""),
 ):
     """Renomeia o arquivo (mesmo diretório). Redireciona de volta ao explorador."""
     settings = get_settings()
@@ -170,7 +408,7 @@ async def files_rename_do(
             url=f"/files/rename?path={quote(path, safe='')}&store={quote(store, safe='')}&error=erro",
             status_code=303,
         )
-    back = f"/files?store={quote(store, safe='')}&renamed=1" if store else "/files?renamed=1"
+    back = _files_back_url(store, ano or None, mes or None, tipo or None, legacy == "1", "&renamed=1")
     return RedirectResponse(url=back, status_code=303)
 
 
@@ -178,6 +416,10 @@ async def files_rename_do(
 async def files_delete(
     path: str = Form(...),
     store: str = Form(""),
+    ano: str = Form(""),
+    mes: str = Form(""),
+    tipo: str = Form(""),
+    legacy: str = Form(""),
 ):
     """Exclui o arquivo. Redireciona de volta ao explorador."""
     settings = get_settings()
@@ -188,5 +430,5 @@ async def files_delete(
         resolved.unlink()
     except OSError:
         return RedirectResponse(url="/files?error=erro_excluir", status_code=303)
-    back = f"/files?store={quote(store, safe='')}&deleted=1" if store else "/files?deleted=1"
+    back = _files_back_url(store, ano or None, mes or None, tipo or None, legacy == "1", "&deleted=1")
     return RedirectResponse(url=back, status_code=303)

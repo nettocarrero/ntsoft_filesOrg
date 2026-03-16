@@ -76,16 +76,9 @@ class Settings:
 
 
 def ensure_directories(paths: PathsConfig) -> None:
-    # limpa pasta temp para evitar acúmulo de arquivos antigos
-    if paths.temp_dir.exists():
-        for child in paths.temp_dir.iterdir():
-            if child.is_file():
-                child.unlink(missing_ok=True)
-            else:
-                import shutil
-
-                shutil.rmtree(child, ignore_errors=True)
-
+    """Cria as pastas necessárias se não existirem. Não limpa temp (evita apagar
+    arquivos extraídos de RAR/ZIP durante processamento se load_settings for
+    chamado por outra parte do sistema, ex.: servidor web)."""
     for path in [
         paths.input_dir,
         paths.output_dir,
@@ -94,6 +87,19 @@ def ensure_directories(paths: PathsConfig) -> None:
         paths.reports_dir,
     ]:
         path.mkdir(parents=True, exist_ok=True)
+
+
+def clear_temp_dir(paths: PathsConfig) -> None:
+    """Remove o conteúdo da pasta temp. Deve ser chamado apenas no início de
+    um lote de processamento (ex.: em process()), não em load_settings()."""
+    if not paths.temp_dir.exists():
+        return
+    import shutil
+    for child in paths.temp_dir.iterdir():
+        if child.is_file():
+            child.unlink(missing_ok=True)
+        else:
+            shutil.rmtree(child, ignore_errors=True)
 
 
 def load_json(path: Path) -> Dict[str, Any]:
