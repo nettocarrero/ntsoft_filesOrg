@@ -17,6 +17,12 @@ _CACHE_TTL_SEC = 60
 _cache: tuple[float, List[Dict[str, Any]]] = (0.0, [])
 
 
+def invalidate_cache() -> None:
+    """Limpa o cache em memória do índice de pagamentos."""
+    global _cache
+    _cache = (0.0, [])
+
+
 def scan_payments(base_output_dir: Path) -> List[Dict[str, Any]]:
     """
     Percorre output/{loja}/{ano}/{mes}/pagamentos/, lê .meta.json de cada PDF
