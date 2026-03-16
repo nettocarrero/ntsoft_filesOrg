@@ -70,6 +70,20 @@ VALOR_KEYWORDS = [
     r"valor\s+documento",
 ]
 
+# Palavras que indicam valores que NÃO são o valor principal do documento
+# (tarifas, taxas, juros, multa etc.)
+NON_MAIN_AMOUNT_KEYWORDS = [
+    r"taxa",
+    r"tarifa",
+    r"servi[cç]o",
+    r"juros",
+    r"multa",
+    r"mora",
+    r"encargos",
+    r"acrescimos?",
+    r"iof",
+]
+
 # Padrão aproximado de linha digitável de boleto:
 # 5 blocos de números com separadores opcionais (espaço, ponto, hífen)
 LINHA_DIGITAVEL_PATTERN = re.compile(
@@ -325,7 +339,8 @@ def _find_amount(text: str) -> Tuple[Optional[float], str]:
     """
     text_norm = _normalize_whitespace(text)
     text_lower = text_norm.lower()
-    candidates: List[Tuple[int, float]] = []  # (min_dist_to_keyword, value)
+    # (min_dist_to_keyword, value, is_penalty_or_fee)
+    candidates: List[Tuple[int, float, bool]] = []
 
     for m in AMOUNT_PATTERN.finditer(text_norm):
         raw = m.group(1)
@@ -333,19 +348,33 @@ def _find_amount(text: str) -> Tuple[Optional[float], str]:
         if value is None or value <= 0 or value > 1e10:
             continue
         start = m.start()
+        # Janela para identificar se é taxa/juros/multa etc.
+        win_start = max(0, start - 60)
+        win_end = min(len(text_lower), start + 60)
+        window = text_lower[win_start:win_end]
+        is_penalty_or_fee = any(
+            re.search(kw, window, re.IGNORECASE) for kw in NON_MAIN_AMOUNT_KEYWORDS
+        )
         min_dist = len(text_norm) + 1
         for kw in VALOR_KEYWORDS:
             for km in re.finditer(kw, text_lower, re.IGNORECASE):
                 dist = abs(km.start() - start)
                 if dist < min_dist:
                     min_dist = dist
-        candidates.append((min_dist, value))
+        candidates.append((min_dist, value, is_penalty_or_fee))
 
     if not candidates:
         return (None, "low")
 
-    candidates.sort(key=lambda x: x[0])
-    best_dist, best_value = candidates[0]
+    # Primeiro tentamos escolher entre os candidatos que NÃO parecem ser taxa/juros/multa
+    normal_candidates = [c for c in candidates if not c[2]]
+    if normal_candidates:
+        normal_candidates.sort(key=lambda x: x[0])
+        best_dist, best_value, _ = normal_candidates[0]
+    else:
+        # Se só houver valores de taxa/juros, usamos mesmo assim (melhor do que nada)
+        candidates.sort(key=lambda x: x[0])
+        best_dist, best_value, _ = candidates[0]
     if best_dist <= 60:
         confidence = "high"
     elif best_dist <= 150:
