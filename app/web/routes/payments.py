@@ -6,8 +6,8 @@ from __future__ import annotations
 from datetime import date
 from urllib.parse import quote
 
-from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse
+from fastapi import APIRouter, Request, Form
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.web.helpers import get_settings, list_output_stores
 from app.services.payment_index_service import (
@@ -15,6 +15,7 @@ from app.services.payment_index_service import (
     get_payments_due_today,
     get_payments_due_in_days,
 )
+from app.services.document_finance_parser import update_payment_status
 
 
 router = APIRouter()
@@ -99,3 +100,19 @@ async def payments_page(request: Request):
             "count_in_7": len(due_in_7),
         },
     )
+
+
+@router.post("/payments/mark-paid", response_class=RedirectResponse)
+async def mark_payment_as_paid(path: str = Form(...)):
+    """
+    Marca um pagamento como 'paid' no .meta.json correspondente.
+    Após isso, ele deixa de aparecer nas listas de vencidos/pendentes.
+    """
+    settings = get_settings()
+    pdf_path = Path(path)
+    try:
+        update_payment_status(pdf_path, status="paid")
+    except Exception:
+        # Em caso de erro, apenas ignora e volta para a tela
+        pass
+    return RedirectResponse(url="/payments", status_code=303)

@@ -300,6 +300,37 @@ def _meta_path_for_pdf(pdf_path: Path) -> Path:
     return pdf_path.parent / (pdf_path.name + ".meta.json")
 
 
+def update_payment_status(
+    pdf_path: Path,
+    status: str,
+    paid_at: Optional[str] = None,
+    paid_value: Optional[float] = None,
+) -> None:
+    """
+    Atualiza status de pagamento no .meta.json (ex.: open, paid, ignored).
+    Não altera o PDF original.
+    """
+    meta_path = _meta_path_for_pdf(pdf_path)
+    if not meta_path.exists():
+        return
+    try:
+        with open(meta_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, dict):
+            data = {}
+    except (OSError, json.JSONDecodeError):
+        data = {}
+
+    data["status"] = status
+    if paid_at is not None:
+        data["paid_at"] = paid_at
+    if paid_value is not None:
+        data["paid_value"] = paid_value
+
+    with open(meta_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+
 def write_payment_meta_file(
     pdf_path: Path,
     due_date: Optional[str],
@@ -315,6 +346,9 @@ def write_payment_meta_file(
         "due_date": due_date,
         "amount": amount,
         "extracted": extracted,
+        "status": "open",
+        "paid_at": None,
+        "paid_value": None,
     }
     meta_path = _meta_path_for_pdf(pdf_path)
     with open(meta_path, "w", encoding="utf-8") as f:
@@ -334,6 +368,9 @@ def read_payment_meta_file(file_path: Path) -> Optional[Dict[str, Any]]:
             data = json.load(f)
         if not isinstance(data, dict):
             return None
+        # Backwards-compat: se não houver status, considera "open"
+        if "status" not in data:
+            data["status"] = "open"
         return data
     except (OSError, json.JSONDecodeError):
         return None

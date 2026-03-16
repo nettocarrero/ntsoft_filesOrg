@@ -72,6 +72,9 @@ def _collect_from_dir(
         meta = read_payment_meta_file(f)
         if not meta or not meta.get("due_date"):
             continue
+        # Ignorar pagamentos marcados como pagos/ignorados
+        if meta.get("status") in ("paid", "ignored"):
+            continue
         due = meta["due_date"]
         amount = meta.get("amount")
         out.append({

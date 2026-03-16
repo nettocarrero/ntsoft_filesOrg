@@ -343,6 +343,9 @@ def _collect_files_from_dir(
     for f in type_path.iterdir():
         if not f.is_file():
             continue
+        # Não exibir arquivos de metadados (.meta.json) no explorador
+        if f.name.endswith(".meta.json"):
+            continue
         if name_filter and name_filter.lower() not in f.name.lower():
             continue
         try:
