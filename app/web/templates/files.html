@@ -224,10 +224,15 @@
     var newNameInput = document.getElementById('inline-rename-new-name');
 
     document.querySelector('.table-files tbody').addEventListener('click', function(e) {
-        var row = e.target.closest('tr.file-row');
+        var row = e.target.closest ? e.target.closest('tr.file-row') : null;
         if (!row) return;
 
-        var target = e.target.closest('button, a');
+        var el = e.target;
+        if (el && el.nodeType !== 1) {
+            el = el.parentElement;
+        }
+        if (!el || !el.closest) return;
+        var target = el.closest('button, a');
         if (!target) return;
 
         if (target.classList.contains('btn-rename')) {
