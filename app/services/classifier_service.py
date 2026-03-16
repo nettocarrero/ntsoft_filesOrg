@@ -304,6 +304,22 @@ def classify_document(doc: DocumentInfo, settings: Settings) -> DocumentInfo:
                 }
             )
 
+        # Casos de "DECLARAÇÃO DE PRESTAÇÃO DE SERVIÇOS - DPS"
+        # Algumas prefeituras usam só "DPS" e "declaração de prestação de serviços"
+        # sem a sigla NFS-e. Refórço específico para classificá-las como nota de serviço.
+        if "declaracao de prestacao de servicos" in text_norm or (
+            "dps" in text_norm and "prestacao de servicos" in text_norm
+        ):
+            current = doc_type_scores.get(DocumentType.NOTA_SERVICO, 0)
+            doc_type_scores[DocumentType.NOTA_SERVICO] = current + 6
+            type_evidence.append(
+                {
+                    "doc_type": DocumentType.NOTA_SERVICO.value,
+                    "keyword": "declaracao_prestacao_servicos_dps",
+                    "location": "text",
+                }
+            )
+
     best_doc_type, ordered_doc_type_scores = None, {}
     if doc_type_scores:
         temp = {dt.value: score for dt, score in doc_type_scores.items()}
