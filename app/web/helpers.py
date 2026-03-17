@@ -273,7 +273,7 @@ def list_output_stores(output_dir: Path, aliases: Dict[str, Any]) -> List[Dict[s
         "ljSb": "São Benedito",
         "ljGba": "Guaraciaba",
         "ljLc": "L&C (Sobral)",
-        "ljKlc": "KLC (Sobral)",
+        "ljKlc": "KLC Serviços (Sobral)",
     }
     for code, info in (aliases.get("stores") or {}).items():
         if code not in store_names and isinstance(info, dict):
@@ -286,7 +286,7 @@ def list_output_stores(output_dir: Path, aliases: Dict[str, Any]) -> List[Dict[s
             out.append({"code": p.name, "name": store_names.get(p.name, p.name)})
 
     # Reordena lojas na ordem desejada no explorador:
-    # UBAJARA, IBIAPINA, SÃO BENEDITO, GUARACIABA, e por último L&C / KLC.
+    # UBAJARA, IBIAPINA, SÃO BENEDITO, GUARACIABA, e por último L&C / KLC / KLC Transportes.
     def _store_sort_key(item: Dict[str, str]) -> tuple[int, str]:
         code = item.get("code", "")
         order_map = {
@@ -294,8 +294,9 @@ def list_output_stores(output_dir: Path, aliases: Dict[str, Any]) -> List[Dict[s
             "ljIbi": 2,  # Ibiapina
             "ljSb": 3,   # São Benedito
             "ljGba": 4,  # Guaraciaba
-            "ljLc": 5,   # L&C (Sobral)
-            "ljKlc": 6,  # KLC (Sobral)
+            "ljLc": 5,    # L&C (Sobral)
+            "ljKlc": 6,   # KLC (Sobral)
+            "ljKlcT": 7,  # KLC Transportes (Sobral)
         }
         base = order_map.get(code, 100)
         return (base, item.get("name", "").lower())

@@ -38,9 +38,16 @@
     "ljKlc": {
       "code": "ljKlc",
       "city": "sobral",
-      "aliases": ["klc", "k l c"],
+      "aliases": ["klc servicos", "klc serviços", "klc", "k l c"],
       "cnpjs": ["32125000000104"],
-      "address_keywords": ["sobral", "klc", "k l c", "centro sobral", "sobral ce"]
+      "address_keywords": ["sobral", "klc servicos", "klc serviços", "klc", "k l c", "centro sobral", "sobral ce"]
+    },
+    "ljKlcT": {
+      "code": "ljKlcT",
+      "city": "sobral",
+      "aliases": ["klc transportes", "klc transp", "klc transportes ltda"],
+      "cnpjs": ["51751292000135"],
+      "address_keywords": ["sobral", "klc transportes", "klc transp", "sobral ce"]
     }
   }
 }
