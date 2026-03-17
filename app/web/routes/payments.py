@@ -86,27 +86,33 @@ def _enrich_payment_item(item: dict, store_names: dict) -> dict:
 async def payments_page(
     request: Request,
     show_all: bool = Query(False, alias="all"),
+    store: str | None = Query(None, description="Código da loja para filtrar boletos"),
 ):
     settings = get_settings()
     store_list = list_output_stores(settings.paths.output_dir, settings.aliases)
     store_names = {s["code"]: s["name"] for s in store_list}
 
+    def _filter_by_store(items: list[dict]) -> list[dict]:
+        if not store:
+            return items
+        return [p for p in items if p.get("store") == store]
+
     overdue = [
         _enrich_payment_item(dict(p), store_names)
-        for p in get_overdue_payments(settings.paths.output_dir)
+        for p in _filter_by_store(get_overdue_payments(settings.paths.output_dir))
     ]
     due_today = [
         _enrich_payment_item(dict(p), store_names)
-        for p in get_payments_due_today(settings.paths.output_dir)
+        for p in _filter_by_store(get_payments_due_today(settings.paths.output_dir))
     ]
     due_in_7 = [
         _enrich_payment_item(dict(p), store_names)
-        for p in get_payments_due_in_days(settings.paths.output_dir, 7)
+        for p in _filter_by_store(get_payments_due_in_days(settings.paths.output_dir, 7))
     ]
 
     all_payments = []
     if show_all:
-        base_list = scan_payments(settings.paths.output_dir)
+        base_list = _filter_by_store(scan_payments(settings.paths.output_dir))
         all_payments = [
             _enrich_payment_item(dict(p), store_names) for p in base_list
         ]
@@ -124,6 +130,8 @@ async def payments_page(
             "count_in_7": len(due_in_7),
             "show_all": show_all,
             "all_payments": all_payments,
+            "stores": store_list,
+            "selected_store": store or "",
         },
     )
 

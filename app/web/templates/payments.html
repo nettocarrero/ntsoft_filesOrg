@@ -6,11 +6,23 @@
         <h2>Pagamentos e vencimentos</h2>
     </div>
     <div class="page-actions">
-        {% if show_all %}
-        <a href="/payments" class="btn btn-sm">Ver apenas vencimentos próximos</a>
-        {% else %}
-        <a href="/payments?all=1" class="btn btn-sm">Exibir todos os boletos</a>
-        {% endif %}
+        <form method="get" action="/payments" class="payments-filters">
+            <label style="margin-right: 0.5rem;">
+                Loja
+                <select name="store" class="filter-select" onchange="this.form.submit()">
+                    <option value="">Todas</option>
+                    {% for s in stores %}
+                    <option value="{{ s.code }}" {% if selected_store == s.code %}selected{% endif %}>{{ s.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            {% if show_all %}
+            <input type="hidden" name="all" value="1">
+            <a href="/payments{% if selected_store %}?store={{ selected_store }}{% endif %}" class="btn btn-sm">Ver apenas vencimentos próximos</a>
+            {% else %}
+            <a href="/payments?all=1{% if selected_store %}&store={{ selected_store }}{% endif %}" class="btn btn-sm">Exibir todos os boletos</a>
+            {% endif %}
+        </form>
     </div>
 </div>
 
